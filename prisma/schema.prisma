@@ -1,0 +1,185 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+// Ini adalah blok generator, memberi tahu Prisma untuk men-generate 
+// Prisma Client dalam bahasa JavaScript/TypeScript agar bisa dipanggil di Express.js.
+generator client{
+  provider = "prisma-client-js"
+}
+
+// Blok datasource mengatur koneksi ke database.
+// Kita menggunakan PostgreSQL, dan URL koneksinya diambil dari file .env.
+datasource db{
+  provider = "postgresql"
+}
+
+// ================= ENUMS =================
+// Enum berfungsi untuk membatasi nilai yang bisa dimasukkan ke dalam kolom database.
+// Ini adalah bentuk validasi tingkat database (Artificial Constraint) yang sangat kuat.
+
+// Status siklus hidup sebuah Swap Request
+
+enum SwapStatus {
+  pending   // Menunggu konfirmasi dari provider
+  active    // Disetujui, sedang dalam proses pengerjaan
+  completed // Selesai dikerjakan dan dikonfirmasi kedua pihak
+  rejected  // Ditolak oleh provider
+  expired   // Melewati batas waktu (48 jam ) tanpa respons
+
+  @@map ("swap_status") // Menyinkronkan penamaan enum di database postgresql
+}
+
+// Tipe transaksi dompet (wallet) untuk histori perpindahan Jam Kredit
+enum TxType {
+  credit    // Saldo masuk (Provider menyelesaikan swap)
+  debit     // Saldo keluar (Requester membayar swap)
+  hold      // Saldo ditahan sementara saat request berstatus 'pending'
+  release   // Saldo dikembalikan jika req ditolak/expired
+
+  @@map("tx_type")
+}
+
+// ================= MODELS =================
+// Tabel Pengguna (Users)
+model User {
+  // Menggunakan UUID (Universally Unique Identifier) sebagai ID agar lebih aman dan tidak bisa ditebak berurutan
+  id                 String   @id @default(uuid()) @db.Uuid
+  name               String   @db.VarChar(100)
+  email              String   @unique @db.VarChar(255)
+  password_hash      String   @db.Text
+  bio                String?  @db.Text
+  avatar_url         String?  @db.Text
+  
+  // Memberikan saldo awal otomatis sebesar 5.00 Jam Kredit untuk user baru sesuai aturan bisnis
+  credit_hours       Decimal  @default(5.00) @db.Decimal(8, 2) 
+  
+  // Persentase kelengkapan profil. User butuh minimal 80% untuk bisa membuat request
+  profile_completion Int      @default(20) 
+  is_active          Boolean  @default(true)
+  created_at         DateTime @default(now()) @db.Timestamptz
+  
+  // @updatedAt akan otomatis memperbarui timestamp setiap kali ada perubahan data (seperti trigger di SQL)
+  updated_at         DateTime @default(now()) @updatedAt @db.Timestamptz
+
+  // --- Relasi Antar Tabel ---
+  skills           Skill[]
+  
+  // Membedakan peran user dalam Swap: sebagai yang meminta (Requester) atau yang menyediakan skill (Provider)[cite: 384, 389, 511].
+  requestsMade     SwapRequest[]       @relation("Requester")
+  requestsReceived SwapRequest[]       @relation("Provider")
+  
+  transactions     WalletTransaction[]
+  ratingsGiven     Rating[]            @relation("Rater")
+  ratingsReceived  Rating[]            @relation("Ratee")
+  notifications    Notification[]
+
+  @@map("users") // Nama tabel di database menggunakan huruf kecil (best practice SQL) 
+}
+
+// Tabel Keahlian (Skills) yang ditawarkan pengguna 
+model Skill {
+  id             String   @id @default(uuid()) @db.Uuid
+  user_id        String   @db.Uuid
+  title          String   @db.VarChar(150)
+  description    String?  @db.Text
+  category       String   @db.VarChar(50) // Kategori seperti 'desain', 'coding', dll
+  
+  // Durasi layanan (harga skill) dalam Jam Kredit. Batasan 0.5 - 24 jam akan divalidasi di Backend.
+  duration_hours Decimal  @db.Decimal(4, 2)
+  is_active      Boolean  @default(true)
+  created_at     DateTime @default(now()) @db.Timestamptz
+
+  // Relasi: Jika User dihapus, maka semua Skill miliknya otomatis ikut terhapus (Cascade).
+  user         User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  swapRequests SwapRequest[]
+
+  @@map("skills")
+}
+
+// Tabel Permintaan Pertukaran (Swap Requests) 
+model SwapRequest {
+  id                  String     @id @default(uuid()) @db.Uuid
+  requester_id        String     @db.Uuid
+  provider_id         String     @db.Uuid
+  skill_id            String     @db.Uuid
+  status              SwapStatus @default(pending) // Request baru selalu mulai dari 'pending'.
+  duration_hours      Decimal    @db.Decimal(4, 2)
+  notes               String?    @db.Text
+  
+  // Flag konfirmasi dari masing-masing pihak. Swap hanya 'completed' jika keduanya true.
+  requester_completed Boolean    @default(false)
+  provider_completed  Boolean    @default(false)
+  
+  expired_at          DateTime   @db.Timestamptz // Waktu kedaluwarsa request (biasanya +48 jam dari created_at).
+  created_at          DateTime   @default(now()) @db.Timestamptz
+
+  // Relasi spesifik ke tabel User menggunakan nama relasi untuk menghindari bentrok identifier.
+  requester    User                @relation("Requester", fields: [requester_id], references: [id])
+  provider     User                @relation("Provider", fields: [provider_id], references: [id])
+  skill        Skill               @relation(fields: [skill_id], references: [id])
+  transactions WalletTransaction[]
+  ratings      Rating[]
+
+  @@map("swap_requests")
+}
+
+// Tabel Riwayat Transaksi Wallet 
+model WalletTransaction {
+  id            String   @id @default(uuid()) @db.Uuid
+  user_id       String   @db.Uuid
+  
+  // Bisa bernilai null jika misalnya ada transaksi bonus admin di luar proses Swap biasa.
+  swap_id       String?  @db.Uuid 
+  
+  type          TxType 
+  amount        Decimal  @db.Decimal(8, 2) // Jumlah Jam Kredit yang diproses[cite: 826].
+  balance_after Decimal  @db.Decimal(8, 2) // Saldo pengguna setelah transaksi ini terjadi (untuk histori).
+  description   String   @db.VarChar(255)
+  created_at    DateTime @default(now()) @db.Timestamptz
+
+  // Relasi
+  user        User         @relation(fields: [user_id], references: [id])
+  swapRequest SwapRequest? @relation(fields: [swap_id], references: [id])
+
+  @@map("wallet_transactions")
+}
+
+// Tabel Penilaian (Ratings) Pasca-Swap [cite: 412, 417, 827]
+model Rating {
+  id         String   @id @default(uuid()) @db.Uuid
+  swap_id    String   @db.Uuid
+  rater_id   String   @db.Uuid // Yang memberi rating [cite: 420, 833]
+  ratee_id   String   @db.Uuid // Yang menerima rating [cite: 423, 833]
+  score      Int               // Nilai 1-5 [cite: 426, 833]
+  comment    String?  @db.Text
+  created_at DateTime @default(now()) @db.Timestamptz
+
+  // Relasi
+  swap  SwapRequest @relation(fields: [swap_id], references: [id])
+  rater User        @relation("Rater", fields: [rater_id], references: [id])
+  ratee User        @relation("Ratee", fields: [ratee_id], references: [id])
+
+  // UNIQUE CONSTRAINT: Validasi ketat agar satu pengguna (rater_id) hanya bisa memberi 
+  // maksimal 1 buah rating untuk satu pertukaran spesifik (swap_id). Mencegah spam rating[cite: 431, 432, 833].
+  @@unique([swap_id, rater_id]) 
+  
+  @@map("ratings")
+}
+
+// Tabel Notifikasi Sistem 
+model Notification {
+  id           String   @id @default(uuid()) @db.Uuid
+  user_id      String   @db.Uuid
+  type         String   @db.VarChar(50) // Contoh tipe: 'swap_request', 'swap_completed'.
+  message      String   @db.Text
+  is_read      Boolean  @default(false) // Untuk fitur "tanda sudah dibaca" di frontend.
+  reference_id String?  @db.Uuid        // ID referensi (misal ID swap yang sedang diproses).
+  created_at   DateTime @default(now()) @db.Timestamptz
+
+  // Relasi: Jika user dihapus, notifikasinya ikut dibersihkan agar database tidak membengkak.
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
