@@ -1,8 +1,13 @@
-import express, {Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import 'dotenv/config'
+
+// Import Routes dan Error Handler
+import authRoutes from './routes/authRoutes';
+import { errorHandler } from './middlewares/errorHandlers';
+import { AppError } from './utils/AppError';
 
 // Inisialisasi aplikasi Express
 const app = express();
@@ -23,6 +28,18 @@ app.get('/health', (req: Request, res: Response) => {
         message: 'SwapHour API is running smoothly!',
     });
 });
+
+// Pasang rute autentikasi
+app.use('/api/auth', authRoutes);
+
+// Tangkap semua rute (endpoint) yang tidak terdaftar (404 not found)
+app.use((req: Request, res: Response, next: NextFunction) => {
+  next(new AppError(`Rute ${req.originalUrl} tidak ditemukan di server ini!`, 404));
+});
+
+// ================= GLOBAL ERROR HANDLER =================
+// Wajib diletakkan di bagian paling bawah setelah semua rute!
+app.use(errorHandler);
 
 // ================= START SERVER =================
 app.listen(PORT, () => {
