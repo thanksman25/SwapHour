@@ -13,6 +13,8 @@ import skillRoutes from './routes/skillRoutes';
 import { errorHandler } from './middlewares/errorHandlers';
 import { AppError } from './utils/AppError';
 
+import swapRoutes from './routes/swapRoutes';
+
 // Inisialisasi aplikasi Express
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,6 +39,7 @@ app.get('/health', (req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);     // Mengurus Register & Login
 app.use('/api/users', userRoutes);    // Mengurus Update Profile
 app.use('/api/skills', skillRoutes);  // Mengurus CRUD Katalog Skill
+app.use('/api/swaps', swapRoutes);    // Mengurus Mesin Utama Swap & Wallet
 
 // ================= PENANGKAP ERROR 404 =================
 // Tangkap semua rute (endpoint) yang tidak terdaftar (404 Not Found)
