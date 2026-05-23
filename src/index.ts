@@ -19,6 +19,9 @@ import ratingRoutes from './routes/ratingRoutes';
 import notificationRoutes from './routes/notificationRoutes';
 import { startCronJobs } from './cron/expireRequests'; // Import asisten Cron
 
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './utils/swagger'; // Import dari file yang baru dibuat
+
 // Inisialisasi aplikasi Express
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -51,10 +54,13 @@ app.use('/api/skills', skillRoutes);  // Mengurus CRUD Katalog Skill
 app.use('/api/swaps', swapRoutes);    // Mengurus Mesin Utama Swap & Wallet
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // ================= PENANGKAP ERROR 404 =================
 // Tangkap semua rute (endpoint) yang tidak terdaftar (404 Not Found)
 app.use((req: Request, res: Response, next: NextFunction) => {
+
+  console.log("Rute yang diakses:", req.originalUrl);
   next(new AppError(`Rute ${req.originalUrl} tidak ditemukan di server ini!`, 404));
 });
 
