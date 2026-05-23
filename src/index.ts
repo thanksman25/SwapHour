@@ -66,6 +66,8 @@ app.use(errorHandler);
 // ================= START CRON JOBS =================
 startCronJobs();
 // Asisten otomatis sekarang akan menyala bersamaan dengan server
-app.listen(PORT, () => {
-    console.log(`[SERVER] API SwapHour berjalan di http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`[SERVER] API SwapHour berjalan di http://localhost:${PORT}`);
+// });
+
+export default app;
