@@ -30,11 +30,16 @@ app.use(helmet());       // Keamanan standar HTTP headers
 app.use(morgan('dev'));  // Logger aktivitas di terminal untuk memudahkan tracking error
 
 // ================= ROUTES =================
+// ENDPOINT WARM-UP (Mitigasi Cold Start Render)
 // 1. Endpoint Health Check (Sangat penting untuk mencegah "cold start" di server gratisan)
+// Render menidurkan server gratis setelah 15 menit tidak aktif.
+// Endpoint ringan ini bisa dipanggil oleh UptimeRobot atau CronJob eksternal 
+// setiap 10 menit agar server tetap "terjaga".
 app.get('/health', (req: Request, res: Response) => {
     res.status(200).json({
         status: 'success',
-        message: 'SwapHour API is running smoothly!',
+        message: 'SwapHour API is awake and running smoothly!',
+        timestamp: new Date().toISOString()
     });
 });
 
