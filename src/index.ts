@@ -15,6 +15,10 @@ import { AppError } from './utils/AppError';
 
 import swapRoutes from './routes/swapRoutes';
 
+import ratingRoutes from './routes/ratingRoutes';
+import notificationRoutes from './routes/notificationRoutes';
+import { startCronJobs } from './cron/expireRequests'; // Import asisten Cron
+
 // Inisialisasi aplikasi Express
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +44,8 @@ app.use('/api/auth', authRoutes);     // Mengurus Register & Login
 app.use('/api/users', userRoutes);    // Mengurus Update Profile
 app.use('/api/skills', skillRoutes);  // Mengurus CRUD Katalog Skill
 app.use('/api/swaps', swapRoutes);    // Mengurus Mesin Utama Swap & Wallet
+app.use('/api/ratings', ratingRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // ================= PENANGKAP ERROR 404 =================
 // Tangkap semua rute (endpoint) yang tidak terdaftar (404 Not Found)
@@ -52,6 +58,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(errorHandler);
 
 // ================= START SERVER =================
+// ================= START CRON JOBS =================
+startCronJobs();
+// Asisten otomatis sekarang akan menyala bersamaan dengan server
 app.listen(PORT, () => {
     console.log(`[SERVER] API SwapHour berjalan di http://localhost:${PORT}`);
 });

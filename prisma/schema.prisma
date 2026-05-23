@@ -63,10 +63,13 @@ model User {
   // @updatedAt akan otomatis memperbarui timestamp setiap kali ada perubahan data (seperti trigger di SQL)
   updated_at         DateTime @default(now()) @updatedAt @db.Timestamptz
 
+  average_rating    Float    @default(0.0) // Menyimpan nilai rata-rata bintang
+  total_ratings     Int      @default(0)   // Menyimpan jumlah orang yang memberi rating
+
   // --- Relasi Antar Tabel ---
   skills           Skill[]
   
-  // Membedakan peran user dalam Swap: sebagai yang meminta (Requester) atau yang menyediakan skill (Provider)[cite: 384, 389, 511].
+  // Membedakan peran user dalam Swap: sebagai yang meminta (Requester) atau yang menyediakan skill (Provider).
   requestsMade     SwapRequest[]       @relation("Requester")
   requestsReceived SwapRequest[]       @relation("Provider")
   
@@ -134,7 +137,7 @@ model WalletTransaction {
   swap_id       String?  @db.Uuid 
   
   type          TxType 
-  amount        Decimal  @db.Decimal(8, 2) // Jumlah Jam Kredit yang diproses[cite: 826].
+  amount        Decimal  @db.Decimal(8, 2) // Jumlah Jam Kredit yang diproses.
   balance_after Decimal  @db.Decimal(8, 2) // Saldo pengguna setelah transaksi ini terjadi (untuk histori).
   description   String   @db.VarChar(255)
   created_at    DateTime @default(now()) @db.Timestamptz
@@ -146,7 +149,7 @@ model WalletTransaction {
   @@map("wallet_transactions")
 }
 
-// Tabel Penilaian (Ratings) Pasca-Swap [cite: 412, 417, 827]
+// Tabel Penilaian (Ratings) Pasca-Swap 
 model Rating {
   id         String   @id @default(uuid()) @db.Uuid
   swap_id    String   @db.Uuid
@@ -162,7 +165,7 @@ model Rating {
   ratee User        @relation("Ratee", fields: [ratee_id], references: [id])
 
   // UNIQUE CONSTRAINT: Validasi ketat agar satu pengguna (rater_id) hanya bisa memberi 
-  // maksimal 1 buah rating untuk satu pertukaran spesifik (swap_id). Mencegah spam rating[cite: 431, 432, 833].
+  // maksimal 1 buah rating untuk satu pertukaran spesifik (swap_id). Mencegah spam rating.
   @@unique([swap_id, rater_id]) 
   
   @@map("ratings")

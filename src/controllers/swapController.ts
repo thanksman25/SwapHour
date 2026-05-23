@@ -3,9 +3,7 @@ import prisma from '../utils/prismaClient';
 import { AppError } from '../utils/AppError';
 import { AuthRequest } from '../middlewares/authMiddleware';
 
-// ==========================================
 // 1. CREATE REQUEST (Meminta Keahlian)
-// ==========================================
 export const createSwapRequest = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const { skill_id, notes } = req.body;
@@ -71,16 +69,25 @@ export const createSwapRequest = async (req: AuthRequest, res: Response, next: N
         }
       });
 
+      // ---> NOTIFIKASI <---
+      // d. Kirim Notifikasi ke Provider bahwa ada pesanan baru
+      await tx.notification.create({
+        data: {
+          user_id: skill.user_id, // Penerima adalah si penyedia jasa
+          type: 'swap_request',
+          message: `Ada request baru untuk skill: ${skill.title}`,
+          reference_id: newRequest.id
+        }
+      });
+
       return newRequest;
     });
 
     res.status(201).json({ status: 'success', data: result });
   } catch (error) { next(error); }
 };
-
-// ==========================================
 // 2. RESPOND REQUEST (Provider Terima/Tolak)
-// ==========================================
+
 export const respondSwapRequest = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     // PERBAIKAN: Tegaskan bahwa id adalah sebuah string
@@ -100,6 +107,17 @@ export const respondSwapRequest = async (req: AuthRequest, res: Response, next: 
       const updatedReq = await prisma.swapRequest.update({
         where: { id },
         data: { status: 'active' }
+      });
+
+      // ---> NOTIFIKASI <---
+      // Kirim Notifikasi ke Requester bahwa request-nya diterima
+      await prisma.notification.create({
+        data: {
+          user_id: swapReq.requester_id,
+          type: 'swap_accepted',
+          message: `Request Anda telah diterima oleh provider. Silakan berdiskusi lebih lanjut!`,
+          reference_id: id
+        }
       });
       return res.status(200).json({ status: 'success', data: updatedReq });
     } 
@@ -132,6 +150,8 @@ export const respondSwapRequest = async (req: AuthRequest, res: Response, next: 
           }
         });
 
+        // Catatan: Kamu juga bisa menambahkan notifikasi penolakan di sini jika mau nantinya.
+
         return rejectedReq;
       });
       return res.status(200).json({ status: 'success', data: result });
@@ -141,9 +161,8 @@ export const respondSwapRequest = async (req: AuthRequest, res: Response, next: 
   } catch (error) { next(error); }
 };
 
-// ==========================================
 // 3. COMPLETE REQUEST (Eksekusi Penyelesaian)
-// ==========================================
+
 export const completeSwapRequest = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     // PERBAIKAN: Tegaskan bahwa id adalah sebuah string
@@ -180,20 +199,20 @@ export const completeSwapRequest = async (req: AuthRequest, res: Response, next:
       
       // TRANSAKSI ATOMIK: Eksekusi final transfer saldo
       await prisma.$transaction(async (tx) => {
-        // 1. Ubah status jadi completed
+        // Ubah status jadi completed
         await tx.swapRequest.update({
           where: { id },
           data: { status: 'completed' }
         });
 
-        // 2. Tambahkan saldo ke Provider
+        // Tambahkan saldo ke Provider
         const duration = Number(swapReq.duration_hours);
         const providerData = await tx.user.update({
           where: { id: swapReq.provider_id },
           data: { credit_hours: { increment: duration } }
         });
 
-        // 3. Catat Wallet Mutasi: Credit untuk Provider (Penerimaan)
+        // Catat Wallet Mutasi: Credit untuk Provider (Penerimaan)
         await tx.walletTransaction.create({
           data: {
             user_id: swapReq.provider_id,
@@ -205,8 +224,7 @@ export const completeSwapRequest = async (req: AuthRequest, res: Response, next:
           }
         });
 
-        // 4. Catat Wallet Mutasi: Debit untuk Requester (Pencatatan final dari Hold)
-        // Kita hanya mencatat history 'debit', tidak memotong saldo lagi karena sudah dipotong di awal
+        // Debit untuk Requester (Pencatatan final dari Hold)
         const requesterData = await tx.user.findUnique({ where: { id: swapReq.requester_id } });
         await tx.walletTransaction.create({
           data: {
@@ -217,6 +235,16 @@ export const completeSwapRequest = async (req: AuthRequest, res: Response, next:
             balance_after: requesterData!.credit_hours,
             description: `Pembayaran sukses untuk Swap ID: ${id}`
           }
+        });
+
+        // ---> NOTIFIKASI <---
+        // Kirim Notifikasi pengingat Rating ke dua belah pihak
+        const message = 'Swap telah selesai! Silakan berikan rating kepada rekan Anda.';
+        await tx.notification.createMany({
+          data: [
+            { user_id: swapReq.requester_id, type: 'swap_completed', message, reference_id: id },
+            { user_id: swapReq.provider_id, type: 'swap_completed', message, reference_id: id }
+          ]
         });
       });
 
