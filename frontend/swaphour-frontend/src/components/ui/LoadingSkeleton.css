@@ -1,0 +1,20 @@
+.skeleton-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skeleton-line {
+  border-radius: 6px;
+}
