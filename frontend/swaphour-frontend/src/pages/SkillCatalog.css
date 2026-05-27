@@ -1,0 +1,118 @@
+.skill-catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 36px 0 64px;
+}
+
+.catalog-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.catalog-title { font-size: 2.2rem; margin-bottom: 8px; }
+
+.catalog-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green-300);
+  background: rgba(45,158,111,0.15);
+  border: 1px solid rgba(45,158,111,0.3);
+  border-radius: var(--radius-badge);
+  padding: 5px 14px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Controls */
+.catalog-controls { display: flex; flex-direction: column; gap: 14px; }
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 16px;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.search-input {
+  padding-left: 46px;
+  padding-right: 40px;
+  height: 50px;
+  font-size: 15px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06) !important;
+}
+
+.search-input:focus { background: rgba(255,255,255,0.09) !important; }
+
+.search-clear {
+  position: absolute;
+  right: 14px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  padding: 4px 7px;
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+}
+.search-clear:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+/* Category tabs */
+.category-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.cat-tab {
+  padding: 7px 18px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-badge);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  color: var(--color-text-muted);
+}
+
+.cat-tab:hover {
+  border-color: var(--green-500);
+  color: var(--green-300);
+  background: rgba(45,158,111,0.1);
+}
+
+.cat-tab--active {
+  background: rgba(45,158,111,0.2);
+  border-color: rgba(45,158,111,0.5);
+  color: var(--green-300);
+  box-shadow: 0 0 16px rgba(45,158,111,0.2);
+}
+
+/* Searching indicator */
+.searching-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.searching-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green-400);
+  animation: pulse 1s ease infinite;
+}
