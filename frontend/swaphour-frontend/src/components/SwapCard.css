@@ -1,0 +1,96 @@
+.swap-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all var(--transition-base) !important;
+}
+
+.swap-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(255,255,255,0.18) !important;
+}
+
+.swap-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.swap-card__skill-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.swap-card__title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.swap-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.swap-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.meta-icon { font-size: 13px; }
+.meta-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.swap-card__notes {
+  font-size: 13px;
+  font-style: italic;
+  padding: 8px 12px;
+  background: var(--color-surface-2);
+  border-left: 3px solid var(--color-primary-pale);
+  border-radius: 0 6px 6px 0;
+}
+
+.swap-card__completion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.completion-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.completion-dot.done {
+  background: var(--color-completed);
+}
+
+.swap-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.swap-card__waiting-text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}

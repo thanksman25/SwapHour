@@ -53,25 +53,15 @@ const LoginPage = () => {
   const handleSubmit = async () => {
     if (!validate()) return;
     setIsLoading(true);
-    setApiError("");
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        navigate("/dashboard");
-      } else {
-        setApiError(data?.message || "Email atau password salah.");
-      }
-    } catch (err) {
-      setApiError("Gagal terhubung ke server. Coba lagi.");
-    } finally {
-      setIsLoading(false);
-    }
+
+    // Simulasi delay loading
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Bypass API — langsung simpan token dummy dan redirect
+    localStorage.setItem("token", "dummy-token-test");
+    navigate("/dashboard");
+
+    setIsLoading(false);
   };
 
   return (
