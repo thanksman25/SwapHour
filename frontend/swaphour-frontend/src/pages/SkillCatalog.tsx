@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { gsap } from 'gsap';
 import apiClient from '../lib/apiClient';
@@ -76,11 +77,16 @@ export default function SkillCatalog() {
             Temukan keahlian yang kamu butuhkan dan mulai pertukaran.
           </p>
         </div>
-        {!isLoading && (
-          <span className="catalog-count">
-            {skills.length} skill ditemukan
-          </span>
-        )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <Link to="/skills/new" className="btn btn-accent btn-sm">
+            + Tambah Skill
+          </Link>
+          {!isLoading && (
+            <span className="catalog-count">
+              {skills.length} skill ditemukan
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Search & filter */}

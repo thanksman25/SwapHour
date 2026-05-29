@@ -31,7 +31,11 @@ const Footer = () => {
           <img
             src={swapHourLogo}
             alt="SwapHour"
-            style={{ height: "26px", width: "auto" }}
+            style={{
+              height: "42px",
+              width: "auto",
+              filter: "brightness(0) invert(1)",
+            }}
           />
           <p className="footer-tagline">
             Tukar keahlian, bangun komunitas, tanpa uang tunai.
