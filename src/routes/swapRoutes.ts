@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createSwapRequest, respondSwapRequest, completeSwapRequest } from '../controllers/swapController';
+import { createSwapRequest, respondSwapRequest, completeSwapRequest, getMySwaps } from '../controllers/swapController';
 import { protect } from '../middlewares/authMiddleware';
 
 const router = Router();
@@ -15,5 +15,8 @@ router.patch('/:id/respond', respondSwapRequest);
 
 // Endpoint 3: Tandai selesai
 router.patch('/:id/complete', completeSwapRequest);
+
+// Endpoint 4: Get my swaps history
+router.get('/', getMySwaps);
 
 export default router;

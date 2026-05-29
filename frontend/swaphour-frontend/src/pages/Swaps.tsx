@@ -51,6 +51,41 @@ export default function Swaps() {
     },
   });
 
+  // Rating Modal State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSwap, setSelectedSwap] = useState<SwapRequest | null>(null);
+  const [score, setScore] = useState(5);
+  const [comment, setComment] = useState('');
+  const [ratingError, setRatingError] = useState('');
+  const [ratingSuccess, setRatingSuccess] = useState('');
+
+  const { mutate: submitRating, isPending: isRatingSubmitting } = useMutation({
+    mutationFn: () =>
+      apiClient.post('/ratings', {
+        swap_id: selectedSwap?.id,
+        score,
+        comment: comment.trim() || undefined,
+      }),
+    onSuccess: () => {
+      setRatingSuccess('✓ Rating berhasil dikirim!');
+      setRatingError('');
+      queryClient.invalidateQueries({ queryKey: ['swaps'] });
+      // Close modal after 1.5s
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setSelectedSwap(null);
+        setScore(5);
+        setComment('');
+        setRatingSuccess('');
+      }, 1500);
+    },
+    onError: (err: any) => {
+      const msg = err?.response?.data?.message ?? 'Gagal mengirim rating.';
+      setRatingError(msg);
+      setRatingSuccess('');
+    },
+  });
+
   // Animasi masuk untuk swap cards setiap kali tab atau data berubah
   useEffect(() => {
     if (isLoading || !pageRef.current) return;
@@ -155,10 +190,84 @@ export default function Swaps() {
               onAccept={(id) => respond({ id, action: 'accept' })}
               onReject={(id) => respond({ id, action: 'reject' })}
               onComplete={(id) => complete(id)}
+              onRate={(swap) => {
+                setSelectedSwap(swap);
+                setIsModalOpen(true);
+                setScore(5);
+                setComment('');
+                setRatingError('');
+                setRatingSuccess('');
+              }}
             />
           ))}
         </div>
       )}
+
+      {/* Rating Modal */}
+      <div className={`modal-backdrop ${isModalOpen ? 'modal-backdrop--open' : ''}`} onClick={() => !isRatingSubmitting && setIsModalOpen(false)}>
+        <div className="rating-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="rating-modal__header">
+            <h3>Beri Penilaian</h3>
+            <button className="rating-modal__close" onClick={() => !isRatingSubmitting && setIsModalOpen(false)}>✕</button>
+          </div>
+          <p className="text-muted text-sm">
+            Bagikan pengalaman kamu melakukan pertukaran skill <strong>{selectedSwap?.skill?.title}</strong> bersama partner.
+          </p>
+
+          <hr className="divider" />
+
+          <div>
+            <label className="rating-modal__label">Skor Rating ({score} Bintang)</label>
+            <div className="rating-stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  className="rating-star-btn"
+                  onClick={() => setScore(star)}
+                  style={{ color: star <= score ? 'var(--color-accent)' : '#4b5563' }}
+                  disabled={isRatingSubmitting || !!ratingSuccess}
+                >
+                  ★
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="notes-field">
+            <label htmlFor="rating-comment" className="rating-modal__label">Komentar / Ulasan (opsional)</label>
+            <textarea
+              id="rating-comment"
+              className="input rating-modal__textarea"
+              placeholder="Tuliskan ulasan singkat mengenai jalannya swap..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              rows={3}
+              disabled={isRatingSubmitting || !!ratingSuccess}
+            />
+          </div>
+
+          {ratingError && <div className="swap-panel__error">❌ {ratingError}</div>}
+          {ratingSuccess && <div className="swap-panel__success">{ratingSuccess}</div>}
+
+          <div className="rating-modal__actions">
+            <button
+              className="btn btn-outline btn-full btn-sm"
+              onClick={() => setIsModalOpen(false)}
+              disabled={isRatingSubmitting || !!ratingSuccess}
+            >
+              Batal
+            </button>
+            <button
+              className="btn btn-accent btn-full btn-sm"
+              onClick={() => submitRating()}
+              disabled={isRatingSubmitting || !!ratingSuccess}
+            >
+              {isRatingSubmitting ? '⏳ Mengirim...' : 'Kirim Rating'}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { gsap } from 'gsap';
 import apiClient from '../lib/apiClient';
-import type { Skill, User } from '../types';
+import type { Skill, User, SwapRequest } from '../types';
 import LoadingSkeleton from '../components/ui/LoadingSkeleton';
 import './SkillDetail.css';
 
@@ -52,6 +52,12 @@ export default function SkillDetail() {
     staleTime: 5 * 60 * 1000,
   });
 
+  const { data: swaps = [], isLoading: swapsLoading } = useQuery({
+    queryKey: ['swaps'],
+    queryFn: () => apiClient.get<{ status: string; data: SwapRequest[] }>('/swaps').then((r) => r.data.data ?? []),
+    staleTime: 2 * 60 * 1000,
+  });
+
   const { mutate: submitSwap, isPending: isSubmitting } = useMutation({
     mutationFn: () =>
       apiClient.post('/swaps', {
@@ -71,12 +77,15 @@ export default function SkillDetail() {
     },
   });
 
-  const isLoading = skillLoading || profileLoading;
+  const isLoading = skillLoading || profileLoading || swapsLoading;
   const balance = Number(profile?.credit_hours ?? 0);
   const duration = Number(skill?.duration_hours ?? 0);
   const canAfford = balance >= duration;
   const profileOk = (profile?.profile_completion ?? 0) >= 80;
   const isOwnSkill = skill?.user_id === profile?.id;
+  const hasActiveRequest = swaps.some(
+    (s) => s.skill_id === id && (s.status === 'pending' || s.status === 'active')
+  );
 
   // GSAP Entry Animation
   useEffect(() => {
@@ -216,8 +225,14 @@ export default function SkillDetail() {
               </div>
             )}
 
+            {hasActiveRequest && !isLoading && (
+              <div className="swap-panel__warning">
+                ⚠️ Kamu memiliki permintaan swap aktif (pending/aktif) untuk skill ini.
+              </div>
+            )}
+
             {/* Notes textarea */}
-            {!isOwnSkill && (
+            {!isOwnSkill && !hasActiveRequest && (
               <div className="notes-field">
                 <label htmlFor="swap-notes" className="notes-label">Catatan (opsional)</label>
                 <textarea
@@ -240,7 +255,7 @@ export default function SkillDetail() {
               <button
                 className="btn btn-accent btn-full btn-lg"
                 onClick={() => submitSwap()}
-                disabled={isSubmitting || !canAfford || !profileOk || isLoading}
+                disabled={isSubmitting || !canAfford || !profileOk || hasActiveRequest || isLoading}
               >
                 {isSubmitting ? '⏳ Mengirim...' : '✉ Kirim Permintaan Swap'}
               </button>

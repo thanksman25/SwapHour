@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { gsap } from "gsap";
-import NotifBadge from "../UI/NotifBadge";
+import NotifBadge from "../ui/NotifBadge";
 import apiClient from "../../lib/apiClient";
 import type { Notification } from "../../types";
 import "./Navbar.css";

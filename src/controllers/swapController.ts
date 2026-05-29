@@ -255,3 +255,34 @@ export const completeSwapRequest = async (req: AuthRequest, res: Response, next:
     res.status(200).json({ status: 'success', message: 'Menunggu pihak lain mengkonfirmasi selesai.' });
   } catch (error) { next(error); }
 };
+
+// 4. GET MY SWAPS (Mendapatkan riwayat swap milik user)
+export const getMySwaps = async (req: AuthRequest, res: Response, next: NextFunction) => {
+  try {
+    const userId = req.user.id;
+    const swaps = await prisma.swapRequest.findMany({
+      where: {
+        OR: [
+          { requester_id: userId },
+          { provider_id: userId }
+        ]
+      },
+      include: {
+        skill: {
+          select: { id: true, title: true, category: true, duration_hours: true }
+        },
+        requester: {
+          select: { id: true, name: true, avatar_url: true }
+        },
+        provider: {
+          select: { id: true, name: true, avatar_url: true }
+        },
+        ratings: true
+      },
+      orderBy: {
+        created_at: 'desc'
+      }
+    });
+    res.status(200).json({ status: 'success', data: swaps });
+  } catch (error) { next(error); }
+};
