@@ -70,6 +70,9 @@
 .sidebar__link-icon {
   font-size: 1.15rem;
   transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar__link:hover {
