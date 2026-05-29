@@ -60,4 +60,37 @@ export const updateProfile = async (req: AuthRequest, res: Response, next: NextF
        // Jika ada error tak terduga (misal database mati), lempar ke Global Error Handler
        next(error);
     }
-}
+};
+
+export const getProfile = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user.id;
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                bio: true,
+                avatar_url: true,
+                profile_completion: true,
+                credit_hours: true,
+                average_rating: true,
+                total_ratings: true,
+                is_active: true,
+                created_at: true,
+            }
+        });
+
+        if (!user) {
+            return next(new AppError('User tidak ditemukan', 404));
+        }
+
+        res.status(200).json({
+            status: 'success',
+            data: user
+        });
+    } catch (error) {
+        next(error);
+    }
+};

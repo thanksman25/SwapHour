@@ -1,8 +1,8 @@
 // Auth helpers — simpan/baca/hapus data auth dari localStorage
 import type { User } from '../types';
 
-export const TOKEN_KEY = 'swaphour_token';
-export const USER_KEY = 'swaphour_user';
+export const TOKEN_KEY = 'token';
+export const USER_KEY = 'user';
 
 export const getToken = (): string | null => localStorage.getItem(TOKEN_KEY);
 
