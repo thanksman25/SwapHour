@@ -17,8 +17,9 @@ src/
 │   └── index.ts           — TypeScript interfaces (User, Skill, SwapRequest, dll)
 ├── components/
 │   ├── layout/
-│   │   ├── Navbar.tsx / .css    — Navbar fixed dark green
-│   │   └── AppLayout.tsx / .css — Wrapper protected routes
+│   │   ├── Sidebar.tsx / .css   — Bilah samping (Sidebar) kiri dengan navigasi dan menu
+│   │   ├── Header.tsx / .css    — Bar atas (Header) kanan dengan info profil & saldo jam
+│   │   └── AppLayout.tsx / .css — Grid layout utama (Sidebar + Header + Content)
 │   ├── ui/
 │   │   ├── NotifBadge.tsx       — Badge merah notifikasi unread
 │   │   └── LoadingSkeleton.tsx / .css — Skeleton loading
@@ -91,8 +92,9 @@ src/
 
 | Komponen | File | Fungsi |
 |---|---|---|
-| `Navbar` | `layout/Navbar.tsx` | Nav utama + avatar + credit + notif badge (refresh 30s) |
-| `AppLayout` | `layout/AppLayout.tsx` | Protected route wrapper + Outlet |
+| `Sidebar` | `layout/Sidebar.tsx` | Nav samping kiri (Dashboard, Wallet, Exchange, Network, Analytics) + tombol post skill + Settings & Logout |
+| `Header` | `layout/Header.tsx` | Bar atas kanan (Docs/API/Community links, saldo jam raw green, bel notifikasi unread, avatar & dropdown) |
+| `AppLayout` | `layout/AppLayout.tsx` | Wrapper layout utama (Sidebar + Header + Main Content Outlet) |
 | `SkillCard` | `SkillCard.tsx` | Kartu katalog skill |
 | `SwapCard` | `SwapCard.tsx` | Kartu swap + tombol aksi kondisional |
 | `NotifBadge` | `ui/NotifBadge.tsx` | Badge merah notifikasi unread |
@@ -164,8 +166,8 @@ Kamu bisa mencicil commit per fitur atau halaman dengan menggunakan git command 
 
 2. **Shared Layout, Routing & Components**
    ```bash
-   git add src/App.tsx src/components/layout/AppLayout.tsx src/components/layout/AppLayout.css src/components/layout/Navbar.tsx src/components/layout/Navbar.css src/components/ui/LoadingSkeleton.tsx src/components/ui/LoadingSkeleton.css src/components/ui/NotifBadge.tsx src/components/SkillCard.tsx src/components/SkillCard.css src/components/SwapCard.tsx src/components/SwapCard.css src/lib/apiClient.ts src/lib/auth.ts src/types/index.ts
-   git commit -m "feat: tambah routing layout dan shared components (Navbar, SkillCard, SwapCard, Skeleton)"
+   git add src/App.tsx src/components/layout/AppLayout.tsx src/components/layout/AppLayout.css src/components/layout/Sidebar.tsx src/components/layout/Sidebar.css src/components/layout/Header.tsx src/components/layout/Header.css src/components/ui/LoadingSkeleton.tsx src/components/ui/LoadingSkeleton.css src/components/ui/NotifBadge.tsx src/components/SkillCard.tsx src/components/SkillCard.css src/components/SwapCard.tsx src/components/SwapCard.css src/lib/apiClient.ts src/lib/auth.ts src/types/index.ts
+   git commit -m "feat: tambah routing layout dan shared components (Sidebar, Header, SkillCard, SwapCard, Skeleton)"
    ```
 
 3. **Dashboard Page**

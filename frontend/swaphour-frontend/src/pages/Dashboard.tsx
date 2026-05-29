@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { gsap } from "gsap";
 import apiClient from "../lib/apiClient";
 import type { User, SwapRequest, Notification, Skill } from "../types";
-import LoadingSkeleton from "../components/UI/LoadingSkeleton";
+import LoadingSkeleton from "../components/ui/LoadingSkeleton";
 import "./Dashboard.css";
 
 function fetchProfile(): Promise<User> {

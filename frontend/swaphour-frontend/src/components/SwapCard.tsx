@@ -1,3 +1,4 @@
+import { getUser } from '../lib/auth';
 import type { SwapRequest, SwapStatus } from '../types';
 import './SwapCard.css';
 
@@ -7,6 +8,7 @@ interface SwapCardProps {
   onAccept?: (id: string) => void;
   onReject?: (id: string) => void;
   onComplete?: (id: string) => void;
+  onRate?: (swap: SwapRequest) => void;
   isLoading?: boolean;
 }
 
@@ -24,11 +26,14 @@ function formatDate(dateStr: string) {
   });
 }
 
-export default function SwapCard({ swap, mode, onAccept, onReject, onComplete, isLoading }: SwapCardProps) {
+export default function SwapCard({ swap, mode, onAccept, onReject, onComplete, onRate, isLoading }: SwapCardProps) {
   const statusInfo = STATUS_MAP[swap.status];
   const counterpart = mode === 'incoming' ? swap.requester : swap.provider;
   const counterpartLabel = mode === 'incoming' ? 'Dari' : 'Kepada';
   const myCompleted = mode === 'incoming' ? swap.provider_completed : swap.requester_completed;
+
+  const currentUser = getUser();
+  const alreadyRated = swap.ratings?.some((r: any) => r.rater_id === currentUser?.id);
 
   return (
     <div className="swap-card card">
@@ -113,6 +118,21 @@ export default function SwapCard({ swap, mode, onAccept, onReject, onComplete, i
         {swap.status === 'active' && myCompleted && (
           <span className="swap-card__waiting-text">
             ⏳ Menunggu konfirmasi dari pihak lain
+          </span>
+        )}
+
+        {swap.status === 'completed' && !alreadyRated && (
+          <button
+            className="btn btn-accent btn-sm"
+            onClick={() => onRate?.(swap)}
+          >
+            ★ Beri Rating
+          </button>
+        )}
+
+        {swap.status === 'completed' && alreadyRated && (
+          <span className="swap-card__completed-text" style={{ color: 'var(--color-completed)', fontSize: 13, fontWeight: 600 }}>
+            ✓ Selesai & Dinilai
           </span>
         )}
       </div>

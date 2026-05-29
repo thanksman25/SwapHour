@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import Button from "../components/UI/Button";
-import Input from "../components/UI/Input";
-import ErrorAlert from "../components/UI/ErrorAlert";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import ErrorAlert from "../components/ui/ErrorAlert";
 import swapHourLogo from "../assets/logo.png";
 
 const LoginPage = () => {
@@ -54,15 +54,35 @@ const LoginPage = () => {
   const handleSubmit = async () => {
     if (!validate()) return;
     setIsLoading(true);
+    setApiError("");
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+      if (response.ok && data.token) {
+        localStorage.setItem("token", data.token);
 
-    // Simulasi delay loading
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+        // Fetch profile to save user info in localStorage for FE-2 pages
+        const profileRes = await fetch("/api/users/profile", {
+          headers: { Authorization: `Bearer ${data.token}` },
+        });
+        const profileData = await profileRes.json();
+        if (profileRes.ok && profileData.data) {
+          localStorage.setItem("user", JSON.stringify(profileData.data));
+        }
 
-    // Bypass API — langsung simpan token dummy dan redirect
-    localStorage.setItem("token", "dummy-token-test");
-    navigate("/dashboard");
-
-    setIsLoading(false);
+        navigate("/dashboard");
+      } else {
+        setApiError(data?.message || "Email atau password salah.");
+      }
+    } catch (err) {
+      setApiError("Gagal terhubung ke server.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

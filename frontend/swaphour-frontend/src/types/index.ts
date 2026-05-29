@@ -43,6 +43,7 @@ export interface SwapRequest {
   skill?: Pick<Skill, 'id' | 'title' | 'category'>;
   requester?: Pick<User, 'id' | 'name' | 'avatar_url'>;
   provider?: Pick<User, 'id' | 'name' | 'avatar_url'>;
+  ratings?: any[];
 }
 
 export type TxType = 'credit' | 'debit' | 'hold' | 'release';
