@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import Button from "../components/UI/Button";
-import Input from "../components/UI/Input";
-import ErrorAlert from "../components/UI/ErrorAlert";
-import Spinner from "../components/UI/Spinner";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import ErrorAlert from "../components/ui/ErrorAlert";
+import Spinner from "../components/ui/Spinner";
 
 interface ProfileData {
   name: string;

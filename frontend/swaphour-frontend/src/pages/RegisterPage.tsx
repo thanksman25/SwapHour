@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import Button from "../components/UI/Button";
-import Input from "../components/UI/Input";
-import ErrorAlert from "../components/UI/ErrorAlert";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import ErrorAlert from "../components/ui/ErrorAlert";
 
 const RegisterPage = () => {
   const navigate = useNavigate();

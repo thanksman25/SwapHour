@@ -1,4 +1,3 @@
-import React from "react";
 
 interface BadgeProps {
   status: "pending" | "active" | "completed" | "rejected" | "expired";
