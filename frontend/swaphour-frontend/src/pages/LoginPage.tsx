@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import ErrorAlert from "../components/ui/ErrorAlert";
-import swapHourLogo from "../assets/logo.png";
+import Logo from "../components/ui/Logo";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -156,15 +156,7 @@ const LoginPage = () => {
           />
 
           <div style={{ textAlign: "center" as const }}>
-            <img
-              src={swapHourLogo}
-              alt="SwapHour"
-              style={{
-                height: "42px",
-                width: "auto",
-                filter: "brightness(0) invert(1)",
-              }}
-            />
+            <Logo size={42} />
             <h1
               style={{
                 fontSize: "1.75rem",

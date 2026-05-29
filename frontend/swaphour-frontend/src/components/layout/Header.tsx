@@ -5,6 +5,7 @@ import { clearAuth } from "../../lib/auth";
 import apiClient from "../../lib/apiClient";
 import type { User, Notification } from "../../types";
 import NotifBadge from "../ui/NotifBadge";
+import Logo from "../ui/Logo";
 import "./Header.css";
 
 function fetchProfile(): Promise<User> {
@@ -62,7 +63,10 @@ export default function Header() {
     <header className="header" ref={headerRef}>
       {/* Left side brand & secondary links */}
       <div className="header__left">
-        <span className="header__brand-name">SwapHour</span>
+        <Link to="/dashboard" className="header__brand">
+          <Logo size={28} />
+          <span className="header__brand-name">SwapHour</span>
+        </Link>
         <nav className="header__links">
           <a href="#docs" className="header__link">Docs</a>
           <a href="#api" className="header__link">API</a>

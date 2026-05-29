@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import ErrorAlert from "../components/ui/ErrorAlert";
-import swapHourLogo from "../assets/logo.png";
+import Logo from "../components/ui/Logo";
 
 const CATEGORIES = [
   "Teknologi",
@@ -225,15 +225,7 @@ const AddSkillPage = () => {
 
         {/* Header */}
         <div>
-          <img
-            src={swapHourLogo}
-            alt="SwapHour"
-            style={{
-              height: "42px",
-              width: "auto",
-              filter: "brightness(0) invert(1)",
-            }}
-          />
+          <Logo size={42} />
 
           <div
             style={{

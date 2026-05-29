@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import swapHourLogo from "../../assets/logo.png";
+import Logo from "../ui/Logo";
 
 const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
@@ -18,17 +18,7 @@ const Navbar = () => {
     <nav ref={navRef} className="navbar">
       <div className="navbar-container">
         <a href="/" className="navbar-logo">
-          <a href="/" className="navbar-logo">
-            <img
-              src={swapHourLogo}
-              alt="SwapHour"
-              style={{
-                height: "42px",
-                width: "auto",
-                filter: "brightness(0) invert(1)",
-              }}
-            />
-          </a>
+          <Logo size={42} />
         </a>
         <div className="navbar-links">
           <a href="/login" className="nav-link">
