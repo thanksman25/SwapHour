@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { clearAuth } from "../../lib/auth";
 import apiClient from "../../lib/apiClient";
@@ -19,7 +19,7 @@ function fetchUnreadCount(): Promise<number> {
 }
 
 export default function Header() {
-  const location = useLocation();
+
   const navigate = useNavigate();
   const headerRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -48,18 +48,7 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const getPageTitle = () => {
-    const path = location.pathname;
-    if (path === "/dashboard") return "Dashboard";
-    if (path === "/skills/new") return "Post a New Skill";
-    if (path.startsWith("/skills/")) return "Detail Skill";
-    if (path === "/skills") return "Katalog Skill";
-    if (path === "/swaps") return "Swap Saya";
-    if (path === "/notifications") return "Notifikasi";
-    if (path === "/wallet") return "Wallet";
-    if (path === "/profile/edit") return "Settings";
-    return "SwapHour";
-  };
+
 
   const handleLogout = () => {
     clearAuth();
@@ -71,27 +60,42 @@ export default function Header() {
 
   return (
     <header className="header" ref={headerRef}>
-      {/* Page Title */}
-      <h2 className="header__title">{getPageTitle()}</h2>
+      {/* Left side brand & secondary links */}
+      <div className="header__left">
+        <span className="header__brand-name">SwapHour</span>
+        <nav className="header__links">
+          <a href="#docs" className="header__link">Docs</a>
+          <a href="#api" className="header__link">API</a>
+          <a href="#community" className="header__link">Community</a>
+        </nav>
+      </div>
 
       {/* Right Controls */}
       <div className="header__controls">
-        {/* Balance hours badge */}
-        <Link to="/wallet" className="header__balance">
-          <svg className="header__balance-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="7" stroke="var(--color-accent)" strokeWidth="1.5" />
-            <path d="M5.5 5.5h5L8 8 5.5 5.5zM5.5 10.5h5L8 8 5.5 10.5z" fill="var(--color-accent)" />
-          </svg>
-          <span className="header__balance-value">{balance}h</span>
+        {/* Balance hours text */}
+        <Link to="/wallet" className="header__balance-text" title="Saldo Jam">
+          {balance}h
         </Link>
 
         {/* Notification Bell */}
         <Link to="/notifications" className="header__notif-btn" title="Notifikasi">
           <span className="notif-icon-wrap">
-            🔔
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
             <NotifBadge count={unreadCount} />
           </span>
         </Link>
+
+        {/* Help Question Icon */}
+        <button className="header__help-btn" title="Bantuan / FAQ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        </button>
 
         {/* User avatar & dropdown */}
         <div className="header__avatar-container">

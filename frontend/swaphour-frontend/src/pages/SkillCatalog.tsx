@@ -1,16 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { gsap } from 'gsap';
-import apiClient from '../lib/apiClient';
-import type { Skill } from '../types';
-import SkillCard from '../components/SkillCard';
-import LoadingSkeleton from '../components/ui/LoadingSkeleton';
-import './SkillCatalog.css';
+import { useState, useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { gsap } from "gsap";
+import apiClient from "../lib/apiClient";
+import type { Skill } from "../types";
+import SkillCard from "../components/SkillCard";
+import LoadingSkeleton from "../components/ui/LoadingSkeleton";
+import "./SkillCatalog.css";
 
 const CATEGORIES = [
-  'Semua', 'Desain', 'Coding', 'Musik', 'Bahasa', 'Memasak',
-  'Olahraga', 'Bisnis', 'Fotografi', 'Lainnya',
+  "Semua",
+  "Coding",
+  "Desain",
+  "Bahasa",
+  "Bisnis",
+  "Musik",
+  "Memasak",
+  "Olahraga",
+  "Fotografi",
+  "Lainnya",
 ];
 
 function useDebounce<T>(value: T, delay: number): T {
@@ -24,9 +31,9 @@ function useDebounce<T>(value: T, delay: number): T {
 
 function fetchSkills(search: string, category: string): Promise<Skill[]> {
   const params: Record<string, string> = {};
-  if (category && category !== 'Semua') params.category = category.toLowerCase();
+  if (category && category !== "Semua") params.category = category.toLowerCase();
   return apiClient
-    .get<{ status: string; data: Skill[] }>('/skills', { params })
+    .get<{ status: string; data: Skill[] }>("/skills", { params })
     .then((r) => {
       const skills = r.data.data ?? [];
       if (!search.trim()) return skills;
@@ -41,82 +48,85 @@ function fetchSkills(search: string, category: string): Promise<Skill[]> {
 }
 
 export default function SkillCatalog() {
-  const [searchInput, setSearchInput] = useState('');
-  const [category, setCategory] = useState('Semua');
+  const [searchInput, setSearchInput] = useState("");
+  const [category, setCategory] = useState("Semua");
   const debouncedSearch = useDebounce(searchInput, 500);
   const gridRef = useRef<HTMLDivElement>(null);
 
   const { data: skills = [], isLoading, isError } = useQuery({
-    queryKey: ['skills', debouncedSearch, category],
+    queryKey: ["skills", debouncedSearch, category],
     queryFn: () => fetchSkills(debouncedSearch, category),
     staleTime: 5 * 60 * 1000,
   });
 
-  // GSAP scale-in stagger on load/filter change
+  // Animasi masuk kartu skill
   useEffect(() => {
     if (!gridRef.current || isLoading) return;
     const ctx = gsap.context(() => {
-      gsap.from('.skill-card', {
-        scale: 0.95,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: 'power2.out',
-      });
+      gsap.fromTo(
+        ".skill-card",
+        { scale: 0.95, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.45,
+          stagger: 0.05,
+          ease: "power2.out",
+          overwrite: "auto",
+        }
+      );
     }, gridRef);
     return () => ctx.revert();
   }, [skills, isLoading]);
 
   return (
     <div className="skill-catalog">
-      {/* Header */}
+      {/* Header section (Title Left, Search Right) */}
       <div className="catalog-header">
-        <div>
+        <div className="catalog-header__left">
           <h1 className="catalog-title">Katalog Skill</h1>
-          <p className="text-muted">
-            Temukan keahlian yang kamu butuhkan dan mulai pertukaran.
+          <p className="catalog-subtitle text-muted">
+            Temukan keahlian dan mulailah saling menukar waktu Anda.
           </p>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Link to="/skills/new" className="btn btn-accent btn-sm">
-            + Tambah Skill
-          </Link>
-          {!isLoading && (
-            <span className="catalog-count">
-              {skills.length} skill ditemukan
-            </span>
-          )}
+        <div className="catalog-header__right">
+          <div className="search-wrap">
+            <span className="search-icon">🔍</span>
+            <input
+              id="skill-search"
+              type="text"
+              className="input search-input"
+              placeholder="Cari keahlian, kategori..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            {searchInput && (
+              <button className="search-clear" onClick={() => setSearchInput("")}>
+                ✕
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Search & filter */}
+      {/* Categories Filter pills row */}
       <div className="catalog-controls">
-        <div className="search-wrap">
-          <span className="search-icon">🔍</span>
-          <input
-            id="skill-search"
-            type="text"
-            className="input search-input"
-            placeholder="Cari skill, kategori, atau provider..."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          {searchInput && (
-            <button className="search-clear" onClick={() => setSearchInput('')}>✕</button>
-          )}
-        </div>
-
         <div className="category-tabs">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
-              className={`cat-tab ${category === cat ? 'cat-tab--active' : ''}`}
+              className={`cat-tab ${category === cat ? "cat-tab--active" : ""}`}
               onClick={() => setCategory(cat)}
             >
               {cat}
             </button>
           ))}
         </div>
+        {!isLoading && (
+          <span className="catalog-count">
+            {skills.length} keahlian ditemukan
+          </span>
+        )}
       </div>
 
       {/* Debounce indicator */}
@@ -127,12 +137,12 @@ export default function SkillCatalog() {
         </div>
       )}
 
-      {/* Grid */}
+      {/* Skills Grid */}
       {isError ? (
         <div className="card empty-state">
           <span className="empty-icon">⚠️</span>
           <h3>Gagal memuat data</h3>
-          <p className="text-muted">Coba refresh halaman ini.</p>
+          <p className="text-muted">Coba muat ulang halaman ini.</p>
         </div>
       ) : isLoading ? (
         <div className="skill-grid" ref={gridRef}>
@@ -141,16 +151,19 @@ export default function SkillCatalog() {
       ) : skills.length === 0 ? (
         <div className="card empty-state">
           <span className="empty-icon">🔍</span>
-          <h3>Tidak ada skill ditemukan</h3>
+          <h3>Tidak ada keahlian ditemukan</h3>
           <p className="text-muted">
             {debouncedSearch
-              ? `Tidak ada hasil untuk "${debouncedSearch}"`
-              : 'Belum ada skill di kategori ini.'}
+              ? `Tidak ada hasil pencarian untuk "${debouncedSearch}"`
+              : "Belum ada keahlian di kategori ini."}
           </p>
           <button
             className="btn btn-outline"
             style={{ marginTop: 12 }}
-            onClick={() => { setSearchInput(''); setCategory('Semua'); }}
+            onClick={() => {
+              setSearchInput("");
+              setCategory("Semua");
+            }}
           >
             Reset Filter
           </button>

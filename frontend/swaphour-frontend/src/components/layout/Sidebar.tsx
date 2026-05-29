@@ -70,9 +70,10 @@ function SwapHourLogo() {
 
 const NAV_ITEMS = [
   { to: "/dashboard", label: "Dashboard", icon: "⊞" },
-  { to: "/skills", label: "Katalog", icon: "◈" },
-  { to: "/swaps", label: "Swap Saya", icon: "⇌" },
-  { to: "/wallet", label: "Wallet", icon: "◎" },
+  { to: "/wallet", label: "Wallet", icon: "💳" },
+  { to: "/skills", label: "Exchange", icon: "⇌" },
+  { to: "/swaps", label: "Network", icon: "👥" },
+  { to: "/analytics", label: "Analytics", icon: "📈" },
 ];
 
 export default function Sidebar() {
