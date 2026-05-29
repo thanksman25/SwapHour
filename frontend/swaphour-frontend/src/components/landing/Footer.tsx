@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import swapHourLogo from "../../assets/logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,7 +28,11 @@ const Footer = () => {
     <footer ref={footerRef} className="footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <span className="footer-logo">⏱ SwapHour</span>
+          <img
+            src={swapHourLogo}
+            alt="SwapHour"
+            style={{ height: "26px", width: "auto" }}
+          />
           <p className="footer-tagline">
             Tukar keahlian, bangun komunitas, tanpa uang tunai.
           </p>

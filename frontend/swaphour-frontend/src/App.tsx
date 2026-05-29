@@ -18,6 +18,7 @@ import SkillDetail from "./pages/SkillDetail";
 import Swaps from "./pages/Swaps";
 import Notifications from "./pages/Notifications";
 import Wallet from "./pages/Wallet";
+import AddSkillPage from "./pages/AddSkillPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/edit" element={<EditProfilePage />} />
+          <Route path="/skills/new" element={<AddSkillPage />} />
 
           {/* Routes FE-2 — Dashboard & Fitur */}
           <Route element={<AppLayout />}>
