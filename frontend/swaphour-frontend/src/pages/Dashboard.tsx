@@ -286,7 +286,7 @@ export default function Dashboard() {
         <div className="dashboard__section">
           <div className="section-head">
             <h2>Skill Saya (3 Terbaru)</h2>
-            <span className="section-more">Milik Kamu</span>
+            <Link to="/skills/new" className="section-more">+ Tambah Skill</Link>
           </div>
 
           {skillsLoading || profileLoading ? (
@@ -298,6 +298,9 @@ export default function Dashboard() {
               <span className="empty-icon">📚</span>
               <h3>Belum ada skill</h3>
               <p className="text-muted text-sm">Tambahkan keahlian kamu untuk mulai berbagi.</p>
+              <Link to="/skills/new" className="btn btn-primary btn-sm" style={{ marginTop: 12 }}>
+                + Tambah Skill Baru
+              </Link>
             </div>
           ) : (
             <div className="recent-swap-list card">
