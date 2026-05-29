@@ -5,7 +5,7 @@ import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import ErrorAlert from "../components/ui/ErrorAlert";
 import Spinner from "../components/ui/Spinner";
-import swapHourLogo from "../assets/logo.png";
+import Logo from "../components/ui/Logo";
 
 interface ProfileData {
   name: string;
@@ -253,15 +253,7 @@ const EditProfilePage = () => {
           }}
         >
           <div>
-            <img
-              src={swapHourLogo}
-              alt="SwapHour"
-              style={{
-                height: "42px",
-                width: "auto",
-                filter: "brightness(0) invert(1)",
-              }}
-            />
+            <Logo size={42} />
             <h1
               style={{
                 fontSize: "1.5rem",

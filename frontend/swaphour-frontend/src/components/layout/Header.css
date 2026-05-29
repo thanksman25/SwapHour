@@ -20,6 +20,18 @@
   gap: 28px;
 }
 
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.header__brand:hover {
+  opacity: 0.85;
+}
+
 .header__brand-name {
   font-family: var(--font-heading);
   font-size: 1.35rem;

@@ -1,72 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { clearAuth } from "../../lib/auth";
+import Logo from "../ui/Logo";
 import "./Sidebar.css";
 
-function SwapHourLogo() {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="16"
-        cy="16"
-        r="15"
-        stroke="url(#sidebarGold)"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.6"
-      />
-      <path
-        d="M10 6h12L16 14 10 6zM10 26h12L16 18l-6 8z"
-        fill="url(#sidebarGreen)"
-        opacity="0.9"
-      />
-      <circle cx="16" cy="16" r="2" fill="url(#sidebarGold)" />
-      <path
-        d="M7 13.5 L4 16 L7 18.5"
-        stroke="url(#sidebarGold)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M25 13.5 L28 16 L25 18.5"
-        stroke="url(#sidebarGold)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <defs>
-        <linearGradient
-          id="sidebarGold"
-          x1="0"
-          y1="0"
-          x2="32"
-          y2="32"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#F5BC3A" />
-          <stop offset="100%" stopColor="#F0A500" />
-        </linearGradient>
-        <linearGradient
-          id="sidebarGreen"
-          x1="16"
-          y1="6"
-          x2="16"
-          y2="26"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#4ab882" />
-          <stop offset="100%" stopColor="#2D9E6F" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
+
 
 const NAV_ITEMS = [
   {
@@ -128,7 +65,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       {/* Brand logo */}
       <div className="sidebar__brand">
-        <SwapHourLogo />
+        <Logo size={32} />
         <div className="sidebar__brand-text">
           <span className="brand-name">SwapHour</span>
           <span className="brand-tagline">Time is Currency</span>
