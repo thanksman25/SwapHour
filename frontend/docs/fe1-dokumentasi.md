@@ -7,7 +7,7 @@
 ---
 
 ## Struktur File yang Dibuat FE-1
-
+```
 src/
 ├── assets/
 │ └── logo.png — Logo SwapHour (PNG, putih via CSS filter)
@@ -38,6 +38,7 @@ src/
 ├── EditProfilePage.tsx — /profile/edit
 └── AddSkillPage.tsx — /skills/new
 
+```
 ---
 
 ## Halaman-Halaman FE-1
