@@ -89,7 +89,7 @@ export default function Sidebar() {
         <div className="sidebar__divider" />
 
         <NavLink
-          to="/profile/edit"
+          to="/settings"
           className={({ isActive }) =>
             `sidebar__footer-link ${isActive ? "sidebar__footer-link--active" : ""}`
           }

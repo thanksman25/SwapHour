@@ -39,13 +39,14 @@ const EditProfilePage = () => {
         const response = await fetch("/api/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const data = await response.json();
+        const resData = await response.json();
         if (response.ok) {
+          const user = resData.data;
           setProfile({
-            name: data.name || "",
-            bio: data.bio || "",
-            avatarUrl: data.avatarUrl || "",
-            profileCompletion: data.profileCompletion || 0,
+            name: user.name || "",
+            bio: user.bio || "",
+            avatarUrl: user.avatar_url || "",
+            profileCompletion: user.profile_completion || 0,
           });
         } else {
           navigate("/login");
@@ -119,7 +120,7 @@ const EditProfilePage = () => {
         body: JSON.stringify({
           name: profile.name,
           bio: profile.bio,
-          avatarUrl: profile.avatarUrl,
+          avatar_url: profile.avatarUrl,
         }),
       });
       const data = await response.json();
