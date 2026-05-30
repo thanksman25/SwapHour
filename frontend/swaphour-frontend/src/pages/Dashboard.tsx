@@ -169,7 +169,7 @@ export default function Dashboard() {
       ? skills.filter((s) => s.user_id === profile.id).slice(0, 3)
       : [];
 
-  // Master GSAP timeline
+  // 1. Animasi statis — jalankan sekali saat mount
   useEffect(() => {
     if (!pageRef.current) return;
     const ctx = gsap.context(() => {
@@ -184,49 +184,60 @@ export default function Dashboard() {
           "-=0.5",
         )
         .from(
-          ".dash-stat-card",
-          { y: 40, opacity: 0, scale: 0.9, duration: 0.5, stagger: 0.08 },
-          "-=0.3",
-        )
-        .from(
           ".dash-quick-card",
           { y: 30, opacity: 0, scale: 0.95, duration: 0.5, stagger: 0.1 },
-          "-=0.2",
-        )
-        .from(
-          ".recent-swap-item",
-          { x: -20, opacity: 0, duration: 0.4, stagger: 0.07 },
-          "-=0.2",
+          "-=0.3",
         );
 
-      // Floating animation on credit card
+      // Floating animation kartu kredit — loop selamanya
       gsap.to(".dash-credit-card", {
         y: -6,
         duration: 3,
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-        delay: 1.5,
+        delay: 1.2,
       });
-
-      // Credit hours counter animation
-      if (creditNumRef.current && profile) {
-        const target = Number(profile.credit_hours ?? 0);
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 1.5,
-          ease: "power2.out",
-          onUpdate() {
-            if (creditNumRef.current) {
-              creditNumRef.current.innerText = obj.val.toFixed(1);
-            }
-          },
-        });
-      }
     }, pageRef);
     return () => ctx.revert();
-  }, [profileLoading, swapsLoading, skillsLoading, profile]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // 2. Stat cards — animasikan setelah data swap selesai load
+  useEffect(() => {
+    if (swapsLoading) return;
+    gsap.fromTo(
+      ".dash-stat-card",
+      { y: 40, opacity: 0, scale: 0.9 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.08, ease: "power3.out" },
+    );
+  }, [swapsLoading]);
+
+  // 3. Recent items — animasikan setelah data tersedia
+  useEffect(() => {
+    if (swapsLoading || skillsLoading) return;
+    gsap.fromTo(
+      ".recent-swap-item",
+      { x: -20, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.4, stagger: 0.07, ease: "power3.out" },
+    );
+  }, [swapsLoading, skillsLoading]);
+
+  // 4. Credit counter — jalankan saat profile tersedia
+  useEffect(() => {
+    if (!creditNumRef.current || !profile) return;
+    const target = Number(profile.credit_hours ?? 0);
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target,
+      duration: 1.5,
+      ease: "power2.out",
+      onUpdate() {
+        if (creditNumRef.current) {
+          creditNumRef.current.innerText = obj.val.toFixed(1);
+        }
+      },
+    });
+  }, [profile]);
 
   const greeting = () => {
     const h = new Date().getHours();
