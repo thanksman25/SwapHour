@@ -98,7 +98,153 @@ const LoginPage = () => {
         left: 0,
       }}
     >
-      {/* Kolom Kiri - Form */}
+      {/* Kolom Kiri - Panel Branding */}
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "4rem",
+          background:
+            "radial-gradient(ellipse at 20% 50%, rgba(45,138,97,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(26,107,74,0.2) 0%, transparent 50%), linear-gradient(160deg, #0f4530 0%, #071810 100%)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div style={{ position: "relative", zIndex: 1, maxWidth: "400px" }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              background: "rgba(240,165,0,0.1)",
+              border: "1px solid rgba(240,165,0,0.2)",
+              color: "#f5c842",
+              fontSize: "0.68rem",
+              fontWeight: 700,
+              padding: "0.35rem 0.9rem",
+              borderRadius: "999px",
+              letterSpacing: "1px",
+              textTransform: "uppercase" as const,
+              marginBottom: "1.5rem",
+            }}
+          >
+            ✦ Time Banking Platform
+          </div>
+
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontWeight: 800,
+              color: "#fff",
+              lineHeight: 1.1,
+              letterSpacing: "-1.5px",
+              marginBottom: "1.25rem",
+            }}
+          >
+            Selamat
+            <br />
+            Datang
+            <br />
+            Kembali!
+          </h2>
+
+          <p
+            style={{
+              fontSize: "1rem",
+              color: "rgba(255,255,255,0.6)",
+              lineHeight: 1.75,
+              fontWeight: 300,
+              marginBottom: "2.5rem",
+            }}
+          >
+            Masuk dan lanjutkan perjalananmu menukar keahlian bersama komunitas
+            SwapHour.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "1rem",
+              background: "rgba(255,255,255,0.05)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "16px",
+              padding: "1.5rem",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
+            }}
+          >
+            {[
+              { number: "10K+", label: "Pengguna Aktif" },
+              { number: "200+", label: "Jenis Keahlian" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                style={{
+                  flex: 1,
+                  textAlign: "center" as const,
+                  borderRight: "1px solid rgba(255,255,255,0.08)",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "1.75rem",
+                    fontWeight: 800,
+                    color: "#fff",
+                    letterSpacing: "-1px",
+                  }}
+                >
+                  {stat.number}
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "rgba(255,255,255,0.5)",
+                    marginTop: "4px",
+                  }}
+                >
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+            <div style={{ flex: 1, textAlign: "center" as const }}>
+              <div
+                style={{
+                  fontSize: "1.75rem",
+                  fontWeight: 800,
+                  color: "#fff",
+                  letterSpacing: "-1px",
+                }}
+              >
+                50K+
+              </div>
+              <div
+                style={{
+                  fontSize: "0.75rem",
+                  color: "rgba(255,255,255,0.5)",
+                  marginTop: "4px",
+                }}
+              >
+                Jam Ditukar
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Kolom Kanan - Form */}
       <div
         style={{
           height: "100vh",
@@ -260,152 +406,6 @@ const LoginPage = () => {
               Daftar gratis →
             </a>
           </p>
-        </div>
-      </div>
-
-      {/* Kolom Kanan - Panel Hijau */}
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "4rem",
-          background:
-            "radial-gradient(ellipse at 20% 50%, rgba(45,138,97,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(26,107,74,0.2) 0%, transparent 50%), linear-gradient(160deg, #0f4530 0%, #071810 100%)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div style={{ position: "relative", zIndex: 1, maxWidth: "400px" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              background: "rgba(240,165,0,0.1)",
-              border: "1px solid rgba(240,165,0,0.2)",
-              color: "#f5c842",
-              fontSize: "0.68rem",
-              fontWeight: 700,
-              padding: "0.35rem 0.9rem",
-              borderRadius: "999px",
-              letterSpacing: "1px",
-              textTransform: "uppercase" as const,
-              marginBottom: "1.5rem",
-            }}
-          >
-            ✦ Time Banking Platform
-          </div>
-
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              fontWeight: 800,
-              color: "#fff",
-              lineHeight: 1.1,
-              letterSpacing: "-1.5px",
-              marginBottom: "1.25rem",
-            }}
-          >
-            Selamat
-            <br />
-            Datang
-            <br />
-            Kembali!
-          </h2>
-
-          <p
-            style={{
-              fontSize: "1rem",
-              color: "rgba(255,255,255,0.6)",
-              lineHeight: 1.75,
-              fontWeight: 300,
-              marginBottom: "2.5rem",
-            }}
-          >
-            Masuk dan lanjutkan perjalananmu menukar keahlian bersama komunitas
-            SwapHour.
-          </p>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              background: "rgba(255,255,255,0.05)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "16px",
-              padding: "1.5rem",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
-            }}
-          >
-            {[
-              { number: "10K+", label: "Pengguna Aktif" },
-              { number: "200+", label: "Jenis Keahlian" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                style={{
-                  flex: 1,
-                  textAlign: "center" as const,
-                  borderRight: "1px solid rgba(255,255,255,0.08)",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "1.75rem",
-                    fontWeight: 800,
-                    color: "#fff",
-                    letterSpacing: "-1px",
-                  }}
-                >
-                  {stat.number}
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    color: "rgba(255,255,255,0.5)",
-                    marginTop: "4px",
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-            <div style={{ flex: 1, textAlign: "center" as const }}>
-              <div
-                style={{
-                  fontSize: "1.75rem",
-                  fontWeight: 800,
-                  color: "#fff",
-                  letterSpacing: "-1px",
-                }}
-              >
-                50K+
-              </div>
-              <div
-                style={{
-                  fontSize: "0.75rem",
-                  color: "rgba(255,255,255,0.5)",
-                  marginTop: "4px",
-                }}
-              >
-                Jam Ditukar
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
