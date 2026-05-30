@@ -116,7 +116,7 @@ const AddSkillPage = () => {
           title: form.title,
           description: form.description,
           category: form.category,
-          duration: parseFloat(form.duration),
+          duration_hours: parseFloat(form.duration),
         }),
       });
 
