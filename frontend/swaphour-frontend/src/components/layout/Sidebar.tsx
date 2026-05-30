@@ -103,12 +103,24 @@ export default function Sidebar() {
             `sidebar__footer-link ${isActive ? "sidebar__footer-link--active" : ""}`
           }
         >
-          <span className="sidebar__footer-icon">⚙</span>
+          <span className="sidebar__footer-icon">
+            {/* Sliders icon — lebih personal dari gear biasa */}
+            <svg width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" style={{ display: "block" }}>
+              <path d="M5 4a1 1 0 0 0-2 0v3H2a1 1 0 0 0 0 2h1v7a1 1 0 1 0 2 0V9h1a1 1 0 0 0 0-2H6V4zm6 0a1 1 0 1 0-2 0v7h-1a1 1 0 1 0 0 2h1v3a1 1 0 1 0 2 0v-3h1a1 1 0 1 0 0-2h-1V4zm5 8a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4zm-1-5a1 1 0 0 0-1 1v.5h-1a1 1 0 1 0 0 2h1V9a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/>
+            </svg>
+          </span>
           <span>Settings</span>
         </NavLink>
 
         <button className="sidebar__footer-link sidebar__logout-btn" onClick={handleLogout}>
-          <span className="sidebar__footer-icon">⟵</span>
+          <span className="sidebar__footer-icon">
+            {/* Pintu keluar — lebih jelas secara semantik */}
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </span>
           <span>Logout</span>
         </button>
       </div>
