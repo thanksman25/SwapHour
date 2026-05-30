@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { createSkill, getSkills, updateSkill, deleteSkill } from '../controllers/skillController';
+import { createSkill, getSkills, getSkillById, updateSkill, deleteSkill } from '../controllers/skillController';
 import { protect } from '../middlewares/authMiddleware';
 
 const router = Router();
 
 // 1. RUTE PUBLIK: Siapapun boleh melihat katalog skill (meskipun belum login)
 router.get('/', getSkills);
+router.get('/:id', getSkillById);
 
 // 2. MIDDLEWARE GLOBAL UNTUK RUTE DI BAWAHNYA
 // Dengan menaruh 'router.use(protect)' di sini, semua rute di bawah baris ini

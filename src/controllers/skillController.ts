@@ -35,14 +35,49 @@ export const getSkills = async (req: Request, res: Response, next: NextFunction)
     const { category, is_active } = req.query;
     const filter: any = {};
 
-    if (category) filter.category = String(category);
+    if (category) {
+      filter.category = {
+        equals: String(category),
+        mode: 'insensitive'
+      };
+    }
     
     if (is_active !== undefined) {
       filter.is_active = is_active === 'true'; 
     }
 
-    const skills = await prisma.skill.findMany({ where: filter });
+    const skills = await prisma.skill.findMany({ 
+      where: filter,
+      include: {
+        user: {
+          select: { id: true, name: true, avatar_url: true }
+        }
+      }
+    });
     res.status(200).json({ status: 'success', results: skills.length, data: skills });
+  } catch (error) { next(error); }
+};
+
+// ==========================================
+// 2.5. READ SKILL BY ID 
+// ==========================================
+export const getSkillById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id as string;
+    const skill = await prisma.skill.findUnique({
+      where: { id },
+      include: {
+        user: {
+          select: { id: true, name: true, avatar_url: true, bio: true, average_rating: true, total_ratings: true }
+        }
+      }
+    });
+    
+    if (!skill) {
+      return next(new AppError('Skill tidak ditemukan', 404));
+    }
+    
+    res.status(200).json({ status: 'success', data: skill });
   } catch (error) { next(error); }
 };
 
