@@ -59,6 +59,13 @@
   padding: 0 5px;
 }
 
+.tab-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 1em;
+}
+
 .swaps-list {
   display: flex;
   flex-direction: column;

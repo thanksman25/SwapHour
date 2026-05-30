@@ -42,15 +42,6 @@ const NAV_ITEMS = [
       </svg>
     )
   },
-  {
-    to: "/analytics",
-    label: "Analytics",
-    icon: (
-      <svg width="1em" height="1em" viewBox="0 0 512 512" fill="currentColor" style={{ display: "block" }}>
-        <path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64L0 400c0 44.2 35.8 80 80 80l400 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 416c-8.8 0-16-7.2-16-16L64 64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/>
-      </svg>
-    )
-  },
 ];
 
 export default function Sidebar() {
@@ -104,9 +95,10 @@ export default function Sidebar() {
           }
         >
           <span className="sidebar__footer-icon">
-            {/* Sliders icon — lebih personal dari gear biasa */}
-            <svg width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" style={{ display: "block" }}>
-              <path d="M5 4a1 1 0 0 0-2 0v3H2a1 1 0 0 0 0 2h1v7a1 1 0 1 0 2 0V9h1a1 1 0 0 0 0-2H6V4zm6 0a1 1 0 1 0-2 0v7h-1a1 1 0 1 0 0 2h1v3a1 1 0 1 0 2 0v-3h1a1 1 0 1 0 0-2h-1V4zm5 8a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4zm-1-5a1 1 0 0 0-1 1v.5h-1a1 1 0 1 0 0 2h1V9a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/>
+            {/* Gear berlubang — ikon settings yang beda dari sliders profil */}
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
             </svg>
           </span>
           <span>Settings</span>
