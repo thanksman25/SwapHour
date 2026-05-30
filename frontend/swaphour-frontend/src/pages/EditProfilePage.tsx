@@ -305,7 +305,10 @@ const EditProfilePage = () => {
                 }}
               />
             ) : (
-              "👤"
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+              </svg>
             )}
           </div>
         </div>
@@ -384,7 +387,14 @@ const EditProfilePage = () => {
                 padding: "0.5rem 0.75rem",
               }}
             >
-              <span style={{ fontSize: "0.85rem" }}>⚠️</span>
+              <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+                {/* Segitiga peringatan */}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5c842" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </span>
               <span
                 style={{
                   fontSize: "0.75rem",
@@ -418,7 +428,13 @@ const EditProfilePage = () => {
               padding: "0.85rem 1.1rem",
             }}
           >
-            <span>✅</span>
+            <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+              {/* Centang lingkaran */}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </span>
             <span
               style={{
                 fontSize: "0.875rem",
@@ -481,9 +497,17 @@ const EditProfilePage = () => {
               fontWeight: 600,
               cursor: "pointer",
               transition: "all 0.2s",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              justifyContent: "center",
             }}
           >
-            ← Kembali
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Kembali
           </button>
           <div style={{ flex: 2 }}>
             <Button
