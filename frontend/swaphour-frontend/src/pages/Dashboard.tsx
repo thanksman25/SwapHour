@@ -184,7 +184,7 @@ export default function Dashboard() {
           "-=0.5",
         )
         .from(
-          ".dash-quick-card",
+          ".dash-quick-wrapper",
           { y: 30, opacity: 0, scale: 0.95, duration: 0.5, stagger: 0.1 },
           "-=0.3",
         );
@@ -396,26 +396,27 @@ export default function Dashboard() {
         </div>
         <div className="dashboard__quick-grid">
           {QUICK_LINKS.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="dash-quick-card card"
-              style={{ "--card-glow": link.glow } as React.CSSProperties}
-            >
-              <div
-                className="quick-icon-wrap"
-                style={{ background: link.color + "20", color: link.color }}
+            <div key={link.to} className="dash-quick-wrapper">
+              <Link
+                to={link.to}
+                className="dash-quick-card card"
+                style={{ "--card-glow": link.glow } as React.CSSProperties}
               >
-                {link.icon}
-              </div>
-              <div className="quick-text">
-                <div className="quick-label">{link.label}</div>
-                <div className="quick-desc text-muted">{link.desc}</div>
-              </div>
-              <span className="quick-arrow" style={{ color: link.color }}>
-                →
-              </span>
-            </Link>
+                <div
+                  className="quick-icon-wrap"
+                  style={{ background: link.color + "20", color: link.color }}
+                >
+                  {link.icon}
+                </div>
+                <div className="quick-text">
+                  <div className="quick-label">{link.label}</div>
+                  <div className="quick-desc text-muted">{link.desc}</div>
+                </div>
+                <span className="quick-arrow" style={{ color: link.color }}>
+                  →
+                </span>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
