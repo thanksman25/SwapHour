@@ -28,11 +28,69 @@ function fetchSkills(): Promise<Skill[]> {
     .then((r) => r.data.data ?? []);
 }
 
+/* ─── SVG Icon helpers ─── */
+const IconSearch = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+);
+const IconSwap = () => (
+  <svg width="22" height="22" viewBox="0 0 512 512" fill="currentColor">
+    <path d="M273 239c-9.4 9.4-24.6 9.4-33.9 0L161 161H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H161l78.1-78.1c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L81.1 125.1c-14.1 14.1-14.1 36.8 0 50.9L205.1 300c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L273 239zM306.9 212c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l78.1 78.1H64c-13.3 0-24 10.7-24 24s10.7 24 24 24H351l-78.1 78.1c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l123.9-123.9c14.1-14.1 14.1-36.8 0-50.9L306.9 212z"/>
+  </svg>
+);
+const IconBell = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+  </svg>
+);
+const IconWallet = () => (
+  <svg width="22" height="22" viewBox="0 0 640 640" fill="currentColor">
+    <path d="M128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 256C576 220.7 547.3 192 512 192L136 192C122.7 192 112 181.3 112 168C112 154.7 122.7 144 136 144L520 144C533.3 144 544 133.3 544 120C544 106.7 533.3 96 520 96L128 96zM480 320C497.7 320 512 334.3 512 352C512 369.7 497.7 384 480 384C462.3 384 448 369.7 448 352C448 334.3 462.3 320 480 320z"/>
+  </svg>
+);
+
+/* Stat icons */
+const IconClock = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+  </svg>
+);
+const IconZap = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </svg>
+);
+const IconCheck = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+  </svg>
+);
+const IconDot = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9" strokeDasharray="2 4"/>
+  </svg>
+);
+
+/* Empty state icons */
+const IconMailbox = () => (
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }}>
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+const IconBooks = () => (
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.3 }}>
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+  </svg>
+);
+
 const QUICK_LINKS = [
   {
     to: "/skills",
     label: "Cari Skill",
-    icon: "◈",
+    icon: <IconSearch />,
     desc: "Jelajahi katalog keahlian",
     color: "#2D9E6F",
     glow: "rgba(45,158,111,0.35)",
@@ -40,7 +98,7 @@ const QUICK_LINKS = [
   {
     to: "/swaps",
     label: "Swap Saya",
-    icon: "⇌",
+    icon: <IconSwap />,
     desc: "Request masuk & keluar",
     color: "#60A5FA",
     glow: "rgba(96,165,250,0.3)",
@@ -48,7 +106,7 @@ const QUICK_LINKS = [
   {
     to: "/notifications",
     label: "Notifikasi",
-    icon: "◐",
+    icon: <IconBell />,
     desc: "Pemberitahuan terbaru",
     color: "#F0A500",
     glow: "rgba(240,165,0,0.3)",
@@ -56,7 +114,7 @@ const QUICK_LINKS = [
   {
     to: "/wallet",
     label: "Wallet",
-    icon: "◎",
+    icon: <IconWallet />,
     desc: "Saldo & riwayat transaksi",
     color: "#A78BFA",
     glow: "rgba(167,139,250,0.3)",
@@ -105,7 +163,11 @@ export default function Dashboard() {
   const completedCount = swaps.filter((s) => s.status === "completed").length;
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
-  const mySkills = skills.filter((s) => s.user_id === profile?.id).slice(0, 3);
+  // FIX: Tunggu profile loading selesai sebelum filter skill, dan fallback ke user.user_id
+  const mySkills =
+    profile && !profileLoading && skills.length > 0
+      ? skills.filter((s) => s.user_id === profile.id).slice(0, 3)
+      : [];
 
   // Master GSAP timeline
   useEffect(() => {
@@ -113,33 +175,24 @@ export default function Dashboard() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // Hero text
       tl.from(".dash-greeting", { y: 30, opacity: 0, duration: 0.6 })
         .from(".dash-title", { y: 24, opacity: 0, duration: 0.55 }, "-=0.35")
         .from(".dash-subtitle", { y: 16, opacity: 0, duration: 0.5 }, "-=0.3")
-
-        // Credit card flies in from right
         .from(
           ".dash-credit-card",
           { x: 60, opacity: 0, duration: 0.7, ease: "back.out(1.5)" },
           "-=0.5",
         )
-
-        // Stats counter in
         .from(
           ".dash-stat-card",
           { y: 40, opacity: 0, scale: 0.9, duration: 0.5, stagger: 0.08 },
           "-=0.3",
         )
-
-        // Quick links cascade
         .from(
           ".dash-quick-card",
           { y: 30, opacity: 0, scale: 0.95, duration: 0.5, stagger: 0.1 },
           "-=0.2",
         )
-
-        // Recent activity
         .from(
           ".recent-swap-item",
           { x: -20, opacity: 0, duration: 0.4, stagger: 0.07 },
@@ -177,35 +230,35 @@ export default function Dashboard() {
 
   const greeting = () => {
     const h = new Date().getHours();
-    if (h < 12) return "☀️ Selamat Pagi";
-    if (h < 17) return "🌤 Selamat Siang";
-    return "🌙 Selamat Malam";
+    if (h < 12) return "Selamat Pagi";
+    if (h < 17) return "Selamat Siang";
+    return "Selamat Malam";
   };
 
   const STAT_CARDS = [
     {
-      icon: "⏳",
+      icon: <IconClock />,
       num: pendingCount,
       label: "Menunggu",
       color: "var(--color-pending)",
       glow: "rgba(245,158,11,0.3)",
     },
     {
-      icon: "⚡",
+      icon: <IconZap />,
       num: activeCount,
       label: "Aktif",
       color: "var(--color-active)",
       glow: "rgba(96,165,250,0.3)",
     },
     {
-      icon: "✦",
+      icon: <IconCheck />,
       num: completedCount,
       label: "Selesai",
       color: "var(--color-completed)",
       glow: "rgba(52,211,153,0.3)",
     },
     {
-      icon: "◐",
+      icon: <IconDot />,
       num: unreadCount,
       label: "Notif Baru",
       color: "var(--gold-400)",
@@ -219,9 +272,8 @@ export default function Dashboard() {
       <div className="dashboard__hero">
         <div className="dashboard__hero-text">
           <p className="dash-greeting">
-            Halo,{" "}
-            <span className="name-accent">{profile?.name ?? "Pengguna"}</span>!{" "}
-            {greeting()}
+            {greeting()},{" "}
+            <span className="name-accent">{profile?.name ?? "Pengguna"}</span>!
           </p>
           <h1 className="dash-title">
             Dashboard <span className="text-gold-gradient">SwapHour</span>
@@ -311,7 +363,12 @@ export default function Dashboard() {
                 className="dash-stat-card card"
                 style={{ "--stat-glow": s.glow } as React.CSSProperties}
               >
-                <span className="stat-emoji">{s.icon}</span>
+                <span
+                  className="stat-svg-icon"
+                  style={{ color: s.color }}
+                >
+                  {s.icon}
+                </span>
                 <div className="stat-number" style={{ color: s.color }}>
                   {s.num}
                 </div>
@@ -338,7 +395,7 @@ export default function Dashboard() {
                 className="quick-icon-wrap"
                 style={{ background: link.color + "20", color: link.color }}
               >
-                <span className="quick-icon-sym">{link.icon}</span>
+                {link.icon}
               </div>
               <div className="quick-text">
                 <div className="quick-label">{link.label}</div>
@@ -369,7 +426,9 @@ export default function Dashboard() {
             </div>
           ) : swaps.length === 0 ? (
             <div className="card empty-state">
-              <span className="empty-icon">📭</span>
+              <span className="empty-icon">
+                <IconMailbox />
+              </span>
               <h3>Belum ada aktivitas</h3>
               <p className="text-muted text-sm">
                 Mulai dengan mencari skill yang kamu butuhkan.
@@ -385,17 +444,36 @@ export default function Dashboard() {
           ) : (
             <div className="recent-swap-list card">
               {swaps.slice(0, 5).map((swap) => {
-                const s = STATUS_MAP[swap.status];
+                const s = STATUS_MAP[swap.status] ?? {
+                  label: swap.status,
+                  cls: "badge-pending",
+                };
                 return (
                   <div key={swap.id} className="recent-swap-item">
-                    <div className="recent-icon">
-                      {swap.status === "pending"
-                        ? "⏳"
-                        : swap.status === "active"
-                          ? "⚡"
-                          : swap.status === "completed"
-                            ? "✦"
-                            : "✕"}
+                    <div
+                      className="recent-icon"
+                      style={{
+                        color:
+                          swap.status === "pending"
+                            ? "var(--color-pending)"
+                            : swap.status === "active"
+                              ? "var(--color-active)"
+                              : swap.status === "completed"
+                                ? "var(--color-completed)"
+                                : "var(--color-rejected)",
+                      }}
+                    >
+                      {swap.status === "pending" ? (
+                        <IconClock />
+                      ) : swap.status === "active" ? (
+                        <IconZap />
+                      ) : swap.status === "completed" ? (
+                        <IconCheck />
+                      ) : (
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                      )}
                     </div>
                     <div className="recent-info">
                       <span className="recent-title">
@@ -416,7 +494,7 @@ export default function Dashboard() {
         {/* User Skills Preview */}
         <div className="dashboard__section">
           <div className="section-head">
-            <h2>Skill Saya (3 Terbaru)</h2>
+            <h2>Skill Saya</h2>
             <Link to="/skills/new" className="section-more">
               + Tambah Skill
             </Link>
@@ -428,7 +506,9 @@ export default function Dashboard() {
             </div>
           ) : mySkills.length === 0 ? (
             <div className="card empty-state">
-              <span className="empty-icon">📚</span>
+              <span className="empty-icon">
+                <IconBooks />
+              </span>
               <h3>Belum ada skill</h3>
               <p className="text-muted text-sm">
                 Tambahkan keahlian kamu untuk mulai berbagi.
@@ -449,7 +529,9 @@ export default function Dashboard() {
                     className="recent-icon"
                     style={{ color: "var(--gold-400)" }}
                   >
-                    ★
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
                   </div>
                   <div className="recent-info">
                     <span className="recent-title">{skill.title}</span>

@@ -181,10 +181,12 @@
 
 .dash-stat-card:hover::before { opacity: 1; }
 
-.stat-emoji {
-  font-size: 24px;
+.stat-svg-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 4px;
-  display: block;
+  opacity: 0.9;
 }
 
 .stat-number {
@@ -284,7 +286,11 @@
   transform: scale(1.1) rotate(-5deg);
 }
 
-.quick-icon-sym { line-height: 1; }
+.quick-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
 
 .quick-text { flex: 1; }
 .quick-label {
@@ -334,6 +340,12 @@
   justify-content: center;
   font-size: 16px;
   flex-shrink: 0;
+}
+
+.recent-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .recent-info {
