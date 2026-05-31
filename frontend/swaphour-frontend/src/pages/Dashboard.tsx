@@ -24,7 +24,7 @@ function fetchNotifications(): Promise<Notification[]> {
 }
 function fetchSkills(): Promise<Skill[]> {
   return apiClient
-    .get<{ status: string; data: Skill[] }>("/skills")
+    .get<{ status: string; data: Skill[] }>("/skills?is_active=true")
     .then((r) => r.data.data ?? []);
 }
 

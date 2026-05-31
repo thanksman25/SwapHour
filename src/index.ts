@@ -14,6 +14,7 @@ import { errorHandler } from './middlewares/errorHandlers';
 import { AppError } from './utils/AppError';
 
 import swapRoutes from './routes/swapRoutes';
+import walletRoutes from './routes/walletRoutes';
 
 import ratingRoutes from './routes/ratingRoutes';
 import notificationRoutes from './routes/notificationRoutes';
@@ -52,6 +53,7 @@ app.use('/api/auth', authRoutes);     // Mengurus Register & Login
 app.use('/api/users', userRoutes);    // Mengurus Update Profile
 app.use('/api/skills', skillRoutes);  // Mengurus CRUD Katalog Skill
 app.use('/api/swaps', swapRoutes);    // Mengurus Mesin Utama Swap & Wallet
+app.use('/api/wallet', walletRoutes); // Mengurus Riwayat Transaksi Wallet
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

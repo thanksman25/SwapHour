@@ -83,6 +83,7 @@ export default function SkillDetail() {
   const canAfford = balance >= duration;
   const profileOk = (profile?.profile_completion ?? 0) >= 80;
   const isOwnSkill = skill?.user_id === profile?.id;
+  const isSkillActive = skill?.is_active ?? true;
   const hasActiveRequest = swaps.some(
     (s) => s.skill_id === id && (s.status === 'pending' || s.status === 'active')
   );
@@ -139,6 +140,11 @@ export default function SkillDetail() {
               <div className="skill-detail__meta-top">
                 <span className="badge badge-primary">{skill.category}</span>
                 <span className="skill-detail__duration">⏱ {skill.duration_hours} jam kredit</span>
+                {!skill.is_active && (
+                  <span className="badge" style={{ backgroundColor: 'var(--color-rejected)', color: '#fff', marginLeft: 8 }}>
+                    Non-aktif
+                  </span>
+                )}
               </div>
 
               <h1 className="skill-detail__title">{skill.title}</h1>
@@ -225,6 +231,12 @@ export default function SkillDetail() {
               </div>
             )}
 
+            {!isSkillActive && !isLoading && (
+              <div className="swap-panel__warning">
+                ❌ Skill ini sudah dinonaktifkan oleh pemiliknya.
+              </div>
+            )}
+
             {hasActiveRequest && !isLoading && (
               <div className="swap-panel__warning">
                 ⚠️ Kamu memiliki permintaan swap aktif (pending/aktif) untuk skill ini.
@@ -255,7 +267,7 @@ export default function SkillDetail() {
               <button
                 className="btn btn-accent btn-full btn-lg"
                 onClick={() => submitSwap()}
-                disabled={isSubmitting || !canAfford || !profileOk || hasActiveRequest || isLoading}
+                disabled={isSubmitting || !canAfford || !profileOk || hasActiveRequest || isLoading || !isSkillActive}
               >
                 {isSubmitting ? '⏳ Mengirim...' : '✉ Kirim Permintaan Swap'}
               </button>

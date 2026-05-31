@@ -36,6 +36,15 @@ export default function Header() {
     staleTime: 30000,
   });
 
+  // Check if account is deactivated
+  useEffect(() => {
+    if (profile && profile.is_active === false) {
+      clearAuth();
+      alert("Akun Anda telah dinonaktifkan oleh sistem.");
+      navigate("/login");
+    }
+  }, [profile, navigate]);
+
   // Tutup dropdown kalau klik di luar
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
