@@ -5,7 +5,6 @@ import { clearAuth } from "../../lib/auth";
 import apiClient from "../../lib/apiClient";
 import type { User, Notification } from "../../types";
 import NotifBadge from "../ui/NotifBadge";
-import Logo from "../ui/Logo";
 import "./Header.css";
 
 function fetchProfile(): Promise<User> {
@@ -24,7 +23,6 @@ export default function Header() {
   const navigate = useNavigate();
   const headerRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [imgError, setImgError] = useState(false);
 
   const { data: profile } = useQuery({
     queryKey: ["profile"],
@@ -35,7 +33,6 @@ export default function Header() {
   const { data: unreadCount = 0 } = useQuery({
     queryKey: ["notifications", "unread-count"],
     queryFn: fetchUnreadCount,
-    refetchInterval: 30000,
     staleTime: 30000,
   });
 
@@ -58,7 +55,6 @@ export default function Header() {
   };
 
   const balance = profile ? Number(profile.credit_hours).toFixed(1) : "0.0";
-  const userInitial = profile?.name ? profile.name[0].toUpperCase() : "U";
 
   return (
     <header className="header" ref={headerRef}>
@@ -81,13 +77,13 @@ export default function Header() {
         </Link>
 
         {/* Help Question Icon */}
-        <button className="header__help-btn" title="Bantuan / FAQ">
+        <Link to="/faq" className="header__help-btn" title="Bantuan / FAQ">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
-        </button>
+        </Link>
 
         {/* User avatar & dropdown */}
         <div className="header__avatar-container">

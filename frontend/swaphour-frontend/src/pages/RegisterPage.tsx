@@ -15,6 +15,21 @@ const RegisterPage = () => {
   const [apiError, setApiError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const getPasswordStrength = (pass: string) => {
+    let score = 0;
+    if (!pass) return { score: 0, label: "", color: "transparent" };
+    if (pass.length >= 8) score += 1;
+    if (/[A-Z]/.test(pass)) score += 1;
+    if (/[0-9]/.test(pass)) score += 1;
+    if (/[^A-Za-z0-9]/.test(pass)) score += 1;
+
+    if (score <= 1) return { score, label: "Lemah", color: "#ef4444" };
+    if (score === 2 || score === 3) return { score, label: "Sedang", color: "#f59e0b" };
+    return { score, label: "Kuat", color: "#10b981" };
+  };
+
+  const strength = getPasswordStrength(form.password);
+
   useEffect(() => {
     gsap.fromTo(
       cardRef.current,
@@ -327,15 +342,38 @@ const RegisterPage = () => {
               errorMessage={errors.email}
               fullWidth
             />
-            <Input
-              label="Password"
-              placeholder="Minimal 8 karakter"
-              value={form.password}
-              onChange={handleChange("password")}
-              type="password"
-              errorMessage={errors.password}
-              fullWidth
-            />
+            <div>
+              <Input
+                label="Password"
+                placeholder="Minimal 8 karakter"
+                value={form.password}
+                onChange={handleChange("password")}
+                type="password"
+                errorMessage={errors.password}
+                fullWidth
+              />
+              {form.password && (
+                <div style={{ marginTop: "0.5rem", paddingLeft: "4px" }}>
+                  <div style={{ display: "flex", gap: "4px", height: "4px", marginBottom: "6px" }}>
+                    {[1, 2, 3, 4].map((level) => (
+                      <div
+                        key={level}
+                        style={{
+                          flex: 1,
+                          borderRadius: "2px",
+                          background: level <= strength.score ? strength.color : "rgba(255,255,255,0.1)",
+                          transition: "all 0.3s"
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem" }}>
+                    <span style={{ color: strength.color, fontWeight: 600 }}>{strength.label}</span>
+                    <span style={{ color: "rgba(255,255,255,0.4)" }}>Min. 8 char, A-Z, 0-9, Simbol</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <Button

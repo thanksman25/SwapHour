@@ -14,6 +14,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [apiError, setApiError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(
@@ -74,7 +75,10 @@ const LoginPage = () => {
           localStorage.setItem("user", JSON.stringify(profileData.data));
         }
 
-        navigate("/dashboard");
+        setShowSuccess(true);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1500);
       } else {
         setApiError(data?.message || "Email atau password salah.");
       }
@@ -86,6 +90,19 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+      {showSuccess && (
+        <div style={{
+          position: "fixed", top: "20px", left: "50%", transform: "translateX(-50%)",
+          background: "rgba(16, 185, 129, 0.95)", color: "white", padding: "12px 24px",
+          borderRadius: "12px", fontWeight: 600, zIndex: 10000,
+          boxShadow: "0 10px 25px rgba(16, 185, 129, 0.4)", display: "flex", alignItems: "center", gap: "10px",
+          backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)"
+        }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Login Berhasil! Mengalihkan...
+        </div>
+      )}
     <div
       style={{
         display: "grid",
@@ -409,6 +426,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

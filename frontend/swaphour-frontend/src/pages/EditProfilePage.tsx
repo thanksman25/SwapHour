@@ -6,6 +6,7 @@ import Input from "../components/ui/Input";
 import ErrorAlert from "../components/ui/ErrorAlert";
 import Spinner from "../components/ui/Spinner";
 import Logo from "../components/ui/Logo";
+import apiClient from "../lib/apiClient";
 
 interface ProfileData {
   name: string;
@@ -32,27 +33,22 @@ const EditProfilePage = () => {
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token") || "test";
-
     const fetchProfile = async () => {
       try {
-        const response = await fetch("/api/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
+        const response = await apiClient.get("/users/profile");
+        const user = response.data.data;
+        setProfile({
+          name: user.name || "",
+          bio: user.bio || "",
+          avatarUrl: user.avatar_url || "",
+          profileCompletion: user.profile_completion || 0,
         });
-        const resData = await response.json();
-        if (response.ok) {
-          const user = resData.data;
-          setProfile({
-            name: user.name || "",
-            bio: user.bio || "",
-            avatarUrl: user.avatar_url || "",
-            profileCompletion: user.profile_completion || 0,
-          });
-        } else {
+      } catch (err: any) {
+        if (err.response?.status === 401) {
           navigate("/login");
+        } else {
+          setApiError("Gagal memuat data profil.");
         }
-      } catch (err) {
-        setApiError("Gagal memuat data profil.");
       } finally {
         setIsFetching(false);
       }
@@ -110,27 +106,14 @@ const EditProfilePage = () => {
     setApiError("");
     setSaveSuccess(false);
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("/api/users/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: profile.name,
-          bio: profile.bio,
-          avatar_url: profile.avatarUrl,
-        }),
+      await apiClient.put("/users/profile", {
+        name: profile.name,
+        bio: profile.bio,
+        avatar_url: profile.avatarUrl,
       });
-      const data = await response.json();
-      if (response.ok) {
-        setSaveSuccess(true);
-      } else {
-        setApiError(data?.message || "Gagal menyimpan profil.");
-      }
-    } catch (err) {
-      setApiError("Gagal terhubung ke server.");
+      setSaveSuccess(true);
+    } catch (err: any) {
+      setApiError(err.response?.data?.message || "Gagal menyimpan profil.");
     } finally {
       setIsLoading(false);
     }

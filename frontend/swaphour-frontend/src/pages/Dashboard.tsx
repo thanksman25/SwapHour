@@ -149,7 +149,6 @@ export default function Dashboard() {
     queryKey: ["notifications"],
     queryFn: fetchNotifications,
     staleTime: 30 * 1000,
-    refetchInterval: 30000,
   });
 
   const { data: skills = [], isLoading: skillsLoading } = useQuery({
@@ -284,7 +283,7 @@ export default function Dashboard() {
         <div className="dashboard__hero-text">
           <p className="dash-greeting">
             {greeting()},{" "}
-            <span className="name-accent">{profile?.name ?? "Pengguna"}</span>!
+            <span className="name-accent">{profile?.name || JSON.parse(localStorage.getItem("user") || "{}")?.name || "Pengguna"}</span>!
           </p>
           <h1 className="dash-title">
             Dashboard <span className="text-gold-gradient">SwapHour</span>

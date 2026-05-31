@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>© 2024 SwapHour. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} SwapHour. All rights reserved.</p>
         </div>
       </div>
     </footer>

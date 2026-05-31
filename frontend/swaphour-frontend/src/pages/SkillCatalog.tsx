@@ -9,14 +9,15 @@ import "./SkillCatalog.css";
 
 const CATEGORIES = [
   "Semua",
-  "Coding",
+  "Teknologi",
   "Desain",
   "Bahasa",
-  "Bisnis",
   "Musik",
   "Memasak",
   "Olahraga",
-  "Fotografi",
+  "Pendidikan",
+  "Bisnis",
+  "Kesehatan",
   "Lainnya",
 ];
 
