@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav ref={navRef} className="navbar">
       <div className="navbar-container">
         <a href="/" className="navbar-logo">
-          <Logo size={42} />
+          <Logo size={42} forceTheme="dark" />
         </a>
         <div className="navbar-links">
           <a href="/login" className="nav-link">
