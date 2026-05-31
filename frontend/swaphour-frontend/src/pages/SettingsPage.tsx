@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { clearAuth } from "../lib/auth";
+import Input from "../components/ui/Input";
 import gsap from "gsap";
 import { useTheme, type Theme } from "../context/ThemeContext";
 import "./SettingsPage.css";
@@ -13,6 +15,23 @@ export default function SettingsPage() {
   // Dummy states
   const [emailNotif, setEmailNotif] = useState(true);
   const [pushNotif, setPushNotif] = useState(true);
+  const navigate = useNavigate();
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({ old: "", new: "" });
+
+  const handleChangePassword = () => {
+    if (!passwordForm.old || !passwordForm.new) return;
+    alert("Password berhasil diubah (Dummy)!");
+    setShowPasswordForm(false);
+    setPasswordForm({ old: "", new: "" });
+  };
+
+  const handleDeleteAccount = () => {
+    alert("Akun berhasil dihapus secara soft-delete (Dummy)!");
+    clearAuth();
+    navigate("/login");
+  };
   
   useEffect(() => {
     if (!pageRef.current) return;
@@ -131,20 +150,41 @@ export default function SettingsPage() {
               <h2>Keamanan</h2>
             </div>
           <div className="settings-list">
-            <div className="settings-item">
-              <div className="settings-item-info">
-                <h3>Ubah Password</h3>
-                <p>Perbarui kata sandi untuk keamanan ekstra.</p>
+            <div className="settings-item" style={{ flexDirection: "column", alignItems: "flex-start" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
+                <div className="settings-item-info">
+                  <h3>Ubah Password</h3>
+                  <p>Perbarui kata sandi untuk keamanan ekstra.</p>
+                </div>
+                <button className="btn btn-outline" style={{padding: '6px 14px', fontSize: '13px'}} onClick={() => setShowPasswordForm(!showPasswordForm)}>
+                  {showPasswordForm ? "Batal" : "Ubah"}
+                </button>
               </div>
-              <button className="btn btn-outline" style={{padding: '6px 14px', fontSize: '13px'}} onClick={() => alert('Fitur akan segera hadir!')}>Ubah</button>
+              {showPasswordForm && (
+                <div style={{ width: "100%", marginTop: "16px", display: "flex", flexDirection: "column", gap: "12px", background: "var(--glass-bg)", padding: "16px", borderRadius: "12px", border: "1px solid var(--glass-border)" }}>
+                  <Input type="password" label="Password Lama" value={passwordForm.old} onChange={(e) => setPasswordForm(prev => ({...prev, old: e.target.value}))} fullWidth />
+                  <Input type="password" label="Password Baru" value={passwordForm.new} onChange={(e) => setPasswordForm(prev => ({...prev, new: e.target.value}))} fullWidth />
+                  <button className="btn btn-primary" onClick={handleChangePassword} style={{marginTop: "8px", padding: "10px", borderRadius: "8px"}}>Simpan Password</button>
+                </div>
+              )}
             </div>
             
-            <div className="settings-item">
-              <div className="settings-item-info">
-                <h3 style={{color: '#f87171'}}>Hapus Akun</h3>
-                <p>Tindakan ini tidak bisa dibatalkan.</p>
+            <div className="settings-item" style={{ flexDirection: "column", alignItems: "flex-start" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
+                <div className="settings-item-info">
+                  <h3 style={{color: '#f87171'}}>Hapus Akun</h3>
+                  <p>Tindakan ini tidak bisa dibatalkan.</p>
+                </div>
+                <button className="btn btn-outline" style={{borderColor: 'rgba(248,113,113,0.3)', color: '#f87171', padding: '6px 14px', fontSize: '13px'}} onClick={() => setShowDeleteConfirm(!showDeleteConfirm)}>
+                  {showDeleteConfirm ? "Batal" : "Hapus"}
+                </button>
               </div>
-              <button className="btn btn-outline" style={{borderColor: 'rgba(248,113,113,0.3)', color: '#f87171', padding: '6px 14px', fontSize: '13px'}} onClick={() => alert('Fitur akan segera hadir!')}>Hapus</button>
+              {showDeleteConfirm && (
+                <div style={{ width: "100%", marginTop: "16px", background: "rgba(248,113,113,0.1)", padding: "16px", borderRadius: "12px", border: "1px solid rgba(248,113,113,0.3)" }}>
+                  <p style={{ color: "#f87171", marginBottom: "12px", fontWeight: 600 }}>Apakah kamu yakin ingin menghapus akun ini secara permanen?</p>
+                  <button className="btn" onClick={handleDeleteAccount} style={{width: "100%", background: "#f87171", color: "white", padding: "10px", borderRadius: "8px", border: "none", fontWeight: 600, cursor: "pointer"}}>Ya, Hapus Akun Saya</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

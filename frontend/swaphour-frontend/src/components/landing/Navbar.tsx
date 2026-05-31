@@ -9,8 +9,8 @@ const Navbar = () => {
     if (!navRef.current) return;
     gsap.fromTo(
       navRef.current,
-      { opacity: 0, y: -30, x: "-50%" },
-      { opacity: 1, y: 0, x: "-50%", duration: 0.7, ease: "power3.out" },
+      { opacity: 0, y: -30, xPercent: -50, x: 0 },
+      { opacity: 1, y: 0, xPercent: -50, x: 0, duration: 0.7, ease: "power3.out" },
     );
   }, []);
 

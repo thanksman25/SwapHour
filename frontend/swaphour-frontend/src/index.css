@@ -23,6 +23,7 @@ body {
 
 
 :root {
+  color-scheme: dark;
   --green-950: #061a0f;
   --green-900: #0d2e1a;
   --green-800: #134d36;
@@ -91,8 +92,9 @@ body {
 }
 
 :root[data-theme='light'] {
-  --color-bg: #faf9f8;
-  --color-bg-deep: #f2f0eb;
+  color-scheme: light;
+  --color-bg: #f4f6f8;
+  --color-bg-deep: #eef1f5;
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-bg-hover: rgba(255, 255, 255, 0.9);
   --glass-border: rgba(0, 0, 0, 0.08);

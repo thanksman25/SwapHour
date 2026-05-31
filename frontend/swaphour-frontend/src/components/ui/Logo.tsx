@@ -1,6 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
-import logoGold from "../../assets/swaphour_gold.svg";
-import logoBlack from "../../assets/swaphour_black.svg";
+import logoPng from "../../assets/logo.png";
 
 interface LogoProps {
   size?: number;
@@ -9,14 +8,10 @@ interface LogoProps {
 }
 
 export default function Logo({ size = 32, className, forceTheme }: LogoProps) {
-  const { actualTheme } = useTheme();
-  
-  const resolvedTheme = forceTheme || actualTheme;
-  const logoSrc = resolvedTheme === 'light' ? logoBlack : logoGold;
-
+  // We just use logoPng for now since it's the actual SwapHour logo
   return (
     <img
-      src={logoSrc}
+      src={logoPng}
       alt="SwapHour"
       width={size}
       height={size}
