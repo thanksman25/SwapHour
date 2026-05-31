@@ -59,6 +59,13 @@
   padding: 0 5px;
 }
 
+.tab-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 1em;
+}
+
 .swaps-list {
   display: flex;
   flex-direction: column;
@@ -69,7 +76,7 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6, 26, 15, 0.85);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
@@ -89,7 +96,7 @@
 .rating-modal {
   width: 90%;
   max-width: 440px;
-  background: rgba(13, 46, 26, 0.98);
+  background: var(--color-bg-deep);
   border: 1px solid var(--glass-border-gold);
   border-radius: var(--radius-card);
   padding: 28px;

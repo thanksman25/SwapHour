@@ -1,6 +1,6 @@
 .header {
   height: 68px;
-  background: rgba(13, 46, 26, 0.45);
+  background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border);
@@ -18,6 +18,18 @@
   display: flex;
   align-items: center;
   gap: 28px;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.header__brand:hover {
+  opacity: 0.85;
 }
 
 .header__brand-name {
@@ -164,7 +176,7 @@
   top: calc(100% + 8px);
   right: 0;
   width: 220px;
-  background: rgba(13, 46, 26, 0.9);
+  background: var(--color-bg);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   border: 1px solid var(--glass-border);
@@ -244,4 +256,11 @@
     opacity: 1;
     filter: drop-shadow(0 0 6px var(--color-accent));
   }
+}
+
+.dropdown-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }

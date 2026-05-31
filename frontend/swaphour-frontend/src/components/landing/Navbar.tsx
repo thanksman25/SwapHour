@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import swapHourLogo from "../../assets/logo.png";
+import Logo from "../ui/Logo";
 
 const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
@@ -9,8 +9,8 @@ const Navbar = () => {
     if (!navRef.current) return;
     gsap.fromTo(
       navRef.current,
-      { opacity: 0, y: -30 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+      { opacity: 0, y: -30, xPercent: -50, x: 0 },
+      { opacity: 1, y: 0, xPercent: -50, x: 0, duration: 0.7, ease: "power3.out" },
     );
   }, []);
 
@@ -18,17 +18,7 @@ const Navbar = () => {
     <nav ref={navRef} className="navbar">
       <div className="navbar-container">
         <a href="/" className="navbar-logo">
-          <a href="/" className="navbar-logo">
-            <img
-              src={swapHourLogo}
-              alt="SwapHour"
-              style={{
-                height: "42px",
-                width: "auto",
-                filter: "brightness(0) invert(1)",
-              }}
-            />
-          </a>
+          <Logo size={42} forceTheme="dark" />
         </a>
         <div className="navbar-links">
           <a href="/login" className="nav-link">

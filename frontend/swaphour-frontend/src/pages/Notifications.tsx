@@ -37,7 +37,6 @@ export default function Notifications() {
     queryKey: ['notifications'],
     queryFn: fetchNotifications,
     staleTime: 30 * 1000,
-    refetchInterval: 30000,
   });
 
   const { mutate: markRead } = useMutation({

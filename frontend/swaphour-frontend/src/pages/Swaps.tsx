@@ -137,7 +137,14 @@ export default function Swaps() {
           className={`swap-tab ${tab === 'incoming' ? 'swap-tab--active' : ''}`}
           onClick={() => setTab('incoming')}
         >
-          <span>📥</span>
+          <span className="tab-icon">
+            {/* Kotak masuk — tray dengan panah turun */}
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="8 17 12 21 16 17"/>
+              <line x1="12" y1="12" x2="12" y2="21"/>
+              <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>
+            </svg>
+          </span>
           Request Masuk
           {incoming.filter((s) => s.status === 'pending').length > 0 && (
             <span className="tab-badge">
@@ -150,7 +157,13 @@ export default function Swaps() {
           className={`swap-tab ${tab === 'outgoing' ? 'swap-tab--active' : ''}`}
           onClick={() => setTab('outgoing')}
         >
-          <span>📤</span>
+          <span className="tab-icon">
+            {/* Panah keluar dari kotak — request yang dikirim */}
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </span>
           Request Keluar
           {outgoing.filter((s) => s.status === 'pending').length > 0 && (
             <span className="tab-badge">
@@ -167,7 +180,20 @@ export default function Swaps() {
         </div>
       ) : listed.length === 0 ? (
         <div className="card empty-state">
-          <span className="empty-icon">{tab === 'incoming' ? '📭' : '📤'}</span>
+          <span className="empty-icon">
+            {tab === 'incoming' ? (
+              // Kotak surat kosong
+              <svg width="2.5em" height="2.5em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.4 }}>
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            ) : (
+              // Panah kirim — belum ada yang dikirim
+              <svg width="2.5em" height="2.5em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.4 }}>
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            )}
+          </span>
           <h3>
             {tab === 'incoming'
               ? 'Belum ada request masuk'

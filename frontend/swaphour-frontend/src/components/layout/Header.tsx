@@ -33,9 +33,17 @@ export default function Header() {
   const { data: unreadCount = 0 } = useQuery({
     queryKey: ["notifications", "unread-count"],
     queryFn: fetchUnreadCount,
-    refetchInterval: 30000,
     staleTime: 30000,
   });
+
+  // Check if account is deactivated
+  useEffect(() => {
+    if (profile && profile.is_active === false) {
+      clearAuth();
+      alert("Akun Anda telah dinonaktifkan oleh sistem.");
+      navigate("/login");
+    }
+  }, [profile, navigate]);
 
   // Tutup dropdown kalau klik di luar
   useEffect(() => {
@@ -56,22 +64,11 @@ export default function Header() {
   };
 
   const balance = profile ? Number(profile.credit_hours).toFixed(1) : "0.0";
-  const userInitial = profile?.name ? profile.name[0].toUpperCase() : "U";
 
   return (
     <header className="header" ref={headerRef}>
-      {/* Left side brand & secondary links */}
-      <div className="header__left">
-        <span className="header__brand-name">SwapHour</span>
-        <nav className="header__links">
-          <a href="#docs" className="header__link">Docs</a>
-          <a href="#api" className="header__link">API</a>
-          <a href="#community" className="header__link">Community</a>
-        </nav>
-      </div>
-
       {/* Right Controls */}
-      <div className="header__controls">
+      <div className="header__controls" style={{ marginLeft: 'auto' }}>
         {/* Balance hours text */}
         <Link to="/wallet" className="header__balance-text" title="Saldo Jam">
           {balance}h
@@ -89,13 +86,13 @@ export default function Header() {
         </Link>
 
         {/* Help Question Icon */}
-        <button className="header__help-btn" title="Bantuan / FAQ">
+        <Link to="/faq" className="header__help-btn" title="Bantuan / FAQ">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
-        </button>
+        </Link>
 
         {/* User avatar & dropdown */}
         <div className="header__avatar-container">
@@ -103,12 +100,12 @@ export default function Header() {
             className="header__avatar-btn"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             title="Menu Akun"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--glass-bg)', border: '1px solid var(--glass-border-gold)', color: 'var(--color-gold)' }}
           >
-            {profile?.avatar_url ? (
-              <img src={profile.avatar_url} alt={profile.name} className="header__avatar-img" />
-            ) : (
-              <div className="header__avatar-placeholder">{userInitial}</div>
-            )}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
           </button>
 
           {/* Account Dropdown Menu */}
@@ -135,13 +132,30 @@ export default function Header() {
               className="dropdown-link"
               onClick={() => setDropdownOpen(false)}
             >
-              <span>👤</span> Edit Profil
+              <span className="dropdown-icon">
+                {/* ikon kartu ID — lebih kontekstual dari sekedar user generik */}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="2"/>
+                  <path d="M2 10h20"/>
+                  <path d="M6 15h4"/>
+                  <path d="M14 15h4"/>
+                </svg>
+              </span>
+              Edit Profil
             </Link>
             
             <div className="dropdown-divider" />
             
             <button className="dropdown-link dropdown-logout" onClick={handleLogout}>
-              <span>⟵</span> Logout
+              <span className="dropdown-icon">
+                {/* Pintu keluar */}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                  <polyline points="16 17 21 12 16 7"/>
+                  <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+              </span>
+              Logout
             </button>
           </div>
         </div>

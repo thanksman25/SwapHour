@@ -1,72 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { clearAuth } from "../../lib/auth";
+import Logo from "../ui/Logo";
 import "./Sidebar.css";
 
-function SwapHourLogo() {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="16"
-        cy="16"
-        r="15"
-        stroke="url(#sidebarGold)"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.6"
-      />
-      <path
-        d="M10 6h12L16 14 10 6zM10 26h12L16 18l-6 8z"
-        fill="url(#sidebarGreen)"
-        opacity="0.9"
-      />
-      <circle cx="16" cy="16" r="2" fill="url(#sidebarGold)" />
-      <path
-        d="M7 13.5 L4 16 L7 18.5"
-        stroke="url(#sidebarGold)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M25 13.5 L28 16 L25 18.5"
-        stroke="url(#sidebarGold)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <defs>
-        <linearGradient
-          id="sidebarGold"
-          x1="0"
-          y1="0"
-          x2="32"
-          y2="32"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#F5BC3A" />
-          <stop offset="100%" stopColor="#F0A500" />
-        </linearGradient>
-        <linearGradient
-          id="sidebarGreen"
-          x1="16"
-          y1="6"
-          x2="16"
-          y2="26"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#4ab882" />
-          <stop offset="100%" stopColor="#2D9E6F" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
+
 
 const NAV_ITEMS = [
   {
@@ -105,15 +42,6 @@ const NAV_ITEMS = [
       </svg>
     )
   },
-  {
-    to: "/analytics",
-    label: "Analytics",
-    icon: (
-      <svg width="1em" height="1em" viewBox="0 0 512 512" fill="currentColor" style={{ display: "block" }}>
-        <path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64L0 400c0 44.2 35.8 80 80 80l400 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 416c-8.8 0-16-7.2-16-16L64 64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/>
-      </svg>
-    )
-  },
 ];
 
 export default function Sidebar() {
@@ -128,7 +56,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       {/* Brand logo */}
       <div className="sidebar__brand">
-        <SwapHourLogo />
+        <Logo size={32} />
         <div className="sidebar__brand-text">
           <span className="brand-name">SwapHour</span>
           <span className="brand-tagline">Time is Currency</span>
@@ -161,17 +89,30 @@ export default function Sidebar() {
         <div className="sidebar__divider" />
 
         <NavLink
-          to="/profile/edit"
+          to="/settings"
           className={({ isActive }) =>
             `sidebar__footer-link ${isActive ? "sidebar__footer-link--active" : ""}`
           }
         >
-          <span className="sidebar__footer-icon">⚙</span>
+          <span className="sidebar__footer-icon">
+            {/* Gear berlubang — ikon settings yang beda dari sliders profil */}
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </span>
           <span>Settings</span>
         </NavLink>
 
         <button className="sidebar__footer-link sidebar__logout-btn" onClick={handleLogout}>
-          <span className="sidebar__footer-icon">⟵</span>
+          <span className="sidebar__footer-icon">
+            {/* Pintu keluar — lebih jelas secara semantik */}
+            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block" }}>
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </span>
           <span>Logout</span>
         </button>
       </div>

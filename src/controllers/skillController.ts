@@ -92,3 +92,36 @@ export const deleteSkill = async (req: AuthRequest, res: Response, next: NextFun
     res.status(204).json({ status: 'success', data: null }); 
   } catch (error) { next(error); }
 };
+
+// ==========================================
+// 5. GET SINGLE SKILL (Melihat Detail 1 Skill)
+// ==========================================
+export const getSkillById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id as string;
+
+    // Cari skill berdasarkan ID
+    const skill = await prisma.skill.findUnique({
+      where: { id },
+      // SANGAT PENTING: Tarik relasi data 'user' (pemilik skill)
+      // agar Frontend tahu ke siapa mereka mengirimkan penawaran (Swap)
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar_url: true
+          }
+        }
+      }
+    });
+
+    if (!skill) {
+      return next(new AppError('Skill tidak ditemukan di sistem', 404));
+    }
+
+    res.status(200).json({ status: 'success', data: skill });
+  } catch (error) { 
+    next(error); 
+  }
+};

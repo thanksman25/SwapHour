@@ -19,6 +19,8 @@ import Swaps from "./pages/Swaps";
 import Notifications from "./pages/Notifications";
 import Wallet from "./pages/Wallet";
 import AddSkillPage from "./pages/AddSkillPage";
+import SettingsPage from "./pages/SettingsPage";
+import FAQPage from "./pages/FAQPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,6 +51,8 @@ function App() {
             <Route path="/swaps" element={<Swaps />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/wallet" element={<Wallet />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/faq" element={<FAQPage />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Routes>

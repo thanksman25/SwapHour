@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import gsap from "gsap";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import ErrorAlert from "../components/ui/ErrorAlert";
-import swapHourLogo from "../assets/logo.png";
+import Logo from "../components/ui/Logo";
+import apiClient from "../lib/apiClient";
 
 const CATEGORIES = [
   "Teknologi",
@@ -19,8 +21,9 @@ const CATEGORIES = [
   "Lainnya",
 ];
 
-const AddSkillPage = () => {
+export default function AddSkillPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const cardRef = useRef<HTMLDivElement>(null);
 
   const [form, setForm] = useState({
@@ -105,31 +108,22 @@ const AddSkillPage = () => {
     setApiError("");
 
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("/api/skills", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: form.title,
-          description: form.description,
-          category: form.category,
-          duration: parseFloat(form.duration),
-        }),
+      await apiClient.post("/skills", {
+        title: form.title,
+        description: form.description,
+        category: form.category,
+        duration_hours: parseFloat(form.duration),
       });
 
-      const data = await response.json();
-
-      if (response.ok || response.status === 201) {
-        setShowSuccess(true);
-        setTimeout(() => navigate("/dashboard"), 2000);
+      setShowSuccess(true);
+      queryClient.invalidateQueries({ queryKey: ["skills"] });
+      setTimeout(() => navigate("/dashboard"), 2000);
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        navigate("/login");
       } else {
-        setApiError(data?.message || "Gagal menambahkan skill.");
+        setApiError(err.response?.data?.message || "Gagal menambahkan skill.");
       }
-    } catch (err) {
-      setApiError("Gagal terhubung ke server. Coba lagi.");
     } finally {
       setIsLoading(false);
     }
@@ -225,15 +219,7 @@ const AddSkillPage = () => {
 
         {/* Header */}
         <div>
-          <img
-            src={swapHourLogo}
-            alt="SwapHour"
-            style={{
-              height: "42px",
-              width: "auto",
-              filter: "brightness(0) invert(1)",
-            }}
-          />
+          <Logo size={42} />
 
           <div
             style={{
@@ -478,5 +464,3 @@ const AddSkillPage = () => {
     </div>
   );
 };
-
-export default AddSkillPage;
