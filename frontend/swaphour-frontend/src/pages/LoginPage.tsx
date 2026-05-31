@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import Button from "../components/ui/Button";
-import Input from "../components/ui/Input";
-import ErrorAlert from "../components/ui/ErrorAlert";
+import Button from "../components/UI/Button";
+import Input from "../components/UI/Input";
+import ErrorAlert from "../components/UI/ErrorAlert";
+import PasswordInput from "../components/UI/PasswordInput";
 import swapHourLogo from "../assets/logo.png";
 
 const LoginPage = () => {
@@ -14,6 +15,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [apiError, setApiError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(
@@ -65,7 +67,6 @@ const LoginPage = () => {
       if (response.ok && data.token) {
         localStorage.setItem("token", data.token);
 
-        // Fetch profile to save user info in localStorage for FE-2 pages
         const profileRes = await fetch("/api/users/profile", {
           headers: { Authorization: `Bearer ${data.token}` },
         });
@@ -74,7 +75,8 @@ const LoginPage = () => {
           localStorage.setItem("user", JSON.stringify(profileData.data));
         }
 
-        navigate("/dashboard");
+        setShowSuccess(true);
+        setTimeout(() => navigate("/dashboard"), 1500);
       } else {
         setApiError(data?.message || "Email atau password salah.");
       }
@@ -187,6 +189,30 @@ const LoginPage = () => {
             </p>
           </div>
 
+          {showSuccess && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                background: "rgba(45,138,97,0.15)",
+                border: "1px solid rgba(45,138,97,0.3)",
+                borderRadius: "12px",
+                padding: "0.85rem 1.1rem",
+              }}
+            >
+              <span>✅</span>
+              <span
+                style={{
+                  fontSize: "0.875rem",
+                  color: "#6ee7b7",
+                  fontWeight: 500,
+                }}
+              >
+                Login berhasil! Mengarahkan ke dashboard...
+              </span>
+            </div>
+          )}
           {apiError && <ErrorAlert message={apiError} />}
 
           <div
@@ -205,14 +231,13 @@ const LoginPage = () => {
               errorMessage={errors.email}
               fullWidth
             />
-            <Input
+            <PasswordInput
               label="Password"
-              placeholder="Minimal 8 karakter"
+              placeholder="Masukkan password..."
               value={form.password}
               onChange={handleChange("password")}
-              type="password"
               errorMessage={errors.password}
-              fullWidth
+              showStrength={false}
             />
           </div>
 
