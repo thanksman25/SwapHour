@@ -5,6 +5,7 @@ import { clearAuth } from "../../lib/auth";
 import apiClient from "../../lib/apiClient";
 import type { User, Notification } from "../../types";
 import NotifBadge from "../ui/NotifBadge";
+import Logo from "../ui/Logo";
 import "./Header.css";
 
 function fetchProfile(): Promise<User> {
@@ -23,6 +24,7 @@ export default function Header() {
   const navigate = useNavigate();
   const headerRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   const { data: profile } = useQuery({
     queryKey: ["profile"],
@@ -93,12 +95,12 @@ export default function Header() {
             className="header__avatar-btn"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             title="Menu Akun"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--glass-bg)', border: '1px solid var(--glass-border-gold)', color: 'var(--color-gold)' }}
           >
-            {profile?.avatar_url ? (
-              <img src={profile.avatar_url} alt={profile.name} className="header__avatar-img" />
-            ) : (
-              <div className="header__avatar-placeholder">{userInitial}</div>
-            )}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
           </button>
 
           {/* Account Dropdown Menu */}
