@@ -7,6 +7,8 @@ const router = Router();
 // Semua proses Swap WAJIB login, jadi kita pasang pelindung di awal
 router.use(protect);
 
+// Endpoint untuk mengambil semua daftar riwayat Swap milik user
+router.get('/', getMySwaps);
 // Endpoint 1: Meminta skill
 router.post('/', createSwapRequest);
 
@@ -15,8 +17,5 @@ router.patch('/:id/respond', respondSwapRequest);
 
 // Endpoint 3: Tandai selesai
 router.patch('/:id/complete', completeSwapRequest);
-
-// Endpoint 4: Get my swaps history
-router.get('/', getMySwaps);
 
 export default router;

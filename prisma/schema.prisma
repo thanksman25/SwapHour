@@ -11,7 +11,7 @@ generator client{
 
 // Blok datasource mengatur koneksi ke database.
 // Kita menggunakan PostgreSQL, dan URL koneksinya diambil dari file .env.
-datasource db {
+datasource db{
   provider = "postgresql"
 }
 

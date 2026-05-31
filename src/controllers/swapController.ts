@@ -256,10 +256,13 @@ export const completeSwapRequest = async (req: AuthRequest, res: Response, next:
   } catch (error) { next(error); }
 };
 
-// 4. GET MY SWAPS (Mendapatkan riwayat swap milik user)
+// 4. GET MY SWAPS (Melihat Riwayat Transaksi Swap)
 export const getMySwaps = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const userId = req.user.id;
+
+    // Cari semua transaksi di mana user ini bertindak sebagai Peminta (Requester) 
+    // ATAU sebagai Penyedia Jasa (Provider)
     const swaps = await prisma.swapRequest.findMany({
       where: {
         OR: [
@@ -267,22 +270,37 @@ export const getMySwaps = async (req: AuthRequest, res: Response, next: NextFunc
           { provider_id: userId }
         ]
       },
+      // Tarik juga data relasinya agar Frontend bisa menampilkan nama dan skill
       include: {
         skill: {
-          select: { id: true, title: true, category: true, duration_hours: true }
+          select: {
+            id: true,
+            title: true
+          }
         },
         requester: {
-          select: { id: true, name: true, avatar_url: true }
+          select: {
+            id: true,
+            name: true,
+            avatar_url: true
+          }
         },
         provider: {
-          select: { id: true, name: true, avatar_url: true }
-        },
-        ratings: true
-      },
-      orderBy: {
-        created_at: 'desc'
+          select: {
+            id: true,
+            name: true,
+            avatar_url: true
+          }
+        }
       }
     });
-    res.status(200).json({ status: 'success', data: swaps });
-  } catch (error) { next(error); }
+
+    res.status(200).json({ 
+        status: 'success', 
+        results: swaps.length, 
+        data: swaps 
+    });
+  } catch (error) { 
+    next(error); 
+  }
 };

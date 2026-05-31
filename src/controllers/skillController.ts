@@ -35,49 +35,14 @@ export const getSkills = async (req: Request, res: Response, next: NextFunction)
     const { category, is_active } = req.query;
     const filter: any = {};
 
-    if (category) {
-      filter.category = {
-        equals: String(category),
-        mode: 'insensitive'
-      };
-    }
+    if (category) filter.category = String(category);
     
     if (is_active !== undefined) {
       filter.is_active = is_active === 'true'; 
     }
 
-    const skills = await prisma.skill.findMany({ 
-      where: filter,
-      include: {
-        user: {
-          select: { id: true, name: true, avatar_url: true }
-        }
-      }
-    });
+    const skills = await prisma.skill.findMany({ where: filter });
     res.status(200).json({ status: 'success', results: skills.length, data: skills });
-  } catch (error) { next(error); }
-};
-
-// ==========================================
-// 2.5. READ SKILL BY ID 
-// ==========================================
-export const getSkillById = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const id = req.params.id as string;
-    const skill = await prisma.skill.findUnique({
-      where: { id },
-      include: {
-        user: {
-          select: { id: true, name: true, avatar_url: true, bio: true, average_rating: true, total_ratings: true }
-        }
-      }
-    });
-    
-    if (!skill) {
-      return next(new AppError('Skill tidak ditemukan', 404));
-    }
-    
-    res.status(200).json({ status: 'success', data: skill });
   } catch (error) { next(error); }
 };
 
@@ -126,4 +91,37 @@ export const deleteSkill = async (req: AuthRequest, res: Response, next: NextFun
     await prisma.skill.delete({ where: { id } });
     res.status(204).json({ status: 'success', data: null }); 
   } catch (error) { next(error); }
+};
+
+// ==========================================
+// 5. GET SINGLE SKILL (Melihat Detail 1 Skill)
+// ==========================================
+export const getSkillById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id as string;
+
+    // Cari skill berdasarkan ID
+    const skill = await prisma.skill.findUnique({
+      where: { id },
+      // SANGAT PENTING: Tarik relasi data 'user' (pemilik skill)
+      // agar Frontend tahu ke siapa mereka mengirimkan penawaran (Swap)
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar_url: true
+          }
+        }
+      }
+    });
+
+    if (!skill) {
+      return next(new AppError('Skill tidak ditemukan di sistem', 404));
+    }
+
+    res.status(200).json({ status: 'success', data: skill });
+  } catch (error) { 
+    next(error); 
+  }
 };
