@@ -59,6 +59,7 @@
     var(--shadow-card),
     0 0 60px rgba(240,165,0,0.12),
     inset 0 1px 0 rgba(255,255,255,0.1) !important;
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base) !important;
 }
 
 /* Decorative orbs */

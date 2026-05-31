@@ -32,13 +32,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: "Sora", sans-serif;
-  background: var(--p1);
-  color: var(--white);
-  overflow-x: hidden;
-}
-
 /* ═══════════════════════════
    NAVBAR
 ═══════════════════════════ */

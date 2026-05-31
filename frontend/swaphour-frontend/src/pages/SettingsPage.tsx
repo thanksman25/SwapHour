@@ -1,15 +1,18 @@
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
+import { useTheme, type Theme } from "../context/ThemeContext";
 import "./SettingsPage.css";
 
 export default function SettingsPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   
+  // Theme context
+  const { theme, setTheme } = useTheme();
+
   // Dummy states
   const [emailNotif, setEmailNotif] = useState(true);
   const [pushNotif, setPushNotif] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
   
   useEffect(() => {
     if (!pageRef.current) return;
@@ -59,13 +62,27 @@ export default function SettingsPage() {
               
               <div className="settings-item">
                 <div className="settings-item-info">
-                  <h3>Tema Gelap (Dark Mode)</h3>
-                  <p>Ubah tampilan aplikasi menjadi gelap.</p>
+                  <h3>Tema Tampilan</h3>
+                  <p>Pilih mode terang, gelap, atau sesuaikan dengan sistem.</p>
                 </div>
-                <label className="settings-switch">
-                  <input type="checkbox" checked={darkMode} onChange={(e) => setDarkMode(e.target.checked)} />
-                  <span className="slider round"></span>
-                </label>
+                <select 
+                  value={theme}
+                  onChange={(e) => setTheme(e.target.value as Theme)}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: 'var(--glass-bg)',
+                    border: '1px solid var(--glass-border)',
+                    color: 'var(--color-text)',
+                    outline: 'none',
+                    fontFamily: 'var(--font-body)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <option value="system">Default Sistem</option>
+                  <option value="dark">Mode Gelap</option>
+                  <option value="light">Mode Terang</option>
+                </select>
               </div>
             </div>
           </div>
