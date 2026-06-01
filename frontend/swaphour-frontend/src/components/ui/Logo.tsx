@@ -8,15 +8,23 @@ interface LogoProps {
 }
 
 export default function Logo({ size = 32, className, forceTheme }: LogoProps) {
-  // We just use logoPng for now since it's the actual SwapHour logo
+  // Using CSS mask to dynamically color the logo gold (var(--gold-400))
+  // The aspect ratio of the logo is ~3.316 (325x98)
   return (
-    <img
-      src={logoPng}
-      alt="SwapHour"
-      width={size}
-      height={size}
+    <div
       className={className}
-      style={{ width: "auto", height: `${size}px`, objectFit: "contain" }}
+      role="img"
+      aria-label="SwapHour Logo"
+      style={{
+        width: `${size * 3.316}px`,
+        height: `${size}px`,
+        backgroundColor: "var(--gold-400)",
+        WebkitMask: `url(${logoPng}) no-repeat center`,
+        WebkitMaskSize: "contain",
+        mask: `url(${logoPng}) no-repeat center`,
+        maskSize: "contain",
+        display: "inline-block"
+      }}
     />
   );
 }
