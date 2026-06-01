@@ -5,7 +5,7 @@ import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
 import ErrorAlert from "../components/UI/ErrorAlert";
 import PasswordInput from "../components/UI/PasswordInput";
-import swapHourLogo from "../assets/logo.png";
+import Logo from "../components/ui/Logo";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -100,202 +100,6 @@ const LoginPage = () => {
         left: 0,
       }}
     >
-      {/* Kolom Kiri - Form */}
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "3rem",
-          background:
-            "radial-gradient(ellipse at 30% 30%, rgba(45,138,97,0.15) 0%, transparent 55%), linear-gradient(160deg, #0f4530 0%, #071810 100%)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "35px 35px",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div
-          ref={cardRef}
-          style={{
-            width: "100%",
-            maxWidth: "420px",
-            background: "rgba(255,255,255,0.06)",
-            backdropFilter: "blur(28px)",
-            WebkitBackdropFilter: "blur(28px)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            borderRadius: "28px",
-            padding: "2.75rem 2.5rem",
-            boxShadow:
-              "0 20px 80px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)",
-            display: "flex",
-            flexDirection: "column" as const,
-            gap: "1.4rem",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "15%",
-              right: "15%",
-              height: "1px",
-              background:
-                "linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)",
-            }}
-          />
-
-          <div style={{ textAlign: "center" as const }}>
-            <img
-              src={swapHourLogo}
-              alt="SwapHour"
-              style={{
-                height: "42px",
-                width: "auto",
-                filter: "brightness(0) invert(1)",
-              }}
-            />
-            <h1
-              style={{
-                fontSize: "1.75rem",
-                fontWeight: 800,
-                color: "#fff",
-                letterSpacing: "-0.5px",
-                marginBottom: "0.4rem",
-              }}
-            >
-              Masuk Akun
-            </h1>
-            <p
-              style={{
-                fontSize: "0.85rem",
-                color: "rgba(255,255,255,0.5)",
-                fontWeight: 300,
-              }}
-            >
-              Lanjutkan perjalanan tukar keahlianmu
-            </p>
-          </div>
-
-          {showSuccess && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                background: "rgba(45,138,97,0.15)",
-                border: "1px solid rgba(45,138,97,0.3)",
-                borderRadius: "12px",
-                padding: "0.85rem 1.1rem",
-              }}
-            >
-              <span>✅</span>
-              <span
-                style={{
-                  fontSize: "0.875rem",
-                  color: "#6ee7b7",
-                  fontWeight: 500,
-                }}
-              >
-                Login berhasil! Mengarahkan ke dashboard...
-              </span>
-            </div>
-          )}
-          {apiError && <ErrorAlert message={apiError} />}
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column" as const,
-              gap: "1rem",
-            }}
-          >
-            <Input
-              label="Alamat Email"
-              placeholder="nama@email.com"
-              value={form.email}
-              onChange={handleChange("email")}
-              type="email"
-              errorMessage={errors.email}
-              fullWidth
-            />
-            <PasswordInput
-              label="Password"
-              placeholder="Masukkan password..."
-              value={form.password}
-              onChange={handleChange("password")}
-              errorMessage={errors.password}
-              showStrength={false}
-            />
-          </div>
-
-          <Button
-            variant="primary"
-            isLoading={isLoading}
-            disabled={isLoading}
-            onClick={handleSubmit}
-            fullWidth
-          >
-            Masuk →
-          </Button>
-
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <div
-              style={{
-                flex: 1,
-                height: "1px",
-                background: "rgba(255,255,255,0.08)",
-              }}
-            />
-            <span
-              style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}
-            >
-              atau
-            </span>
-            <div
-              style={{
-                flex: 1,
-                height: "1px",
-                background: "rgba(255,255,255,0.08)",
-              }}
-            />
-          </div>
-
-          <p
-            style={{
-              textAlign: "center" as const,
-              fontSize: "0.875rem",
-              color: "rgba(255,255,255,0.45)",
-              margin: 0,
-            }}
-          >
-            Belum punya akun?{" "}
-            <a
-              href="/register"
-              style={{
-                color: "#F0A500",
-                fontWeight: 600,
-                textDecoration: "none",
-              }}
-            >
-              Daftar gratis →
-            </a>
-          </p>
-        </div>
-      </div>
-
       {/* Kolom Kanan - Panel Hijau */}
       <div
         style={{
@@ -441,6 +245,195 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+      {/* Kolom Kiri - Form */}
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "3rem",
+          background:
+            "radial-gradient(ellipse at 30% 30%, rgba(45,138,97,0.15) 0%, transparent 55%), linear-gradient(160deg, #0f4530 0%, #071810 100%)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "35px 35px",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div
+          ref={cardRef}
+          style={{
+            width: "100%",
+            maxWidth: "420px",
+            background: "rgba(255,255,255,0.06)",
+            backdropFilter: "blur(28px)",
+            WebkitBackdropFilter: "blur(28px)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: "28px",
+            padding: "2.75rem 2.5rem",
+            boxShadow:
+              "0 20px 80px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)",
+            display: "flex",
+            flexDirection: "column" as const,
+            gap: "1.4rem",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "15%",
+              right: "15%",
+              height: "1px",
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)",
+            }}
+          />
+
+          <div style={{ textAlign: "center" as const }}>
+            <Logo size={42} forceTheme="dark" />
+            <h1
+              style={{
+                fontSize: "1.75rem",
+                fontWeight: 800,
+                color: "#fff",
+                letterSpacing: "-0.5px",
+                marginBottom: "0.4rem",
+              }}
+            >
+              Masuk Akun
+            </h1>
+            <p
+              style={{
+                fontSize: "0.85rem",
+                color: "rgba(255,255,255,0.5)",
+                fontWeight: 300,
+              }}
+            >
+              Lanjutkan perjalanan tukar keahlianmu
+            </p>
+          </div>
+
+          {showSuccess && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                background: "rgba(45,138,97,0.15)",
+                border: "1px solid rgba(45,138,97,0.3)",
+                borderRadius: "12px",
+                padding: "0.85rem 1.1rem",
+              }}
+            >
+              <span>✅</span>
+              <span
+                style={{
+                  fontSize: "0.875rem",
+                  color: "#6ee7b7",
+                  fontWeight: 500,
+                }}
+              >
+                Login berhasil! Mengarahkan ke dashboard...
+              </span>
+            </div>
+          )}
+          {apiError && <ErrorAlert message={apiError} />}
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column" as const,
+              gap: "1rem",
+            }}
+          >
+            <Input
+              label="Alamat Email"
+              placeholder="nama@email.com"
+              value={form.email}
+              onChange={handleChange("email")}
+              type="email"
+              errorMessage={errors.email}
+              fullWidth
+            />
+            <PasswordInput
+              label="Password"
+              placeholder="Masukkan password..."
+              value={form.password}
+              onChange={handleChange("password")}
+              errorMessage={errors.password}
+              showStrength={false}
+            />
+          </div>
+
+          <Button
+            variant="primary"
+            isLoading={isLoading}
+            disabled={isLoading}
+            onClick={handleSubmit}
+            fullWidth
+          >
+            Masuk →
+          </Button>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div
+              style={{
+                flex: 1,
+                height: "1px",
+                background: "rgba(255,255,255,0.08)",
+              }}
+            />
+            <span
+              style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}
+            >
+              atau
+            </span>
+            <div
+              style={{
+                flex: 1,
+                height: "1px",
+                background: "rgba(255,255,255,0.08)",
+              }}
+            />
+          </div>
+
+          <p
+            style={{
+              textAlign: "center" as const,
+              fontSize: "0.875rem",
+              color: "rgba(255,255,255,0.45)",
+              margin: 0,
+            }}
+          >
+            Belum punya akun?{" "}
+            <a
+              href="/register"
+              style={{
+                color: "#F0A500",
+                fontWeight: 600,
+                textDecoration: "none",
+              }}
+            >
+              Daftar gratis →
+            </a>
+          </p>
+        </div>
+      </div>
+
+      
     </div>
   );
 };

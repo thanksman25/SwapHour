@@ -5,7 +5,7 @@ import Button from "../components/UI/Button";
 import Input from "../components/UI/Input";
 import ErrorAlert from "../components/UI/ErrorAlert";
 import PasswordInput from "../components/UI/PasswordInput";
-import swapHourLogo from "../assets/logo.png";
+import Logo from "../components/ui/Logo";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -279,15 +279,7 @@ const RegisterPage = () => {
           />
 
           <div style={{ textAlign: "center" as const }}>
-            <img
-              src={swapHourLogo}
-              alt="SwapHour"
-              style={{
-                height: "42px",
-                width: "auto",
-                filter: "brightness(0) invert(1)",
-              }}
-            />
+            <Logo size={42} forceTheme="dark" />
             <h1
               style={{
                 fontSize: "1.75rem",
