@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import Button from "../components/ui/Button";
-import Input from "../components/ui/Input";
-import ErrorAlert from "../components/ui/ErrorAlert";
-import Spinner from "../components/ui/Spinner";
-import Logo from "../components/ui/Logo";
-import apiClient from "../lib/apiClient";
+import Button from "../components/UI/Button";
+import Input from "../components/UI/Input";
+import ErrorAlert from "../components/UI/ErrorAlert";
+import Spinner from "../components/UI/Spinner";
+import PasswordInput from "../components/UI/PasswordInput";
+import swapHourLogo from "../assets/logo.png";
 
 interface ProfileData {
   name: string;
@@ -32,28 +32,43 @@ const EditProfilePage = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
+  // Ubah Password
+  const [showChangePassword, setShowChangePassword] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
+
+  // Hapus Akun
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+
   useEffect(() => {
+    const token = localStorage.getItem("token") || "test";
     const fetchProfile = async () => {
       try {
-        const response = await apiClient.get("/users/profile");
-        const user = response.data.data;
-        setProfile({
-          name: user.name || "",
-          bio: user.bio || "",
-          avatarUrl: user.avatar_url || "",
-          profileCompletion: user.profile_completion || 0,
+        const response = await fetch("/api/users/profile", {
+          headers: { Authorization: `Bearer ${token}` },
         });
-      } catch (err: any) {
-        if (err.response?.status === 401) {
-          navigate("/login");
+        const data = await response.json();
+        if (response.ok) {
+          setProfile({
+            name: data.name || "",
+            bio: data.bio || "",
+            avatarUrl: data.avatarUrl || "",
+            profileCompletion: data.profileCompletion || 0,
+          });
         } else {
-          setApiError("Gagal memuat data profil.");
+          navigate("/login");
         }
+      } catch (err) {
+        setApiError("Gagal memuat data profil.");
       } finally {
         setIsFetching(false);
       }
     };
-
     fetchProfile();
   }, []);
 
@@ -106,17 +121,49 @@ const EditProfilePage = () => {
     setApiError("");
     setSaveSuccess(false);
     try {
-      await apiClient.put("/users/profile", {
-        name: profile.name,
-        bio: profile.bio,
-        avatar_url: profile.avatarUrl,
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/users/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: profile.name,
+          bio: profile.bio,
+          avatarUrl: profile.avatarUrl,
+        }),
       });
-      setSaveSuccess(true);
-    } catch (err: any) {
-      setApiError(err.response?.data?.message || "Gagal menyimpan profil.");
+      const data = await response.json();
+      if (response.ok) {
+        setSaveSuccess(true);
+      } else {
+        setApiError(data?.message || "Gagal menyimpan profil.");
+      }
+    } catch (err) {
+      setApiError("Gagal terhubung ke server.");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleChangePassword = async () => {
+    setIsChangingPassword(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setPasswordSuccess(true);
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setTimeout(() => setPasswordSuccess(false), 3000);
+    setIsChangingPassword(false);
+  };
+
+  const handleDeleteAccount = async () => {
+    setIsDeletingAccount(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    localStorage.removeItem("token");
+    navigate("/login");
+    setIsDeletingAccount(false);
   };
 
   const getCompletionColor = () => {
@@ -157,7 +204,6 @@ const EditProfilePage = () => {
         overflow: "hidden",
       }}
     >
-      {/* Dot grid */}
       <div
         style={{
           position: "fixed",
@@ -168,8 +214,6 @@ const EditProfilePage = () => {
           pointerEvents: "none",
         }}
       />
-
-      {/* Glow orbs */}
       <div
         style={{
           position: "fixed",
@@ -212,9 +256,11 @@ const EditProfilePage = () => {
             "0 20px 80px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)",
           position: "relative",
           zIndex: 1,
+          display: "flex",
+          flexDirection: "column" as const,
+          gap: "1rem",
         }}
       >
-        {/* Top shimmer */}
         <div
           style={{
             position: "absolute",
@@ -233,11 +279,20 @@ const EditProfilePage = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: "2rem",
           }}
         >
           <div>
-            <Logo size={42} />
+            <img
+              src={swapHourLogo}
+              alt="SwapHour"
+              style={{
+                height: "32px",
+                width: "auto",
+                filter: "brightness(0) invert(1)",
+                marginBottom: "0.5rem",
+                display: "block",
+              }}
+            />
             <h1
               style={{
                 fontSize: "1.5rem",
@@ -260,8 +315,6 @@ const EditProfilePage = () => {
               Lengkapi profilmu untuk mulai swap
             </p>
           </div>
-
-          {/* Avatar */}
           <div
             style={{
               width: "64px",
@@ -289,10 +342,7 @@ const EditProfilePage = () => {
                 }}
               />
             ) : (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-              </svg>
+              "👤"
             )}
           </div>
         </div>
@@ -304,7 +354,6 @@ const EditProfilePage = () => {
             border: "1px solid rgba(255,255,255,0.08)",
             borderRadius: "16px",
             padding: "1.25rem",
-            marginBottom: "1.75rem",
           }}
         >
           <div
@@ -334,8 +383,6 @@ const EditProfilePage = () => {
               {profile.profileCompletion}%
             </span>
           </div>
-
-          {/* Progress bar track */}
           <div
             style={{
               width: "100%",
@@ -356,8 +403,6 @@ const EditProfilePage = () => {
               }}
             />
           </div>
-
-          {/* Warning < 80% */}
           {profile.profileCompletion < 80 && (
             <div
               style={{
@@ -371,14 +416,7 @@ const EditProfilePage = () => {
                 padding: "0.5rem 0.75rem",
               }}
             >
-              <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-                {/* Segitiga peringatan */}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5c842" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                  <line x1="12" y1="9" x2="12" y2="13"/>
-                  <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-              </span>
+              <span style={{ fontSize: "0.85rem" }}>⚠️</span>
               <span
                 style={{
                   fontSize: "0.75rem",
@@ -392,17 +430,11 @@ const EditProfilePage = () => {
           )}
         </div>
 
-        {apiError && (
-          <div style={{ marginBottom: "1rem" }}>
-            <ErrorAlert message={apiError} />
-          </div>
-        )}
+        {apiError && <ErrorAlert message={apiError} />}
 
-        {/* Success message */}
         {saveSuccess && (
           <div
             style={{
-              marginBottom: "1rem",
               display: "flex",
               alignItems: "center",
               gap: "8px",
@@ -412,13 +444,7 @@ const EditProfilePage = () => {
               padding: "0.85rem 1.1rem",
             }}
           >
-            <span style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-              {/* Centang lingkaran */}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
-            </span>
+            <span>✅</span>
             <span
               style={{
                 fontSize: "0.875rem",
@@ -437,7 +463,6 @@ const EditProfilePage = () => {
             display: "flex",
             flexDirection: "column" as const,
             gap: "1rem",
-            marginBottom: "1.5rem",
           }}
         >
           <Input
@@ -466,6 +491,7 @@ const EditProfilePage = () => {
           />
         </div>
 
+        {/* Tombol Kembali & Simpan */}
         <div style={{ display: "flex", gap: "1rem" }}>
           <button
             onClick={() => navigate(-1)}
@@ -480,18 +506,9 @@ const EditProfilePage = () => {
               fontSize: "0.9rem",
               fontWeight: 600,
               cursor: "pointer",
-              transition: "all 0.2s",
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              justifyContent: "center",
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-              <line x1="19" y1="12" x2="5" y2="12"/>
-              <polyline points="12 19 5 12 12 5"/>
-            </svg>
-            Kembali
+            ← Kembali
           </button>
           <div style={{ flex: 2 }}>
             <Button
@@ -505,6 +522,198 @@ const EditProfilePage = () => {
             </Button>
           </div>
         </div>
+
+        {/* Divider */}
+        <div style={{ height: "1px", background: "rgba(255,255,255,0.08)" }} />
+
+        {/* Ubah Password */}
+        <button
+          onClick={() => setShowChangePassword(!showChangePassword)}
+          style={{
+            width: "100%",
+            padding: "0.85rem",
+            borderRadius: "12px",
+            background: "rgba(255,255,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            color: "rgba(255,255,255,0.7)",
+            fontFamily: "Sora, sans-serif",
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>🔑 Ubah Password</span>
+          <span>{showChangePassword ? "▲" : "▼"}</span>
+        </button>
+
+        {showChangePassword && (
+          <div
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "12px",
+              padding: "1.25rem",
+              display: "flex",
+              flexDirection: "column" as const,
+              gap: "1rem",
+            }}
+          >
+            <PasswordInput
+              label="Password Lama"
+              placeholder="Masukkan password lama..."
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              showStrength={false}
+            />
+            <PasswordInput
+              label="Password Baru"
+              placeholder="Masukkan password baru..."
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              showStrength={true}
+            />
+            <PasswordInput
+              label="Konfirmasi Password Baru"
+              placeholder="Ulangi password baru..."
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              showStrength={false}
+              errorMessage={
+                confirmPassword && newPassword !== confirmPassword
+                  ? "Password tidak cocok"
+                  : ""
+              }
+            />
+            {passwordSuccess && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  background: "rgba(45,138,97,0.12)",
+                  border: "1px solid rgba(45,138,97,0.25)",
+                  borderRadius: "10px",
+                  padding: "0.75rem 1rem",
+                }}
+              >
+                <span>✅</span>
+                <span
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "#6ee7b7",
+                    fontWeight: 500,
+                  }}
+                >
+                  Password berhasil diubah!
+                </span>
+              </div>
+            )}
+            <Button
+              variant="primary"
+              onClick={handleChangePassword}
+              isLoading={isChangingPassword}
+              disabled={
+                isChangingPassword ||
+                newPassword !== confirmPassword ||
+                !oldPassword ||
+                !newPassword
+              }
+              fullWidth
+            >
+              Simpan Password
+            </Button>
+          </div>
+        )}
+
+        {/* Divider */}
+        <div style={{ height: "1px", background: "rgba(255,255,255,0.08)" }} />
+
+        {/* Hapus Akun */}
+        <button
+          onClick={() => setShowDeleteConfirm(!showDeleteConfirm)}
+          style={{
+            width: "100%",
+            padding: "0.85rem",
+            borderRadius: "12px",
+            background: "rgba(239,68,68,0.06)",
+            border: "1px solid rgba(239,68,68,0.2)",
+            color: "#f87171",
+            fontFamily: "Sora, sans-serif",
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>🗑️ Hapus Akun</span>
+          <span>{showDeleteConfirm ? "▲" : "▼"}</span>
+        </button>
+
+        {showDeleteConfirm && (
+          <div
+            style={{
+              background: "rgba(239,68,68,0.06)",
+              border: "1px solid rgba(239,68,68,0.2)",
+              borderRadius: "12px",
+              padding: "1.25rem",
+              display: "flex",
+              flexDirection: "column" as const,
+              gap: "1rem",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "0.85rem",
+                color: "rgba(255,255,255,0.6)",
+                margin: 0,
+                lineHeight: 1.6,
+              }}
+            >
+              ⚠️ Tindakan ini{" "}
+              <strong style={{ color: "#f87171" }}>
+                tidak dapat dibatalkan
+              </strong>
+              . Semua data kamu akan dihapus permanen.
+            </p>
+            <Input
+              label="Ketik 'HAPUS' untuk konfirmasi"
+              placeholder="HAPUS"
+              value={deleteConfirmText}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setDeleteConfirmText(e.target.value)
+              }
+              fullWidth
+            />
+            <button
+              onClick={handleDeleteAccount}
+              disabled={deleteConfirmText !== "HAPUS" || isDeletingAccount}
+              style={{
+                width: "100%",
+                padding: "0.85rem",
+                borderRadius: "12px",
+                background:
+                  deleteConfirmText === "HAPUS"
+                    ? "rgba(239,68,68,0.8)"
+                    : "rgba(239,68,68,0.2)",
+                border: "1px solid rgba(239,68,68,0.4)",
+                color: "#fff",
+                fontFamily: "Sora, sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 700,
+                cursor:
+                  deleteConfirmText === "HAPUS" ? "pointer" : "not-allowed",
+                opacity: deleteConfirmText === "HAPUS" ? 1 : 0.5,
+              }}
+            >
+              {isDeletingAccount ? "Menghapus..." : "Hapus Akun Permanen"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

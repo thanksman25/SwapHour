@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
-import Button from "../components/ui/Button";
-import Input from "../components/ui/Input";
-import ErrorAlert from "../components/ui/ErrorAlert";
-import Logo from "../components/ui/Logo";
+import Button from "../components/UI/Button";
+import Input from "../components/UI/Input";
+import ErrorAlert from "../components/UI/ErrorAlert";
+import PasswordInput from "../components/UI/PasswordInput";
+import swapHourLogo from "../assets/logo.png";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -14,21 +15,6 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({ name: "", email: "", password: "" });
   const [apiError, setApiError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const getPasswordStrength = (pass: string) => {
-    let score = 0;
-    if (!pass) return { score: 0, label: "", color: "transparent" };
-    if (pass.length >= 8) score += 1;
-    if (/[A-Z]/.test(pass)) score += 1;
-    if (/[0-9]/.test(pass)) score += 1;
-    if (/[^A-Za-z0-9]/.test(pass)) score += 1;
-
-    if (score <= 1) return { score, label: "Lemah", color: "#ef4444" };
-    if (score === 2 || score === 3) return { score, label: "Sedang", color: "#f59e0b" };
-    return { score, label: "Kuat", color: "#10b981" };
-  };
-
-  const strength = getPasswordStrength(form.password);
 
   useEffect(() => {
     gsap.fromTo(
@@ -293,7 +279,15 @@ const RegisterPage = () => {
           />
 
           <div style={{ textAlign: "center" as const }}>
-            <Logo size={42} />
+            <img
+              src={swapHourLogo}
+              alt="SwapHour"
+              style={{
+                height: "42px",
+                width: "auto",
+                filter: "brightness(0) invert(1)",
+              }}
+            />
             <h1
               style={{
                 fontSize: "1.75rem",
@@ -342,38 +336,14 @@ const RegisterPage = () => {
               errorMessage={errors.email}
               fullWidth
             />
-            <div>
-              <Input
-                label="Password"
-                placeholder="Minimal 8 karakter"
-                value={form.password}
-                onChange={handleChange("password")}
-                type="password"
-                errorMessage={errors.password}
-                fullWidth
-              />
-              {form.password && (
-                <div style={{ marginTop: "0.5rem", paddingLeft: "4px" }}>
-                  <div style={{ display: "flex", gap: "4px", height: "4px", marginBottom: "6px" }}>
-                    {[1, 2, 3, 4].map((level) => (
-                      <div
-                        key={level}
-                        style={{
-                          flex: 1,
-                          borderRadius: "2px",
-                          background: level <= strength.score ? strength.color : "rgba(255,255,255,0.1)",
-                          transition: "all 0.3s"
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem" }}>
-                    <span style={{ color: strength.color, fontWeight: 600 }}>{strength.label}</span>
-                    <span style={{ color: "rgba(255,255,255,0.4)" }}>Min. 8 char, A-Z, 0-9, Simbol</span>
-                  </div>
-                </div>
-              )}
-            </div>
+            <PasswordInput
+              label="Password"
+              placeholder="Minimal 8 karakter..."
+              value={form.password}
+              onChange={handleChange("password")}
+              errorMessage={errors.password}
+              showStrength={true}
+            />
           </div>
 
           <Button

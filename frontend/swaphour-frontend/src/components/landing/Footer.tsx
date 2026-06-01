@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Logo from "../ui/Logo";
+import swapHourLogo from "../../assets/logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,7 +28,15 @@ const Footer = () => {
     <footer ref={footerRef} className="footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <Logo size={42} />
+          <img
+            src={swapHourLogo}
+            alt="SwapHour"
+            style={{
+              height: "42px",
+              width: "auto",
+              filter: "brightness(0) invert(1)",
+            }}
+          />
           <p className="footer-tagline">
             Tukar keahlian, bangun komunitas, tanpa uang tunai.
           </p>
@@ -44,7 +52,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} SwapHour. All rights reserved.</p>
+          <p>© 2026 SwapHour. All rights reserved.</p>
         </div>
       </div>
     </footer>
