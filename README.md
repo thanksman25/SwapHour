@@ -1,19 +1,34 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=220&section=header&text=SwapHour&fontSize=80&fontColor=ffffff&fontAlignY=38&desc=Skill%20Exchange%20Platform%20%E2%80%94%20Time%20is%20the%20Currency&descAlignY=58&descSize=20&descColor=e2e8f0" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366f1,50:8b5cf6,100:a855f7&height=220&section=header&text=SwapHour&fontSize=80&fontColor=ffffff&fontAlignY=38&desc=Where%20Skills%20Meet%20%E2%80%94%20Time%20is%20the%20Only%20Currency&descAlignY=58&descSize=19&descColor=e2e8f0" width="100%" />
 
 <br/>
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+**Frontend**
+
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-Build_Tool-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TanStack Query](https://img.shields.io/badge/TanStack_Query-v5-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)](https://tanstack.com/query)
+[![React Router](https://img.shields.io/badge/React_Router-v6-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)](https://reactrouter.com/)
+[![GSAP](https://img.shields.io/badge/GSAP-Animation-88CE02?style=for-the-badge&logo=greensock&logoColor=black)](https://gsap.com/)
+[![Axios](https://img.shields.io/badge/Axios-HTTP_Client-5A29E4?style=for-the-badge&logo=axios&logoColor=white)](https://axios-http.com/)
+
+<br/>
+
+**Backend**
+
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-5.x-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![Prisma](https://img.shields.io/badge/Prisma%20ORM-7.x-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://swap-hour-api.vercel.app)
-[![License](https://img.shields.io/badge/License-ISC-6B48FF?style=for-the-badge)](./LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-7.x-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://swap-hour-api.vercel.app)
+[![License](https://img.shields.io/badge/License-ISC-8b5cf6?style=for-the-badge)](./LICENSE)
 
 <br/>
 
-🌐 **[Live API](https://swap-hour-api.vercel.app)** &nbsp;·&nbsp;
+🌐 **[Live Demo](https://swap-hour-api.vercel.app)** &nbsp;·&nbsp;
 📚 **[API Docs](https://swap-hour-api.vercel.app/api-docs)** &nbsp;·&nbsp;
 🐛 **[Report Issue](https://github.com/Nixzouxu/SwapHour/issues)** &nbsp;·&nbsp;
 💡 **[Request Feature](https://github.com/Nixzouxu/SwapHour/issues)**
@@ -26,9 +41,10 @@
 
 > _To every developer, recruiter, evaluator, and curious mind who has landed on this page welcome._
 >
-> _This is not just a repository. It is a record of four semester-4 students learning to engineer
-> something that actually solves a real problem: the idea that knowledge should be accessible to
-> everyone, regardless of financial ability. Pull up a chair._
+> _This is not just a repository. It is a record of four semester-4 students learning to build
+> a real product from end to end: from the animated React interface a user sees and touches,
+> to the TypeScript API that powers every transaction, to the PostgreSQL database that keeps
+> every credit safe. Pull up a chair._
 
 <br/>
 
@@ -36,55 +52,55 @@
 
 ## 📖 Background
 
-Pernahkah kamu ingin belajar sesuatu desain, coding, memasak, atau bahasa asing tapi terhenti karena biaya les atau jasa yang tidak terjangkau?
+Pernahkah kamu ingin belajar sesuatu desain, coding, memasak, atau bahasa asing tapi terhenti karena biaya kursus yang tidak terjangkau?
 
-Itulah masalah yang kami lihat sehari-hari di lingkungan kampus. Banyak orang punya keahlian berharga yang diam-diam tidak dimanfaatkan. Di sisi lain, banyak yang sangat ingin belajar tapi tidak mampu membayar. Dua kebutuhan ini saling bersilangan, namun tidak pernah bertemu karena satu penghalang: **uang**.
+Itulah masalah nyata yang kami lihat di lingkungan kampus. Banyak mahasiswa punya keahlian berharga yang tidak dimanfaatkan. Di sisi lain, banyak yang ingin belajar tapi tidak mampu membayar. Dua kebutuhan ini terus bersilangan, namun tidak pernah bertemu karena satu penghalang: **uang**.
 
-Proyek ini lahir dari pertanyaan sederhana di kelas semester 4: **bagaimana jika kita hapus uang dari persamaannya?**
+Proyek ini lahir dari pertanyaan sederhana di semester 4: **bagaimana jika kita hapus uang dari persamaannya?**
 
-Jawabannya menjadi SwapHour sebuah platform pertukaran keahlian berbasis **time banking**, di mana waktu yang kamu berikan adalah mata uangnya. Tidak perlu dompet. Tidak perlu transfer bank. Cukup keahlian dan waktu.
+Jawabannya menjadi SwapHour.
 
 ---
 
-## 💡 What This Project Is
+## 💡 What is SwapHour?
 
-SwapHour adalah **platform backend berbasis REST API** yang menggerakkan ekosistem barter keahlian antar pengguna menggunakan sistem kredit waktu (*time credits*) sebagai satuan nilai.
+SwapHour adalah **platform skill exchange** berbasis konsep **time banking** sistem ekonomi alternatif di mana setiap orang menukar keahlian menggunakan **kredit waktu (jam)** sebagai mata uang, bukan rupiah.
 
-Bayangkan ini:
+Cara kerjanya sangat sederhana:
 
 ```
-Kamu ahli edit video.
-Seseorang butuh video diedit — 2 jam pekerjaan.
-Kamu selesaikan tugasnya.
+Kamu ahli desain grafis.
+Seseorang butuh bantuanmu 2 jam pekerjaan.
 
-→ Kamu mendapat 2 jam kredit di wallet SwapHour kamu.
+Selesai → kamu mendapat 2 jam kredit di wallet SwapHour kamu.
 
-Besoknya, kamu ingin belajar desain grafis.
-Kamu temukan desainer di platform, tawarkan 2 jam kredit.
-Dia setuju. Proses berlangsung.
+Besoknya, kamu ingin belajar editing video.
+Kamu tawarkan 2 jam kreditmu ke editor di platform.
 
-→ 2 jam kredit berpindah otomatis dari wallet kamu ke wallet-nya.
+Dia setuju → sistem langsung transfer kredit secara otomatis.
 ```
 
-Tidak ada uang yang bergerak. Sistem yang bekerja. Adil untuk semua pihak.
+Tidak ada uang bergerak. Tidak ada yang dirugikan. Adil untuk semua pihak.
 
-Di balik layar, SwapHour dibangun di atas **Node.js + TypeScript + PostgreSQL** dengan arsitektur yang dirancang layaknya sistem production lengkap dengan autentikasi JWT, validasi input berlapis, keamanan HTTP headers, hingga penjadwalan transfer kredit otomatis.
+SwapHour adalah aplikasi **full-stack** yang dibangun dengan teknologi modern di kedua sisi:
+antarmuka React yang responsif dan dianimasikan dengan GSAP di frontend, dan REST API TypeScript yang aman dan terdokumentasi penuh di backend.
 
 ---
 
 ## 📋 Table of Contents
 
 - [Background](#-background)
-- [What This Project Is](#-what-this-project-is)
+- [What is SwapHour?](#-what-is-swaphour)
+- [Application Preview](#-application-preview)
 - [Tech Stack](#%EF%B8%8F-tech-stack)
-- [Key Features](#-key-features)
+- [Features](#-features)
 - [Project Architecture](#-project-architecture)
+- [Frontend Deep Dive](#-frontend-deep-dive)
+- [Backend Deep Dive](#-backend-deep-dive)
 - [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation & Local Run](#installation--local-run)
 - [Available Scripts](#-available-scripts)
 - [API Documentation](#-api-documentation)
-- [Security Implementation](#-security-implementation)
+- [Security](#-security)
 - [Deployment](#-deployment)
 - [Engineering Decisions & Lessons](#-engineering-decisions--lessons)
 - [Roadmap](#%EF%B8%8F-roadmap)
@@ -95,402 +111,365 @@ Di balik layar, SwapHour dibangun di atas **Node.js + TypeScript + PostgreSQL** 
 
 ---
 
-## 🛠️ Tech Stack
-
-Setiap teknologi dipilih dengan alasan, bukan sekadar tren:
-
-| Layer | Teknologi | Alasan Pemilihan |
-|-------|-----------|-----------------|
-| **Language** | TypeScript 6.x (strict mode) | Menangkap bug di compile-time, bukan saat production crash |
-| **Runtime** | Node.js ≥ 18 | Non-blocking I/O cocok untuk API dengan banyak concurrent request |
-| **Framework** | Express 5.x | Minimalis, mature, ekosistem middleware terlengkap |
-| **Database** | PostgreSQL | ACID-compliant kritis untuk transaksi kredit yang tidak boleh gagal di tengah jalan |
-| **ORM** | Prisma 7.x | Type-safe query, migration otomatis, Prisma Studio untuk debug |
-| **Auth** | JWT + bcrypt 6.x | Stateless auth yang scalable; password di-hash dengan salt |
-| **Validation** | express-validator 7.x | Sanitasi dan validasi setiap input sebelum menyentuh database |
-| **Security** | helmet 8.x + express-rate-limit | Proteksi header HTTP + pembatasan request per IP |
-| **Scheduler** | node-cron 4.x | Cron job untuk transfer kredit otomatis tanpa trigger manual |
-| **API Docs** | Swagger (jsdoc + UI) | Dokumentasi interaktif langsung dari kode — selalu sinkron |
-| **Logging** | morgan | Request logging untuk debugging dan monitoring |
-| **Deployment** | Vercel (Serverless) | Zero-config deploy, preview environment gratis |
+## 📸 Application Preview
+```
+┌──────────────────────────────────────────────────────────────┐
+│                     SwapHour - React App                     │
+│                                                              │
+│  ┌──────────────────┐    ┌──────────────────────────────┐   │
+│  │   🏠 Landing     │    │       📊 Dashboard            │   │
+│  │                  │    │                              │   │
+│  │  [Hero Section]  │    │  💰 Wallet: 5 Jam Kredit     │   │
+│  │  GSAP Animation  │    │  🔄 Swap Aktif: 3            │   │
+│  │                  │    │  ✅ Selesai: 12              │   │
+│  │  [Mulai Swap →]  │    │  [+ Buat Swap Baru]         │   │
+│  └──────────────────┘    └──────────────────────────────┘   │
+│                                                              │
+│  ┌──────────────────┐    ┌──────────────────────────────┐   │
+│  │   🔐 Auth Page   │    │       🔄 Swap Marketplace    │   │
+│  │                  │    │                              │   │
+│  │  [Login Form]    │    │  Video Edit ←→ UI Design 2h  │   │
+│  │  [Register Form] │    │  Coding    ←→ Fotografi  3h  │   │
+│  │                  │    │  [Terima] [Detail]           │   │
+│  │  React Router v6 │    │  TanStack Query (cache) ✨   │   │
+│  └──────────────────┘    └──────────────────────────────┘   │
+└──────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## ✨ Key Features
+## 🛠️ Tech Stack
 
-### Untuk Pengguna Umum
+SwapHour adalah aplikasi **full-stack modern** dengan pilihan teknologi yang masing-masing punya alasan kuat.
 
-- **🔐 Daftar & Masuk dengan Aman** : Sistem registrasi dan login dengan password terenkripsi. Token JWT memastikan sesi kamu aman.
-- **👛 Wallet Kredit Waktu** : Setiap akun memiliki wallet yang menyimpan saldo jam kredit. Transparent, real-time, dan tercatat.
-- **🔄 Ajukan & Terima Swap** : Temukan orang dengan keahlian yang kamu butuhkan, ajukan swap, dan sepakati bersama.
-- **✅ Penyelesaian Otomatis** : Setelah swap selesai dikonfirmasi, sistem langsung memindahkan kredit tanpa perlu langkah manual.
+### 🎨 Frontend
 
-### Untuk Developer / Evaluator Teknis
+| Teknologi | Versi | Peran | Alasan Dipilih |
+|-----------|-------|-------|----------------|
+| **React** | 18 | UI library | Component-based, ekosistem besar, concurrent features |
+| **TypeScript** | 5.x | Bahasa | Type safety end-to-end, autocomplete yang kuat |
+| **Vite** | Latest | Build tool | Cold start < 300ms, HMR instan, jauh lebih cepat dari CRA |
+| **TanStack Query** | v5 | Server state | Caching, background refetch, loading/error state otomatis |
+| **React Router** | v6 | Client routing | Nested routes, lazy loading, declarative navigation |
+| **GSAP** | Latest | Animasi | Performa 60fps, kontrol timeline yang presisi |
+| **Axios** | Latest | HTTP Client | Interceptors, auto JSON transform, error handling terpusat |
 
-- **🏗️ Layered Architecture** : Routes → Controllers → Services → Prisma. Setiap lapisan memiliki tanggung jawab tunggal yang jelas.
-- **🔒 Multi-Layer Security** : Helmet (11+ HTTP headers) + rate limiter + input validator + JWT guard membentuk pertahanan berlapis.
-- **⚙️ Transactional Credit Transfer** : Transfer kredit menggunakan Prisma `$transaction` : atomik, tidak ada partial execution.
-- **📅 Automated Cron Scheduler** : `node-cron` menjalankan background job untuk resolusi transfer tanpa bergantung pada user action.
-- **📄 OpenAPI 3.0 Documentation** : Swagger UI yang dapat langsung dicoba di browser, di-generate otomatis dari JSDoc annotations.
-- **🚀 Serverless Ready** : Dikonfigurasi untuk Vercel serverless dengan rewrite rules yang tepat.
+### ⚙️ Backend
+
+| Teknologi | Versi | Peran | Alasan Dipilih |
+|-----------|-------|-------|----------------|
+| **TypeScript** | 6.x (strict) | Bahasa | Menangkap bug di compile time, bukan saat runtime crash |
+| **Node.js** | ≥ 18 | Runtime | Non-blocking I/O, cocok untuk API dengan banyak concurrent request |
+| **Express** | 5.x | HTTP framework | Minimalis, mature, ekosistem middleware terlengkap |
+| **PostgreSQL** | ≥ 14 | Database | ACID-compliant wajib untuk transaksi kredit yang atomik |
+| **Prisma ORM** | 7.x | Query builder | Type-safe queries, schema migration otomatis, Prisma Studio |
+| **JWT + bcrypt** | 9.x / 6.x | Auth & hashing | Stateless authentication + password protection berlapis |
+| **express-validator** | 7.x | Validation | Sanitasi dan validasi setiap input sebelum menyentuh DB |
+| **helmet** | 8.x | HTTP security | 11+ security headers otomatis |
+| **express-rate-limit** | 8.x | Rate limiting | Proteksi brute-force dan request flooding |
+| **node-cron** | 4.x | Scheduler | Background jobs untuk auto-resolusi transfer kredit |
+| **Swagger UI** | 5.x | API Docs | Interactive OpenAPI 3.0 documentation |
+
+### 🚀 Deployment & Tooling
+
+| Tool | Fungsi |
+|------|--------|
+| **Vercel** | Cloud deployment backend (serverless) |
+| **ts-node-dev** | Hot-reload development server (backend) |
+| **Prisma Migrate** | Database schema versioning |
+
+---
+
+## ✨ Features
+
+### Untuk pengguna umum
+
+- **🔐 Autentikasi yang Mulus** - Registrasi dan login dengan form yang divalidasi di frontend dan backend. Token JWT disimpan dengan aman dan di-refresh secara transparan.
+- **👛 Wallet Kredit Waktu** - Saldo jam kredit ditampilkan real-time di dashboard. Setiap perubahan langsung ter-reflect berkat TanStack Query yang otomatis refetch setelah mutation.
+- **🔄 Buat & Kelola Swap** - Form pengajuan swap yang intuitif. Lihat status swap secara live: `Menunggu → Diterima → Selesai`.
+- **✅ Transfer Kredit Otomatis** - Begitu swap ditandai selesai, kredit berpindah tanpa perlu langkah manual apapun.
+- **📜 Riwayat Lengkap** - Lacak semua swap dan transaksi kredit dengan filter dan tampilan yang bersih.
+- **✨ Animasi yang Berkesan** - GSAP menggerakkan transisi halaman, hero section, dan micro-interactions yang membuat pengalaman terasa premium.
+
+### Untuk developer dan evaluator teknis
+
+- **⚛️ React 18 Concurrent Features** - Memanfaatkan `Suspense` dan concurrent rendering untuk UI yang responsif meski data belum dimuat.
+- **🔄 Server State Management** - TanStack Query mengelola semua data dari API: caching, background refetch, optimistic updates, dan sinkronisasi otomatis.
+- **🧭 Client-Side Routing** - React Router v6 dengan nested routes, protected routes (redirect jika belum login), dan lazy loading per halaman.
+- **⚡ Vite Build Pipeline** - HMR (Hot Module Replacement) instan saat development, output bundle yang optimal saat production build.
+- **🔒 Axios Interceptors** - Token JWT otomatis disertakan di setiap request. Response error 401 otomatis redirect ke login.
+- **🏗️ Layered Backend Architecture** - Routes → Controllers → Services → Prisma. Setiap layer punya tanggung jawab tunggal.
+- **⚛️ Atomic Credit Transfer** - Transfer menggunakan Prisma `$transaction` - semua commit atau semua rollback.
 
 ---
 
 ## 📁 Project Architecture
 
+SwapHour adalah **monorepo full-stack** dengan struktur yang bersih:
+
 ```
 SwapHour/
 │
-├── 📂 src/                          # TypeScript source — entry point semua logika
-│   ├── 📂 routes/                   # Definisi endpoint HTTP (auth, users, swaps, wallet)
-│   ├── 📂 controllers/              # Menerima request, panggil service, kirim response
-│   ├── 📂 middlewares/              # JWT guard · rate limiter · input validator
-│   ├── 📂 services/                 # Business logic: swap engine, wallet operations
-│   ├── 📂 utils/                    # Helper: JWT generator, response formatter, logger
-│   └── 📄 index.ts                  # Bootstrap Express app, mount semua middleware & routes
+├── 🎨 frontend/                         # React + TypeScript + Vite App
+│   ├── src/
+│   │   ├── components/                  # Reusable UI components
+│   │   │   ├── ui/                      # Base components (Button, Input, Card)
+│   │   │   ├── layout/                  # Navbar, Sidebar, Footer
+│   │   │   └── swap/                    # SwapCard, SwapForm, SwapStatus
+│   │   │
+│   │   ├── pages/                       # Route-level components
+│   │   │   ├── LandingPage.tsx          # Hero + cara kerja + CTA
+│   │   │   ├── LoginPage.tsx            # Form login
+│   │   │   ├── RegisterPage.tsx         # Form registrasi
+│   │   │   ├── DashboardPage.tsx        # Wallet + daftar swap
+│   │   │   └── SwapPage.tsx             # Buat & detail swap
+│   │   │
+│   │   ├── hooks/                       # Custom React hooks
+│   │   │   ├── useAuth.ts               # Auth state, login, logout
+│   │   │   ├── useWallet.ts             # Wallet data via TanStack Query
+│   │   │   └── useSwaps.ts              # Swap CRUD via TanStack Query
+│   │   │
+│   │   ├── services/                    # Axios API calls
+│   │   │   ├── api.ts                   # Axios instance + interceptors
+│   │   │   ├── auth.service.ts          # register, login
+│   │   │   ├── wallet.service.ts        # getWallet, getHistory
+│   │   │   └── swap.service.ts          # createSwap, acceptSwap, etc.
+│   │   │
+│   │   ├── animations/                  # GSAP animation configs
+│   │   │   ├── hero.animation.ts        # Landing page hero entrance
+│   │   │   └── page.transition.ts       # Page transition timelines
+│   │   │
+│   │   ├── router/
+│   │   │   └── index.tsx                # React Router v6 route definitions
+│   │   │
+│   │   ├── types/                       # TypeScript interfaces & types
+│   │   │   ├── user.types.ts
+│   │   │   ├── swap.types.ts
+│   │   │   └── wallet.types.ts
+│   │   │
+│   │   ├── App.tsx                      # Root component + QueryClientProvider
+│   │   └── main.tsx                     # Vite entry point
+│   │
+│   ├── index.html                       # Vite HTML template
+│   ├── vite.config.ts                   # Vite config (proxy ke backend)
+│   └── tsconfig.json                    # TypeScript config untuk frontend
 │
-├── 📂 prisma/
-│   ├── 📄 schema.prisma             # Definisi model & relasi database
-│   └── 📂 migrations/              # Riwayat versi migration (tidak pernah diedit manual)
+├── ⚙️ src/                              # Backend TypeScript (Express)
+│   ├── routes/                          # Definisi endpoint HTTP
+│   ├── controllers/                     # Request handlers
+│   ├── middlewares/                     # Auth guard, validator, rate limiter
+│   ├── services/                        # Business logic (swap engine, wallet)
+│   ├── utils/                           # JWT helper, response formatter
+│   └── index.ts                         # Bootstrap Express server
 │
-├── 📂 frontend/                     # Layer antarmuka (HTML + CSS)
+├── 🗄️ prisma/
+│   ├── schema.prisma                    # Database models & relations
+│   └── migrations/                     # Versioned migration history
 │
-├── 📂 dist/                         # Output kompilasi TypeScript (auto-generated, gitignored)
-│
-├── 📄 prisma.config.ts              # Konfigurasi datasource & path migration Prisma
-├── 📄 tsconfig.json                 # Compiler options TypeScript (strict mode aktif)
-├── 📄 vercel.json                   # Serverless rewrite rules untuk Vercel deployment
-├── 📄 package.json                  # Manifest dependencies + npm scripts
-└── 📄 .gitignore                    # Excludes: dist/, node_modules/, .env, *.log
-```
-
-**Pola Arsitektur:** SwapHour menggunakan **Layered Architecture** yang memisahkan concern secara tegas:
-
-```
-HTTP Request
-     │
-     ▼
-  [ Route ]          →  Mendefinisikan path & method
-     │
-     ▼
-[ Controller ]       →  Orkestrasi: validasi → panggil service → format response
-     │
-     ▼
-  [ Service ]        →  Core business logic (swap lifecycle, wallet math)
-     │
-     ▼
-[ Prisma Client ]    →  Type-safe database queries & transactions
-     │
-     ▼
- [ PostgreSQL ]      →  Persistent storage
+├── 📦 dist/                             # Backend compiled output (gitignored)
+├── prisma.config.ts
+├── tsconfig.json                        # TypeScript config untuk backend
+├── vercel.json                          # Serverless deployment config
+└── package.json                         # Backend dependencies & scripts
 ```
 
 ---
 
-## 🏃 Getting Started
+## 🎨 Frontend Deep Dive
 
-### Prerequisites
+### Arsitektur State Management
 
-Sebelum menjalankan proyek, pastikan tools berikut sudah terinstal:
-
-| Tool | Versi Minimum | Download |
-|------|---------------|----------|
-| **Node.js** | `v18.0.0` | [nodejs.org/download](https://nodejs.org/en/download) |
-| **npm** | `v9.0.0` | Sudah termasuk dalam Node.js |
-| **PostgreSQL** | `v14.0` | [postgresql.org/download](https://www.postgresql.org/download/) |
-| **Git** | Latest | [git-scm.com](https://git-scm.com/downloads) |
-
-**Cara cek apakah sudah terinstal:**
-```bash
-node --version    # Harus menampilkan v18.x.x atau lebih baru
-npm --version     # Harus menampilkan 9.x.x atau lebih baru
-psql --version    # Harus menampilkan 14.x atau lebih baru
-git --version     # Versi berapapun oke
-```
-
-Jika salah satu belum terinstal, ikuti link download di atas terlebih dahulu sebelum lanjut.
-
----
-
-### Installation & Local Run
-
-Ikuti setiap langkah secara berurutan. Jangan skip satu pun.
-
-#### ① Clone Repository ke komputermu
-
-```bash
-git clone https://github.com/Nixzouxu/SwapHour.git
-```
-
-Setelah selesai, masuk ke folder proyek:
-
-```bash
-cd SwapHour
-```
-
-#### ② Install semua dependencies
-
-```bash
-npm install
-```
-
-Tunggu hingga selesai. Proses ini mengunduh semua library yang dibutuhkan.
-`postinstall` script akan otomatis menjalankan `prisma generate` di akhir.
-
-> ℹ️ Jika muncul peringatan (warning), itu normal. Yang penting tidak ada **error** merah.
-
----
-
-#### ③ Buat Database PostgreSQL
-
-Buka terminal baru (jangan tutup terminal sebelumnya), lalu masuk ke PostgreSQL:
-
-```bash
-# macOS / Linux
-psql -U postgres
-
-# Windows — buka Command Prompt sebagai Administrator, lalu:
-psql -U postgres
-```
-
-Di dalam psql shell, jalankan perintah ini:
-
-```sql
-CREATE DATABASE swaphour_db;
-```
-
-Seharusnya muncul pesan: `CREATE DATABASE`
-
-Keluar dari psql:
-
-```sql
-\q
-```
-
----
-
-#### ④ Buat file konfigurasi `.env`
-
-Di root folder proyek (`SwapHour/`), buat file baru bernama `.env`:
-
-```bash
-# macOS / Linux
-touch .env
-
-# Windows (Command Prompt)
-type nul > .env
-```
-
-Buka file `.env` dengan teks editor apapun (Notepad, VS Code, dll), lalu isi dengan:
-
-```env
-# ─── Database Connection ──────────────────────────────────────────
-# Ganti YOUR_PASSWORD dengan password PostgreSQL kamu
-# Ganti swaphour_db jika kamu pakai nama database yang berbeda
-DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/swaphour_db"
-
-# ─── JWT Authentication ───────────────────────────────────────────
-# String acak minimal 32 karakter. Jangan pernah share ini ke siapapun!
-JWT_SECRET="ganti_dengan_string_rahasia_minimal_32_karakter_disini"
-JWT_EXPIRES_IN="7d"
-
-# ─── Server Configuration ─────────────────────────────────────────
-PORT=3000
-NODE_ENV=development
-```
-
-> 💡 **Cara generate JWT_SECRET yang aman:**
-> Buka terminal baru dan jalankan:
-> ```bash
-> node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-> ```
-> Copy hasilnya dan paste sebagai nilai `JWT_SECRET`.
-
-> ⚠️ **Penting:** File `.env` sudah masuk `.gitignore` — artinya tidak akan ter-upload ke GitHub. Aman.
-
----
-
-#### ⑤ Jalankan Migrasi Database
-
-Perintah ini membuat semua tabel yang dibutuhkan di database:
-
-```bash
-npx prisma migrate dev --name init
-```
-
-Tunggu hingga muncul pesan sukses. Proses ini:
-- Membaca `prisma/schema.prisma`
-- Membuat semua tabel di database `swaphour_db`
-- Menyimpan riwayat migration di folder `prisma/migrations/`
-
-> 🔍 **Ingin lihat isi database secara visual?** Jalankan:
-> ```bash
-> npx prisma studio
-> ```
-> Buka browser di `http://localhost:5000` kamu akan melihat semua tabel beserta datanya.
-
----
-
-#### ⑥ Jalankan Server
-
-```bash
-npm run dev
-```
-
-Jika berhasil, kamu akan melihat output seperti ini di terminal:
+SwapHour memisahkan dua jenis state dengan tegas:
 
 ```
-[INFO] Server running on http://localhost:5000
-[INFO] API Documentation: http://localhost:5000/api-docs
-[INFO] Database connected successfully
+┌─────────────────────────────────────────────────┐
+│              State Management Strategy          │
+│                                                 │
+│  Server State (data dari API)                   │
+│  └── TanStack Query                             │
+│       ├── useQuery()   → GET /api/wallet        │
+│       ├── useQuery()   → GET /api/swaps         │
+│       └── useMutation() → POST/PUT/DELETE       │
+│            └── onSuccess: invalidate cache      │
+│                 └── UI otomatis re-fetch ✅      │
+│                                                 │
+│  Client State (UI-only state)                   │
+│  └── React useState / useReducer                │
+│       ├── Form input values                     │
+│       ├── Modal open/close                      │
+│       └── Toast notifications                  │
+└─────────────────────────────────────────────────┘
 ```
 
-Sekarang buka browser dan akses:
+### Axios Interceptor Pattern
 
-```
-http://localhost:5000/api-docs
-```
+```typescript
+// services/api.ts - Sentralisasi semua HTTP config
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 10000,
+});
 
-Kamu akan melihat Swagger UI dokumentasi interaktif di mana kamu bisa langsung mencoba semua endpoint! ✅
+// Request interceptor: auto-attach JWT token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
----
-
-## 📜 Available Scripts
-
-| Perintah | Fungsi |
-|----------|--------|
-| `npm run dev` | Jalankan server development dengan hot-reload (perubahan kode langsung terdeteksi) |
-| `npm run build` | Kompilasi TypeScript ke JavaScript di folder `dist/` |
-| `npm start` | Jalankan server dari hasil build (mode production) |
-| `npx prisma generate` | Regenerate Prisma Client setelah schema berubah |
-| `npx prisma migrate dev` | Buat dan apply migration baru ke database |
-| `npx prisma studio` | Buka GUI visual untuk melihat dan mengedit data |
-| `npx prisma migrate reset` | Reset total database (⚠️ semua data hilang) |
-
----
-
-## 📖 API Documentation
-
-Akses dokumentasi interaktif di Swagger UI:
-
-```
-Development  →  http://localhost:5000/api-docs
-Production   →  https://swap-hour-api.vercel.app/api-docs (Tidak Nyala lagi, Tidak perlu ditest)
+// Response interceptor: handle 401 globally
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login'; // Auto redirect
+    }
+    return Promise.reject(error);
+  }
+);
 ```
 
-Di Swagger UI, kamu bisa langsung mencoba setiap endpoint tanpa perlu Postman.
+### React Router v6 - Protected Routes
 
-### Peta Lengkap Endpoint
-
-```
-🔓 Publik (tidak perlu login)
-├── POST  /api/auth/register        Daftar akun baru
-└── POST  /api/auth/login           Login dan dapatkan token
-
-🔒 Protected (wajib sertakan JWT token di header)
-│
-├── 👤 Users
-│   ├── GET   /api/users/me         Lihat profil diri sendiri
-│   └── PUT   /api/users/me         Update data profil
-│
-├── 👛 Wallet
-│   ├── GET   /api/wallet           Cek saldo kredit waktu
-│   └── GET   /api/wallet/history   Riwayat semua transaksi kredit
-│
-└── 🔄 Swaps
-    ├── POST  /api/swaps             Buat pengajuan swap baru
-    ├── GET   /api/swaps             Lihat semua swap yang kamu buat/terima
-    ├── GET   /api/swaps/:id         Detail satu swap tertentu
-    ├── PUT   /api/swaps/:id/accept  Terima pengajuan swap dari orang lain
-    ├── PUT   /api/swaps/:id/complete  Tandai swap selesai → kredit auto-transfer
-    └── DELETE /api/swaps/:id        Batalkan swap (sebelum diterima)
-```
-
-**Contoh: Mendaftar akun baru**
-```bash
-curl -X POST https://swap-hour-api.vercel.app/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Hafidz",
-    "email": "hafidz@example.com",
-    "password": "password123"
-  }'
+```typescript
+// router/index.tsx
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LandingPage />,
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <ProtectedRoute>   {/* Redirect ke /login jika belum auth */}
+        <DashboardPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/swaps/:id',
+    element: (
+      <ProtectedRoute>
+        <SwapDetailPage />
+      </ProtectedRoute>
+    ),
+  },
+]);
 ```
 
-**Contoh: Membuat pengajuan swap**
-```bash
-curl -X POST https://swap-hour-api.vercel.app/api/swaps \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN_HERE" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "targetUserId": "id-pengguna-tujuan",
-    "offeredSkill": "Video Editing",
-    "requestedSkill": "Graphic Design",
-    "durationHours": 2
-  }'
+### GSAP Animation
+
+```typescript
+// animations/hero.animation.ts
+export const animateHeroEntrance = (containerRef: RefObject<HTMLDivElement>) => {
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  tl.from('.hero-title', { opacity: 0, y: 60, duration: 0.8 })
+    .from('.hero-subtitle', { opacity: 0, y: 40, duration: 0.6 }, '-=0.4')
+    .from('.hero-cta', { opacity: 0, scale: 0.9, duration: 0.5 }, '-=0.3')
+    .from('.hero-illustration', { opacity: 0, x: 80, duration: 0.8 }, '-=0.6');
+
+  return tl;
+};
+```
+
+### Alur Lengkap Pengguna
+
+```
+Browser
+  │
+  ▼
+Vite Dev Server / Production Build
+  │
+  ├── React Router v6 → match URL ke component
+  │
+  ├── ProtectedRoute → cek token di localStorage
+  │     ├── Token ada → render halaman
+  │     └── Tidak ada → redirect /login
+  │
+  ├── Page Component render
+  │     └── TanStack Query hooks:
+  │           ├── useQuery → fetch data → tampilkan / loading / error
+  │           └── useMutation → aksi user → update server → invalidate cache
+  │
+  ├── Axios → kirim request ke backend
+  │     └── Interceptor otomatis sertakan JWT header
+  │
+  └── GSAP → animasikan transisi dan elemen masuk
 ```
 
 ---
 
-## 🔒 Security Implementation
+## ⚙️ Backend Deep Dive
 
-Keamanan bukan tambahan di akhir — ia dirancang dari awal sebagai bagian dari arsitektur:
+### Request Pipeline
 
 ```
-Request Masuk
-      │
-      ▼
-┌─────────────┐
-│   Helmet    │  → Inject 11+ security HTTP headers
-│             │    (X-Frame-Options, CSP, HSTS, dll)
-└──────┬──────┘
+HTTP Request dari Axios (Frontend)
+        │
+        ▼
+┌──────────────┐
+│   Helmet     │  → Inject 11+ HTTP security headers
+└──────┬───────┘
        │
        ▼
 ┌──────────────────┐
-│  Rate Limiter    │  → Batasi maks. N request per IP per window
-│                  │    Proteksi dari brute-force & DDoS
+│  Rate Limiter    │  → Batasi request per IP per window
 └──────┬───────────┘
        │
        ▼
 ┌───────────────────┐
-│  Input Validator  │  → Sanitasi & validasi req.body / req.params
-│                   │    Cegah SQL injection & malformed data
+│  Input Validator  │  → Sanitasi & validasi body/params
 └──────┬────────────┘
        │
        ▼
 ┌──────────────┐
-│  JWT Guard   │  → Verifikasi signature & expiry token
-│              │    Reject request tanpa token valid
+│  JWT Guard   │  → Verifikasi token (protected routes)
 └──────┬───────┘
        │
        ▼
    Controller
+       │
+       ▼
+    Service         → Business logic (swap engine, wallet math)
+       │
+       ▼
+  Prisma Client     → Type-safe database queries
+       │
+       ▼
+  PostgreSQL        → Persistent storage
 ```
 
-| Mekanisme | Library | Perlindungan |
-|-----------|---------|-------------|
-| HTTP Headers | `helmet` | Clickjacking, XSS, MIME sniffing, dll |
-| Rate Limiting | `express-rate-limit` | Brute-force attack, request flooding |
-| Input Validation | `express-validator` | Injection attack, malformed payload |
-| Password | `bcrypt` | Plain-text password exposure di database |
-| Authentication | `jsonwebtoken` | Session hijacking, unauthorized access |
+### Database Schema
 
+```
+User ─────────────────────────────────────────────────
+ id · name · email · passwordHash · createdAt
 
+        │ 1:1                │ 1:N (as initiator)
+        ▼                    ▼
+      Wallet               Swap
+  id · credits          id · initiatorId · receiverId
+  userId                offeredSkill · requestedSkill
+                         durationHours
+        │ 1:N             status: PENDING | ACCEPTED
+        ▼                         COMPLETED | CANCELLED
+  WalletTransaction       completedAt
+  id · walletId
+  type: CREDIT | DEBIT
+  amount · relatedSwapId
+```
 
-
-
----
-
-## 🧠 Engineering Decisions & Lessons
-
-Bagian ini adalah yang paling jujur dari seluruh dokumentasi ini keputusan teknis yang kami buat, mengapa kami membuatnya, dan apa yang kami pelajari dari konsekuensinya.
-
-### 1. PostgreSQL atas MongoDB
-
-SwapHour membutuhkan jaminan bahwa ketika transfer kredit dieksekusi, operasi debit dan kredit **selalu terjadi bersama atau tidak sama sekali**. MongoDB transactions ada, tapi PostgreSQL adalah pilihan lebih natural untuk data relasional dengan foreign key constraints yang ketat.
+### Atomic Credit Transfer
 
 ```typescript
-// Transfer kredit: atomik dengan Prisma $transaction
+// services/swap.service.ts
+// Seluruh operasi ini atomic - gagal satu, semua di-rollback
 await prisma.$transaction([
   prisma.wallet.update({
     where: { userId: initiatorId },
@@ -502,115 +481,374 @@ await prisma.$transaction([
   }),
   prisma.swap.update({
     where: { id: swapId },
-    data: { status: 'COMPLETED' },
+    data: { status: 'COMPLETED', completedAt: new Date() },
+  }),
+  prisma.walletTransaction.createMany({
+    data: [
+      { walletId: initiatorWalletId, type: 'DEBIT', amount: durationHours, relatedSwapId: swapId },
+      { walletId: receiverWalletId, type: 'CREDIT', amount: durationHours, relatedSwapId: swapId },
+    ],
   }),
 ]);
-// Jika salah satu gagal → semua di-rollback otomatis
 ```
 
-### 2. TypeScript Strict Mode dari Hari Pertama
+---
 
-Keputusan untuk mengaktifkan `"strict": true` dan `"noUncheckedIndexedAccess": true` di `tsconfig.json` membuat development lebih lambat di awal, tapi mengeliminasi puluhan potensi `undefined is not a function` sebelum kode bahkan dijalankan.
+## 🏃 Getting Started
 
-### 3. Layered Architecture bukan Flat Structure
+Proyek ini terdiri dari dua aplikasi yang berjalan secara bersamaan:
+- **Backend** - Express API di `http://localhost:5000`
+- **Frontend** - React App di `http://localhost:5173` (via Vite)
 
-Di proyek kecil, flat structure (`routes/everything.ts`) terasa lebih cepat. Tapi ketika fitur swap lifecycle mulai kompleks, pemisahan `routes → controllers → services` terbukti krusial. Tiap anggota tim bisa mengerjakan layer berbeda tanpa konflik.
+### Prerequisites
 
-### 4. Tantangan: Express di Vercel Serverless
+| Tool | Versi Minimum | Link Download |
+|------|---------------|---------------|
+| **Node.js** | v18.0.0 | [nodejs.org](https://nodejs.org/) |
+| **npm** | v9.0.0 | Sudah termasuk Node.js |
+| **PostgreSQL** | v14.0 | [postgresql.org](https://www.postgresql.org/download/) |
+| **Git** | Latest | [git-scm.com](https://git-scm.com/) |
 
-Express diasumsikan berjalan sebagai persistent server dengan port terbuka. Vercel serverless tidak begitu. Solusinya adalah konfigurasi `vercel.json` rewrite + memastikan tidak ada state yang bergantung pada memori server yang persisten.
+**Cek versi yang sudah terpasang:**
+```bash
+node --version    # harus v18.x.x atau lebih
+npm --version     # harus 9.x.x atau lebih
+psql --version    # harus 14.x atau lebih
+```
 
-### 5. node-cron vs Event-Driven Transfer
+---
 
-Awalnya transfer kredit direncanakan dipicu langsung saat endpoint `/complete` dipanggil. Tapi untuk ketahanan terhadap network failure di tengah jalan, kami menambahkan cron job sebagai failsafe yang memverifikasi dan menyelesaikan swap yang statusnya stuck.
+### Setup Backend
+
+#### ① Clone repository
+
+```bash
+git clone https://github.com/Nixzouxu/SwapHour.git
+cd SwapHour
+```
+
+#### ② Install backend dependencies
+
+```bash
+npm install
+```
+
+> ℹ️ Script `postinstall` otomatis menjalankan `prisma generate` setelah instalasi selesai.
+
+#### ③ Buat database PostgreSQL
+
+```bash
+# Masuk ke psql shell
+psql -U postgres
+
+# Buat database
+CREATE DATABASE swaphour_db;
+
+# Keluar
+\q
+```
+
+#### ④ Buat file `.env` di root project
+
+```bash
+touch .env        # macOS / Linux
+type nul > .env   # Windows
+```
+
+Isi file `.env`:
+
+```env
+# ─── Database ─────────────────────────────────────────────────
+# Ganti YOUR_PASSWORD dengan password PostgreSQL kamu
+DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/swaphour_db"
+
+# ─── Authentication ───────────────────────────────────────────
+JWT_SECRET="ganti_dengan_string_acak_minimal_32_karakter_disini"
+JWT_EXPIRES_IN="7d"
+
+# ─── Server ───────────────────────────────────────────────────
+PORT=3000
+NODE_ENV=development
+```
+
+> 💡 **Generate JWT_SECRET yang aman:**
+> ```bash
+> node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+> ```
+
+#### ⑤ Jalankan migrasi database
+
+```bash
+npx prisma migrate dev --name init
+```
+
+> 🔍 Untuk melihat isi database secara visual:
+> ```bash
+> npx prisma studio    # buka http://localhost:5555
+> ```
+
+#### ⑥ Jalankan backend server
+
+```bash
+npm run dev
+```
+
+Backend berjalan di `http://localhost:5000` ✅
+
+---
+
+### Setup Frontend
+
+Buka terminal **baru** (jangan tutup terminal backend).
+
+#### ① Masuk ke folder frontend
+
+```bash
+cd frontend
+```
+
+#### ② Install frontend dependencies
+
+```bash
+npm install
+```
+
+#### ③ Buat file `.env` untuk frontend
+
+```bash
+touch .env        # macOS / Linux
+type nul > .env   # Windows
+```
+
+Isi file `frontend/.env`:
+
+```env
+# URL backend yang sudah berjalan
+VITE_API_URL=http://localhost:3000/api
+```
+
+#### ④ Jalankan frontend development server
+
+```bash
+npm run dev
+```
+
+Frontend berjalan di `http://localhost:5173` ✅
+
+---
+
+### Sekarang Keduanya Berjalan
+
+```
+Terminal 1 (Backend)   →   http://localhost:5000
+Terminal 2 (Frontend)  →   http://localhost:5173
+```
+
+Buka browser di `http://localhost:5173` dan SwapHour siap digunakan! 🎉
+
+---
+
+## 📜 Available Scripts
+
+### Backend (dari root `/`)
+
+| Perintah | Fungsi |
+|----------|--------|
+| `npm run dev` | Server development dengan hot-reload |
+| `npm run build` | Kompilasi TypeScript → `dist/` |
+| `npm start` | Jalankan dari hasil build |
+| `npx prisma generate` | Regenerate Prisma Client |
+| `npx prisma migrate dev` | Buat & apply migration baru |
+| `npx prisma studio` | GUI visual database |
+| `npx prisma migrate reset` | ⚠️ Reset total database |
+
+### Frontend (dari folder `frontend/`)
+
+| Perintah | Fungsi |
+|----------|--------|
+| `npm run dev` | Vite dev server dengan HMR |
+| `npm run build` | Build production ke `dist/` |
+| `npm run preview` | Preview hasil production build |
+| `npm run lint` | Jalankan ESLint |
+
+---
+
+## 📖 API Documentation
+
+Akses Swagger UI di:
+
+```
+Development  →  http://localhost:3000/api-docs
+Production   →  https://swap-hour-api.vercel.app/api-docs
+```
+
+### Peta Lengkap Endpoint
+
+```
+🔓 Public
+├── POST  /api/auth/register      Daftar akun baru
+└── POST  /api/auth/login         Login & dapatkan JWT token
+
+🔒 Protected  (Header: Authorization: Bearer <token>)
+│
+├── 👤 Users
+│   ├── GET   /api/users/me       Profil pengguna saat ini
+│   └── PUT   /api/users/me       Update profil
+│
+├── 👛 Wallet
+│   ├── GET   /api/wallet         Cek saldo kredit waktu
+│   └── GET   /api/wallet/history Riwayat semua transaksi
+│
+└── 🔄 Swaps
+    ├── POST  /api/swaps               Buat swap baru
+    ├── GET   /api/swaps               Semua swap
+    ├── GET   /api/swaps/:id           Detail swap
+    ├── PUT   /api/swaps/:id/accept    Terima swap
+    ├── PUT   /api/swaps/:id/complete  Selesaikan → auto-transfer kredit ✅
+    └── DELETE /api/swaps/:id          Batalkan swap
+```
+
+---
+
+## 🔒 Security
+
+| Layer | Implementasi | Proteksi |
+|-------|-------------|---------|
+| **HTTP Headers** | `helmet` | XSS, clickjacking, MIME sniffing, HSTS |
+| **Rate Limiting** | `express-rate-limit` | Brute-force, request flooding |
+| **Input Validation** | `express-validator` | SQL injection, malformed payload |
+| **Password Hashing** | `bcrypt` (6.x) | Plain-text credential exposure |
+| **Authentication** | `jsonwebtoken` | Session hijacking, unauthorized access |
+| **CORS** | `cors` | Restrict API access ke origin yang diizinkan |
+| **Axios Interceptors** | Frontend | Auto-handle 401, centralised error management |
+
+---
+
+## 🧠 Engineering Decisions & Lessons
+
+### 1. React + Vite bukan Create React App
+
+CRA sudah deprecated dan build speed-nya lambat untuk development aktif. Vite memberikan **cold start < 300ms** dan HMR yang benar-benar instan - membuat iterasi frontend jauh lebih cepat dan menyenangkan. Untuk proyek tim dengan banyak perubahan UI, ini sangat terasa.
+
+### 2. TanStack Query untuk Server State
+
+Awalnya kami mencoba `useState + useEffect` untuk fetch data dari API. Masalahnya: loading state tersebar di mana-mana, cache tidak ada, dan setelah mutation data tidak otomatis update. TanStack Query menyelesaikan semua itu sekaligus - satu hook menggantikan puluhan baris boilerplate.
+
+```tsx
+// Sebelum: boilerplate tersebar
+const [data, setData] = useState(null);
+const [loading, setLoading] = useState(false);
+useEffect(() => { fetchWallet().then(setData); }, []);
+
+// Sesudah: TanStack Query
+const { data, isLoading, error } = useQuery({
+  queryKey: ['wallet'],
+  queryFn: walletService.getWallet,
+});
+```
+
+### 3. Axios Interceptors untuk Auth Terpusat
+
+Daripada menyertakan `Authorization: Bearer token` di setiap Axios call secara manual, satu request interceptor menangani semuanya. Ketika token expired dan backend mengembalikan 401, response interceptor otomatis membersihkan state dan redirect ke login - tanpa perlu logika ini di setiap halaman.
+
+### 4. GSAP bukan CSS Animations untuk Hero
+
+CSS animations cukup untuk micro-interactions sederhana. Tapi untuk hero landing page dengan multiple elements masuk secara sequence, GSAP `timeline` memberikan kontrol presisi dan performa GPU-accelerated yang tidak bisa dicapai dengan CSS saja.
+
+### 5. PostgreSQL + Prisma Transaction untuk Keamanan Kredit
+
+Transfer kredit adalah operasi paling kritis. Menggunakan `prisma.$transaction` memastikan debit dan credit terjadi **secara atomik**. Jika server crash di tengah eksekusi, tidak ada kredit yang hilang atau dobel.
+
+### 6. Monorepo: Frontend dan Backend Satu Repo
+
+Memilih monorepo memudahkan koordinasi tim - ketika API berubah, perubahan type di backend bisa langsung terlihat bersamaan dengan update di frontend service layer. PR review lebih kontekstual karena perubahan contract API dan konsumernya ada di satu tempat.
 
 ---
 
 ## 🗺️ Roadmap
 
-Visi jangka panjang SwapHour melampaui tugas kuliah:
-
-**Phase 1 — Core Platform** ✅ *(Selesai)*
-- [x] JWT Authentication system
+**Phase 1 - Foundation** ✅ *(Selesai)*
+- [x] React 18 + TypeScript + Vite frontend
+- [x] TanStack Query server state management
+- [x] React Router v6 dengan protected routes
+- [x] GSAP animations
+- [x] Axios dengan interceptors
+- [x] Express + TypeScript backend
+- [x] JWT authentication
 - [x] Time credit wallet engine
-- [x] Swap lifecycle (propose → accept → complete)
-- [x] Automated cron-based credit transfer
-- [x] Swagger API documentation
-- [ ] Vercel deployment (Tidak jadi)
+- [x] Swap lifecycle dengan atomic transfer
+- [x] Vercel deployment
 
-**Phase 2 — Richer User Experience** 🔄 *(Direncanakan)*
-- [ ] Rating & review system setelah swap selesai
-- [ ] Kategori keahlian dengan sistem pencarian & filter
-- [ ] Notifikasi real-time via WebSocket
-- [ ] Profil pengguna dengan portofolio keahlian
-- [ ] Riwayat swap dengan pagination
+**Phase 2 - Enhanced Platform** 🔄 *(Direncanakan)*
+- [ ] Rating & review post-swap
+- [ ] Kategori keahlian & fitur pencarian
+- [ ] Notifikasi real-time via WebSocket + React state
+- [ ] Infinite scroll / pagination dengan TanStack Query
+- [ ] Optimistic updates di swap actions
+- [ ] Dark mode dengan CSS custom properties
 
-**Phase 3 — Production Maturity** 🔮 *(Masa Depan)*
-- [ ] Unit & integration testing (Jest + Supertest)
+**Phase 3 - Production Grade** 🔮 *(Masa Depan)*
+- [ ] Unit tests: Vitest + React Testing Library (frontend)
+- [ ] Integration tests: Jest + Supertest (backend)
 - [ ] CI/CD pipeline via GitHub Actions
-- [ ] Redis caching untuk endpoint yang sering diakses
-- [ ] Admin moderation dashboard
-- [ ] Frontend penuh berbasis React
-- [ ] Email notification (Resend / Nodemailer)
-- [ ] Mobile app (React Native)
+- [ ] Redis caching untuk endpoint populer
+- [ ] Email notifikasi (Resend)
+- [ ] PWA support (service worker + offline mode)
+- [ ] Mobile app dengan React Native + Expo
 
 ---
 
 ## 🤝 Contributing
 
-Proyek ini terbuka untuk kontribusi. Apakah itu bug fix kecil, ide fitur, atau perbaikan dokumentasi — semua diterima dengan senang hati.
-
 ```bash
-# 1. Fork repository ini (klik tombol Fork di GitHub)
+# 1. Fork repository (klik "Fork" di GitHub)
 
-# 2. Clone fork milikmu
+# 2. Clone fork kamu
 git clone https://github.com/USERNAME_KAMU/SwapHour.git
 cd SwapHour
 
-# 3. Buat branch baru dengan nama yang deskriptif
+# 3. Buat branch baru
 git checkout -b feature/nama-fitur
-# atau
-git checkout -b fix/deskripsi-bug
+# atau: git checkout -b fix/nama-bug
 
-# 4. Lakukan perubahan, lalu commit
+# 4. Lakukan perubahan & commit
 git add .
-git commit -m "feat: deskripsi singkat apa yang ditambahkan"
+git commit -m "feat: tambahkan fitur X"
 
-# 5. Push ke fork kamu
+# 5. Push dan buka Pull Request
 git push origin feature/nama-fitur
-
-# 6. Buka Pull Request dari GitHub
 ```
 
-**Panduan Commit Message:**
+**Commit Convention:**
 
-| Prefix | Digunakan Untuk |
-|--------|----------------|
-| `feat:` | Menambahkan fitur baru |
-| `fix:` | Memperbaiki bug |
-| `docs:` | Perubahan dokumentasi |
-| `refactor:` | Refactoring tanpa mengubah behavior |
-| `chore:` | Update konfigurasi / tooling |
+| Prefix | Untuk |
+|--------|-------|
+| `feat:` | Fitur baru |
+| `fix:` | Perbaikan bug |
+| `docs:` | Dokumentasi |
+| `style:` | Perubahan CSS/styling |
+| `refactor:` | Refactoring tanpa ubah behavior |
+| `chore:` | Konfigurasi / tooling |
 
-**Sebelum Submit PR, pastikan:**
-- Tidak ada TypeScript error (`npm run build` berhasil)
-- Tidak memasukkan file `.env` atau `dist/` ke commit
-- Mengikuti pola arsitektur yang sudah ada
+**Sebelum submit PR:**
+- Backend: `npm run build` harus berhasil tanpa TypeScript error
+- Frontend: `npm run lint` harus bersih
+- Tidak ada file `.env`, `dist/`, atau `node_modules/` dalam commit
 
 ---
 
 ## 👨‍💻 Team
 
-SwapHour dibangun oleh empat mahasiswa Teknik Informatika Semester 4 yang percaya bahwa proyek terbaik lahir dari masalah nyata.
+Dibangun oleh empat mahasiswa **Informatika Semester 4** yang percaya bahwa proyek terbaik lahir dari masalah nyata.
 
 <br/>
 
-| | Nama | Peran | Kontribusi |
-|---|------|-------|-----------|
-| 👨‍💼 | **Muhammad Hafidz** | Project Manager · QA · Backend Dev | Arsitektur sistem, koordinasi tim, quality assurance, backend core |
-| 👨‍💻 | **Muhammad Yazid Arrazi** | Backend Developer | Implementasi API endpoints, business logic, database queries |
-| 🎨 | **Abdan Syakura Bin Yasir** | Frontend Dev · System Design | Desain antarmuka, user flow, system architecture diagram |
-| 🎨 | **Aulia Lutfi** | Frontend Dev · System Design | UI implementation, user experience, visual system design |
+| | Nama | Peran | Fokus Utama |
+|---|------|-------|-------------|
+| 👨‍💼 | **Muhammad Hafidz** | Project Manager · QA · Backend Dev | Arsitektur sistem, koordinasi tim, testing, backend core |
+| 👨‍💻 | **Muhammad Yazid Arrazi** | Backend Developer | API endpoints, business logic, Prisma schema & queries |
+| 🎨 | **Abdan Syakura Bin Yasir** | Frontend Dev · System Design | React components, routing, system architecture design |
+| 🎨 | **Aulia Lutfi** | Frontend Dev · System Design | UI/UX, GSAP animations, visual design system |
 
 <br/>
 
@@ -620,41 +858,36 @@ SwapHour dibangun oleh empat mahasiswa Teknik Informatika Semester 4 yang percay
 
 ## 📄 License
 
-Proyek ini didistribusikan di bawah **ISC License**  izin terbuka yang memperbolehkan penggunaan, modifikasi, dan distribusi selama kredit dicantumkan.
+Proyek ini menggunakan **ISC License**.
 
 ```
 ISC License
 
-Copyright (c) 2025 SwapHour Team
-(Muhammad Hafidz, Muhammad Yazid Arrazi, Abdan Syakura Bin Yasir, Aulia Lutfi)
+Copyright (c) 2026 SwapHour Team
+Muhammad Hafidz · Muhammad Yazid Arrazi · Abdan Syakura Bin Yasir · Aulia Lutfi
 
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted, provided that the above
-copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
 ```
+
+Lihat file [`LICENSE`](./LICENSE) untuk teks lengkap.
 
 ---
 
 ## 🙏 Acknowledgements
 
-Proyek ini tidak akan ada tanpa bahu-membahu dengan ekosistem open source yang luar biasa:
-
-- [**Prisma**](https://www.prisma.io/) — ORM yang membuat database relationship terasa intuitif
-- [**Express.js**](https://expressjs.com/) — Minimalist framework yang tidak pernah mengecewakan
-- [**Vercel**](https://vercel.com/) — Deploy semudah `git push`, gratis untuk mahasiswa
-- [**Swagger UI**](https://swagger.io/tools/swagger-ui/) — Dokumentasi API yang bisa langsung dicoba
-- [**Shields.io**](https://shields.io/) — Badge generator untuk README yang lebih hidup
-- [**capsule-render**](https://github.com/kyechan99/capsule-render) — Wave header yang mempercantik tampilan
-- [**Best-README-Template**](https://github.com/othneildrew/Best-README-Template) — Inspirasi struktur dokumentasi profesional
-- Seluruh dosen dan teman-teman Informatika yang menjadi sumber semangat dan feedback
+- [**React**](https://react.dev/) - UI library yang mengubah cara kita berpikir tentang antarmuka
+- [**TanStack Query**](https://tanstack.com/query) - Server state yang tidak pernah membuat kami kecewa
+- [**Vite**](https://vitejs.dev/) - Build tool yang membuktikan development bisa se-instan itu
+- [**GSAP**](https://gsap.com/) - Animasi yang berjalan di 60fps tanpa kompromi
+- [**Prisma**](https://www.prisma.io/) - ORM yang membuat database interaction terasa natural
+- [**Express.js**](https://expressjs.com/) - Framework minimalis yang tidak pernah mengecewakan
+- [**Vercel**](https://vercel.com/) - Deploy semudah `git push`
+- [**Shields.io**](https://shields.io/) - Badge yang mempercantik README
+- [**capsule-render**](https://github.com/kyechan99/capsule-render) - Header animasi wave
+- [**MDN Web Docs**](https://developer.mozilla.org/) - Referensi web terbaik yang pernah ada
+- Seluruh dosen dan teman-teman Informatika atas feedback, diskusi, dan dukungannya
 
 ---
 
@@ -662,7 +895,8 @@ Proyek ini tidak akan ada tanpa bahu-membahu dengan ekosistem open source yang l
 
 <br/>
 
-**Ada pertanyaan? Buka [Issue](https://github.com/Nixzouxu/SwapHour/issues) atau hubungi tim kami.**
+**Ada pertanyaan atau ingin berkontribusi?**
+Buka [Issue](https://github.com/Nixzouxu/SwapHour/issues) atau kirim Pull Request.
 
 <br/>
 
@@ -672,8 +906,8 @@ Proyek ini tidak akan ada tanpa bahu-membahu dengan ekosistem open source yang l
 
 <br/>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=120&section=footer" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6366f1,50:8b5cf6,100:a855f7&height=120&section=footer" width="100%" />
 
-_SwapHour © 2026 Karena waktu adalah satu-satunya mata uang yang benar-benar setara untuk semua orang._
+_SwapHour © 2026 · Karena waktu adalah satu-satunya mata uang yang benar-benar setara untuk semua orang._
 
 </div>
