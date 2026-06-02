@@ -29,7 +29,21 @@ const PORT = process.env.PORT || 5000;
 
 // ================= MIDDLEWARES GLOBAL =================
 app.use(express.json()); // Menerima request body berupa JSON
-app.use(cors());         // Mengizinkan akses dari frontend
+// app.use(cors());         // Mengizinkan akses dari frontend
+
+const corsOptions = {
+  origin: [
+    'http://localhost:5173', // Untuk testing lokal
+    'https://swaphour-app.vercel.app' // Domain frontend Vercel kamu
+  ],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Wajib di-true jika pakai JWT di Cookie atau butuh kredensial
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 app.use(helmet());       // Keamanan standar HTTP headers
 app.use(morgan('dev'));  // Logger aktivitas di terminal untuk memudahkan tracking error
 
