@@ -101,7 +101,6 @@ antarmuka React yang responsif dan dianimasikan dengan GSAP di frontend, dan RES
 - [Available Scripts](#-available-scripts)
 - [API Documentation](#-api-documentation)
 - [Security](#-security)
-- [Deployment](#-deployment)
 - [Engineering Decisions & Lessons](#-engineering-decisions--lessons)
 - [Roadmap](#%EF%B8%8F-roadmap)
 - [Contributing](#-contributing)
