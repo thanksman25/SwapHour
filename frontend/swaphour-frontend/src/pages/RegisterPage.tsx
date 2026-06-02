@@ -61,7 +61,7 @@ const RegisterPage = () => {
     setIsLoading(true);
     setApiError("");
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://swaphour-backend.vercel.app/api'}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

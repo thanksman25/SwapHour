@@ -58,7 +58,7 @@ const LoginPage = () => {
     setIsLoading(true);
     setApiError("");
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://swaphour-backend.vercel.app/api'}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -67,7 +67,7 @@ const LoginPage = () => {
       if (response.ok && data.token) {
         localStorage.setItem("token", data.token);
 
-        const profileRes = await fetch("/api/users/profile", {
+        const profileRes = await fetch(`${import.meta.env.VITE_API_URL || 'https://swaphour-backend.vercel.app/api'}/users/profile`, {
           headers: { Authorization: `Bearer ${data.token}` },
         });
         const profileData = await profileRes.json();

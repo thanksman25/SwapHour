@@ -49,7 +49,7 @@ const EditProfilePage = () => {
     const token = localStorage.getItem("token") || "test";
     const fetchProfile = async () => {
       try {
-        const response = await fetch("/api/users/profile", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://swaphour-backend.vercel.app/api'}/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();
@@ -122,7 +122,7 @@ const EditProfilePage = () => {
     setSaveSuccess(false);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/users/profile", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://swaphour-backend.vercel.app/api'}/users/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
