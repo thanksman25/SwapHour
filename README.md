@@ -104,7 +104,7 @@ Setiap teknologi dipilih dengan alasan, bukan sekadar tren:
 | **Language** | TypeScript 6.x (strict mode) | Menangkap bug di compile-time, bukan saat production crash |
 | **Runtime** | Node.js ≥ 18 | Non-blocking I/O cocok untuk API dengan banyak concurrent request |
 | **Framework** | Express 5.x | Minimalis, mature, ekosistem middleware terlengkap |
-| **Database** | PostgreSQL | ACID-compliant — kritis untuk transaksi kredit yang tidak boleh gagal di tengah jalan |
+| **Database** | PostgreSQL | ACID-compliant kritis untuk transaksi kredit yang tidak boleh gagal di tengah jalan |
 | **ORM** | Prisma 7.x | Type-safe query, migration otomatis, Prisma Studio untuk debug |
 | **Auth** | JWT + bcrypt 6.x | Stateless auth yang scalable; password di-hash dengan salt |
 | **Validation** | express-validator 7.x | Sanitasi dan validasi setiap input sebelum menyentuh database |
