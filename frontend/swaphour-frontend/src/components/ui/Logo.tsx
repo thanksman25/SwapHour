@@ -1,13 +1,11 @@
-import { useTheme } from "../../context/ThemeContext";
 import logoPng from "../../assets/logo.png";
 
 interface LogoProps {
   size?: number;
   className?: string;
-  forceTheme?: 'dark' | 'light';
 }
 
-export default function Logo({ size = 32, className, forceTheme }: LogoProps) {
+export default function Logo({ size = 32, className }: LogoProps) {
   // Using CSS mask to dynamically color the logo gold (var(--gold-400))
   // The aspect ratio of the logo is ~3.316 (325x98)
   return (

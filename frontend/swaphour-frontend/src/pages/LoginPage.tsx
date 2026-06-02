@@ -303,7 +303,7 @@ const LoginPage = () => {
           />
 
           <div style={{ textAlign: "center" as const }}>
-            <Logo size={42} forceTheme="dark" />
+            <Logo size={42} />
             <h1
               style={{
                 fontSize: "1.75rem",
